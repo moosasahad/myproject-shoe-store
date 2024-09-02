@@ -1,0 +1,43 @@
+.maincountainer{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.firstdiv{
+    width: 30%;
+    height: 70%;
+}
+.firstdivicon{
+    font-size: 60px;
+}
+.seconddiv{
+    width: 40%;
+    height: 70%;
+}
+.loginform{
+    display: flex;
+    flex-direction: column;
+}
+.seconddiv input{
+width: 60%;
+
+}
+.butonandlinkdiv{
+    display: flex;
+    align-items: center;
+}
+.butonandlinkdiv button{
+    width: 70px;
+    height: 40px;
+    background-color: rgb(64, 64, 248);
+    border: none;
+    border-radius: 30px;
+    margin-left: 30px;
+    font-size: 15px;
+    padding: 10px;
+    font-weight: bold;
+}
+

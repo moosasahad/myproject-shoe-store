@@ -1,0 +1,31 @@
+.accounticon{
+    font-size: 40px;
+    color: rgb(0, 0, 0);
+}
+.cart{
+    font-size: 40px;
+    margin-right: 10px;
+    color: black;
+}
+.navbardiv{
+    height: 60px;
+    padding: 10px;
+    
+}
+.accountlink.active .accounticon {
+    color: rgb(87, 15, 15);
+}
+.inputt{
+    height: 30px;
+}
+.button{
+    height: 35px;
+    border: none;
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    
+}
+.cartlink.active .cart{
+    color: rgb(87, 15, 15);
+}

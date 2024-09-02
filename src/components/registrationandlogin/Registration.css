@@ -1,0 +1,63 @@
+.maincontainer {
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subcontainer {
+    width: 40%;
+    height: auto;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    background-color: rgb(243, 231, 207);
+}
+
+.subcontainer input {
+    width: 100%;
+}
+
+.subcontainer label {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.registrationbutton {
+    width: 100px;
+    height: 30px;
+    border: none;
+    background-color: blueviolet;
+    border-radius: 20px;
+    color: white;
+}
+
+.password-container {
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    width: 100%;
+    margin-right: 10px;
+}
+
+.toggle-password {
+    background: none;
+    border: none;
+    color: blueviolet;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.subcontainer span {
+    color: red;
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
