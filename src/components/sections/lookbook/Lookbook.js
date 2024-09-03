@@ -1,13 +1,11 @@
 import React from 'react'
 
-function Home() {
+function Lookbook() {
   return (
     <div>
-    
-        Home
-      
+      lookbook
     </div>
   )
 }
 
-export default Home
+export default Lookbook

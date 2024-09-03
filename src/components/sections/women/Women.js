@@ -1,0 +1,37 @@
+import React from 'react'
+import useProducts from '../../coustom hook/Products'
+import { Link } from 'react-router-dom'
+import { BsCartCheckFill } from 'react-icons/bs'
+
+function Women() {
+    const[menproduct,womenproduct,product]=useProducts()
+    return (
+        <div className='menmaindiv'>
+            <h1 className='hedding'>Women</h1>
+    
+            <div className='menproducts'>
+            <div className='listproducts'>
+            <div className='productrow'>
+              {womenproduct.map((value,index)=>(
+                <div className='singleproductdiv'>
+                  <button className='kartbutton'><BsCartCheckFill />
+                  </button>
+                  <img src={value.image} alt="" className='productimage' />
+                  <Link to="/women"><h6 className='hidenid'>{value.id}</h6></Link>
+                  <h5>{value.brand}</h5>
+                  <h4><span>₹ - </span>{value.price}</h4>
+                  <h6>{value.name}</h6>
+                </div>
+              ))}
+              
+            </div>
+    
+          </div>
+    
+            </div>
+            
+        </div>
+      )
+}
+
+export default Women

@@ -1,0 +1,15 @@
+.menmaindiv{
+    width: auto;
+    height: auto;
+    background-color: antiquewhite;
+
+    margin: 20px;
+}
+.hedding{
+    text-align: start;
+    padding: 30px;
+    font-size: 50px;
+    padding-top: 100px;
+    padding-left: 40px;
+    font-weight: bold;
+}

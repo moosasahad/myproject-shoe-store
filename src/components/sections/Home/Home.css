@@ -1,0 +1,205 @@
+
+
+.maincontainner{
+    width: auto;
+    height: auto;
+    padding: 20px;
+}
+.mainimagediv {
+    width: auto;
+    height: 500px;
+    background-image: url(https://img.freepik.com/premium-photo/flat-lay-shoe-with-plain-background-ecommerce-online-shop-concept_734910-740.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   
+}
+.mainimagedivcontent{
+    width: auto;
+    height: auto;
+}
+.mainimagediv h1{
+    font-size: 70px;
+    font-weight: bold;
+
+}
+.mainimagedivbutton{
+    display: flex;
+}
+.homecategerybutton{
+    background-color: blanchedalmond;
+    height: 50px;
+    width: auto;
+    padding: 20px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+.homecategerybutton.active{
+    background-color: rgb(32, 21, 8);
+}
+.brands{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 30px;
+}
+.prodectadds{
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.prodectaddsimg{
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+
+}
+.prodectaddsimg img{
+    
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+.imagedetails{
+    width: 50%;
+    height: auto;
+    padding: 40px;
+}
+.homecategarydiv{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.leftsectio{
+    width: 45%;
+    height: 600px;
+    background-image: url(https://pyxis.nymag.com/v1/imgs/78b/839/e41b8693c622af9f596b4a237194c8ee5c-men-s-workout-shoes-032.rsquare.w700.jpg);
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding-bottom: 30px;
+}
+.rightsection{
+    width: 45%;
+    height: 600px;
+    background-image: url(https://thumbs.dreamstime.com/b/black-heels-ladies-shoes-women-319799542.jpg);
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding-bottom: 30px;
+    background-size: cover
+}
+.shoppingbutton{
+    width: auto;
+    text-align: center;
+    padding: 10px;
+    background-color: white;
+    border: solid 1px black;
+    font-size: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+}
+.productrow{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.singleproductdiv {
+    width: 300px;
+    height: 430px;
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+    border-radius: 20px;
+    margin: 10px;
+    text-align: center;
+    box-shadow: 5px 15px 15px gray;
+    position: relative;
+    cursor: pointer;
+}
+.singleproductdiv:hover {
+    transform: translateY(-10px);
+    box-shadow: 5px 20px 20px gray;
+}
+
+
+.kartbutton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px; 
+    top: 10px;
+    border: none;  
+    font-size: 30px; 
+}
+.kartbutton :hover{
+    color: green;
+    font-size: 35px;
+}
+
+.productimage{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.singleproductdiv h5{
+    text-align: center;
+    padding-top: 5px;
+}
+.singleproductdiv span {
+    font-size: 20px;
+}
+.singleproductdiv h4{
+    font-size: 20px;
+}
+.hidenid{
+    visibility: hidden;
+}
+.resyclipost{
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+    background-color: rgb(255, 253, 240);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    
+}
+.contentsimg img{
+    margin: 20px;
+    margin-top: 100px;
+    align-items: end;
+}
+.contents{
+    width: 60%;
+
+}
+.images img{
+    border-radius: 50%;
+}
+
+
