@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import './Registration.css';
+import axios from 'axios';
 
 function Registration() {
     const [input, setInput] = useState({
+        id: Date.now(),
         name: '',
         email: '',
         number: '',
         password: '',
-        cpassword: ''
+        cpassword: '',
+        cart: []
     });
 
     const [focus, setFocus] = useState({
@@ -18,10 +21,39 @@ function Registration() {
         cpassword: false
     });
 
-    const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+    const [showPassword, setShowPassword] = useState(false);
+    const [submitted, setSubmitted] = useState(false); // Track form submission
 
-    const handleForm = (evn) => {
+    const handleForm = async (evn) => {
         evn.preventDefault();
+        setSubmitted(true);
+        if (evn.target.checkValidity()) {
+            alert("login succssesed") 
+            try {
+                const response = await axios.post("http://localhost:3000/usere", input);
+                console.log("Form submitted successfully");   
+                   
+            } catch (error) {
+                console.error("Error submitting form", error);
+            }
+            setInput({
+                name: '',
+                email: '',
+                number: '',
+                password: '',
+                cpassword: '',
+                cart: []
+            });
+            setFocus({
+                name: false,
+                email: false,
+                number: false,
+                password: false,
+                cpassword: false
+            });
+            setSubmitted(false);
+        }
+        
     };
 
     const getInputValues = (evn) => {
@@ -63,7 +95,7 @@ function Registration() {
                         onBlur={handleFocus}
                         focus={focus.name.toString()}
                     />
-                    {focus.name && input.name.length < 2 && (
+                    {(submitted || focus.name) && input.name.length < 2 && (
                         <span>Please enter your full name</span>
                     )}
 
@@ -77,7 +109,7 @@ function Registration() {
                         onBlur={handleFocus}
                         focus={focus.email.toString()}
                     />
-                    {focus.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email) && (
+                    {(submitted || focus.email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email) && (
                         <span>Enter a valid email id</span>
                     )}
                     <br />
@@ -93,7 +125,7 @@ function Registration() {
                         onBlur={handleFocus}
                         focus={focus.number.toString()}
                     />
-                    {focus.number && !/^[1-9]\d{9}$/.test(input.number) && (
+                    {(submitted || focus.number) && !/^[1-9]\d{9}$/.test(input.number) && (
                         <span>Please enter a correct phone number</span>
                     )}
                     <br />
@@ -102,7 +134,7 @@ function Registration() {
                     <div className="password-container">
                         <input
                             name='password'
-                            type={showPassword ? "text" : "password"} // Toggle type between text and password
+                            type={showPassword ? "text" : "password"}
                             value={input.password}
                             onChange={getInputValues}
                             required
@@ -118,7 +150,7 @@ function Registration() {
                             {showPassword ? "Hide" : "Show"}
                         </button>
                     </div>
-                    {focus.password && !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(input.password) && (
+                    {(submitted || focus.password) && !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(input.password) && (
                         <span>Password must have at least 6 characters including one uppercase, one lowercase, and one digit</span>
                     )}
                     <br />
@@ -134,7 +166,7 @@ function Registration() {
                         onBlur={handleFocus}
                         focus={focus.cpassword.toString()}
                     />
-                    {focus.cpassword && input.password !== input.cpassword && (
+                    {(submitted || focus.cpassword) && input.password !== input.cpassword && (
                         <span>Password does not match</span>
                     )}
                     <br />

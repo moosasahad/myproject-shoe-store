@@ -25,11 +25,11 @@
 width: 60%;
 
 }
-.butonandlinkdiv{
+.buttonandlinkdiv{
     display: flex;
     align-items: center;
 }
-.butonandlinkdiv button{
+.buttonandlinkdiv button{
     width: 70px;
     height: 40px;
     background-color: rgb(64, 64, 248);
@@ -40,4 +40,45 @@ width: 60%;
     padding: 10px;
     font-weight: bold;
 }
+.maindiv{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+}
+.subdiv{
+    width: 50%;
+    height: 50%;
+    background-color: wheat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+}
+.subdivicon{
+    font-size: 150px;
+}
+.subdiv button{
+    width: auto;
+    border: none;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.button1{
+    background-color: red;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;  
+}
+.button2{
+    background-color: green;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;  
+}
+
 

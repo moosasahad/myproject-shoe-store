@@ -23,7 +23,7 @@ function Navbare() {
           <NavLink to="/cart" className='cartlink my-auto'>
           <FaShoppingCart className='cart' />
             </NavLink>
-            <NavLink to="/loginpage" className='accountlink my-auto'>
+            <NavLink to="/login" className='accountlink my-auto'>
             <MdAccountCircle className='accounticon me-5 my-auto'/>
             </NavLink>
         </Form>

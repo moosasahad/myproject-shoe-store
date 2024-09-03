@@ -1,5 +1,5 @@
 {
-"Product": [
+  "Product": [
     {
       "id": "1",
       "name": "Men’s Black Running",
@@ -239,6 +239,98 @@
       "brand": "Recycled Shoes",
       "rating": 4.4,
       "reviews": 10
+    }
+  ],
+  "usere": [
+    {
+      "id": "b66c",
+      "name": "jkdfjfjkhsjkdh",
+      "email": "jhdshkjsd@mail.com",
+      "number": "1234567890",
+      "password": "123456y",
+      "cpassword": "123456y",
+      "cart": []
+    },
+    {
+      "id": "5207",
+      "name": "moosa sahad pk",
+      "email": "moosa@gmail.com",
+      "number": "1234567890",
+      "password": "moosa123",
+      "cpassword": "moosa123",
+      "cart": []
+    },
+    {
+      "id": "1725280412120",
+      "name": "sdjsahdsjh",
+      "email": "jdhjfh@gamil.com",
+      "number": "1234567890",
+      "password": "moosa123",
+      "cpassword": "moosa123",
+      "cart": []
+    },
+    {
+      "id": "1725280628634",
+      "name": "cxhvcxhkj",
+      "email": "khfdjksfh@gmail.com",
+      "number": "1234567890",
+      "password": "123moosa",
+      "cpassword": "123moosa",
+      "cart": []
+    },
+    {
+      "id": "f7e7",
+      "name": "fdjkgh",
+      "email": "hkjghfkjhg@gmail.com",
+      "number": "1234567890",
+      "password": "12qwer",
+      "cpassword": "12qwer",
+      "cart": []
+    },
+    {
+      "id": "1725280896437",
+      "name": "hfjhgfjhdfj",
+      "email": "fsdjh@gmail.com",
+      "number": "1234567890",
+      "password": "12345qw",
+      "cpassword": "12345qw",
+      "cart": []
+    },
+    {
+      "id": "3d1b",
+      "name": "jkghfjdkh",
+      "email": "hfjkhf@gmail.com",
+      "number": "1234567890",
+      "password": "123456wq",
+      "cpassword": "123456wq",
+      "cart": []
+    },
+    {
+      "id": "1725281021778",
+      "name": "jkdsfhjdhjs",
+      "email": "jhjdffs@gamail.com",
+      "number": "1234567890",
+      "password": "fdsa12",
+      "cpassword": "fdsa12",
+      "cart": []
+    },
+    {
+      "id": "1725282621037",
+      "name": "hdsgfhdsgfhs",
+      "email": "jkffhjhjfd@gmail.com",
+      "number": "1234567891",
+      "password": "j123456q",
+      "cpassword": "j123456q",
+      "cart": []
+    },
+    {
+      "id": 1725337381801,
+      "name": "moosa",
+      "email": "moosa@gmail.com",
+      "number": "1234567890",
+      "password": "123456m",
+      "cpassword": "123456m",
+      "cart": []
     }
   ]
 }
