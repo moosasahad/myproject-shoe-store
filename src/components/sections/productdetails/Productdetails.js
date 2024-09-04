@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useProducts from '../../coustom hook/Products';
-import useCart from '../../cart/Cart'; // Corrected import
 import './productdetails.css';
 import { BsCartCheckFill } from 'react-icons/bs';
+import Cart from '../../cart/Cart';
 
 function Productdetails() {
-    const [cart, addCart] = useCart(); // Use the useCart hook to get the addCart function
+    const  [addcart] =Cart()
 
     const [state, setState] = useState([]);
     const [value, setValue] = useState([]);
-    const { id } = useParams();
+
     const [menproduct, womenproduct, product, slicedp] = useProducts();
+    const { id } = useParams();
+
+const handleCart=(id)=>{
+    addcart(id)
+}
 
     useEffect(() => {
         setState(product);
-    }, [product]);
+    }, [product]); 
 
     useEffect(() => {
         if (state.length > 0) {
@@ -24,19 +29,8 @@ function Productdetails() {
         }
     }, [state, id]);
 
-    const handleCart = (product) => {
-        addCart(product); // Add the product to the cart
-        console.log("Product added to cart:", product);
-    };
-
-    const handleClick = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    };
-     // Function to convert letter-based star rating to visual stars
-     const convertToStars = (stars) => {
+    // Function to convert letter-based star rating to visual stars
+    const convertToStars = (stars) => {
         const rating = parseFloat(stars);
         const fullStars = Math.floor(rating);
         const hasHalfStar = rating % 1 >= 0.5;
@@ -50,6 +44,14 @@ function Productdetails() {
             </span>
         );
     };
+
+    const handleClick = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+    
 
     return (
         <div>
@@ -68,7 +70,7 @@ function Productdetails() {
                         <span>Reviews: {product.reviews}</span>
                         <h4>₹ {product.price}</h4>
                         <div className='broductdivbutton'>
-                            <button onClick={() => handleCart(product)}>Add to Cart</button>
+                            <button onClick={()=>handleCart(product.i)}>Add to Cart</button>
                             <button>Buy Now</button>
                         </div>
                     </div>
@@ -76,9 +78,9 @@ function Productdetails() {
             ))}
           
             <div className='listproducts'>
-                <h1 style={{ textAlign: 'center' }}>Related products</h1>
+                <h1 style={{textAlign: 'center'}}>Related products</h1>
                 <div className='productrow'>
-                    {slicedp.map((product) => (
+                    {slicedp.map((product, index) => (
                         <Link 
                             key={product.id} 
                             className='navigatelink' 

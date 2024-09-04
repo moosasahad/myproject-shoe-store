@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from 'react';
 
-function useCart() {
-  const [cart, setCart] = useState([]);
+function Cart() {
+  const [user, setUser] = useState([]);
+  const[cart, setCart]=useState([])
+  console.log("neare",cart) 
 
-  // Load cart from localStorage when the component mounts
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem('cart'));
-    if (storedCart) {
-      setCart(storedCart);
+    const storedCurrentUser = JSON.parse(localStorage.getItem('inputValue'));
+    if (storedCurrentUser) {
+      setUser(storedCurrentUser);
     }
   }, []);
 
-  // Save cart to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+  console.log("User data:", user);
+  useEffect(()=>{
+    
+    console.log(localStorage.getItem("cartitem"));
+  },[cart])
+  const addcart=(product)=>{
+    setCart((prevproduct)=>{
+     const updatecart = [...prevproduct,{...product}]
+     setCart(updatecart)
+     
+    }
+    )      
+  }
+  return [addcart,cart]
 
-  // Function to add product to cart
-  const addCart = (product) => {
-    setCart((prevCart) => {
-      const updatedCart = [...prevCart, { ...product }];
-      return updatedCart;
-    });
-  };
-
-  return [cart, addCart];
 }
 
-export default useCart;
+export default Cart;
