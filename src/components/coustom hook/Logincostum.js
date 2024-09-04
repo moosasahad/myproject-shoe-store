@@ -1,9 +1,10 @@
 
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function useLogandReg() {
+    const Logincontext = createContext()
     const navigate = useNavigate(); 
     const [inputValue, setInputValue] = useState({
         email: "",
@@ -51,8 +52,8 @@ function useLogandReg() {
             [name]: value
         });
     };
-
-    return [handleChange, inputValue, handleSubmit,active,setActive];
+const value = 12;
+    return [handleChange, inputValue, handleSubmit,active,setActive]
 }
 
 export default useLogandReg;

@@ -7,6 +7,7 @@ function useProducts() {
     const[menproduct, setMenproduct]=useState([])
     const[womenproduct, setWomenproduct]=useState([])
     const[product, setProduct]=useState([])
+    const[slicedp,setSlicedp]=useState([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,9 +15,11 @@ function useProducts() {
         const res = await axios.get("http://localhost:3000/Product");
         const menProducts = res.data.filter(Product => Product.type === "men");
         const womenproduct = res.data.filter(Product => Product.type === "women");
+        const slicproduct = res.data.slice(4,12);
         setMenproduct(menProducts);
         setWomenproduct(womenproduct)
         setProduct(res.data)
+        setSlicedp(slicproduct)
         console.log(menProducts);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -27,7 +30,7 @@ function useProducts() {
   }, []);
 
 
-  return [menproduct,womenproduct,product]
+  return [menproduct,womenproduct,product,slicedp]
 }
 
 export default useProducts

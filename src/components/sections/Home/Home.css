@@ -118,6 +118,10 @@
     text-decoration: none;
     color: black;
 }
+.navigatelink{
+    text-decoration: none;
+    color: black;
+}
 .productrow{
     width: 100%;
     height: auto;
@@ -125,6 +129,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    
 }
 .singleproductdiv {
     width: 300px;
@@ -137,6 +142,7 @@
     box-shadow: 5px 15px 15px gray;
     position: relative;
     cursor: pointer;
+
 }
 .singleproductdiv:hover {
     transform: translateY(-10px);

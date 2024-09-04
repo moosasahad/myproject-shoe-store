@@ -2,5 +2,32 @@
     width: 100%;
     height: auto;
     background-color: antiquewhite;
-    
+
+}
+.footerspecification{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+    padding: 20px;
+}
+.foterfeterdiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    width: 30%;
+    margin: 20px;
+}
+.footerlinkicon{
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+.footerlinksanddatas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 100px;
 }

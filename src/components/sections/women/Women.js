@@ -13,15 +13,17 @@ function Women() {
             <div className='listproducts'>
             <div className='productrow'>
               {womenproduct.map((value,index)=>(
-                <div className='singleproductdiv'>
-                  <button className='kartbutton'><BsCartCheckFill />
-                  </button>
-                  <img src={value.image} alt="" className='productimage' />
-                  <Link to="/women"><h6 className='hidenid'>{value.id}</h6></Link>
-                  <h5>{value.brand}</h5>
-                  <h4><span>₹ - </span>{value.price}</h4>
-                  <h6>{value.name}</h6>
-                </div>
+                 <Link  className='navigatelink' to={`/productdetails/${value.id}`}>
+                 <div className='singleproductdiv'>
+                   <button className='kartbutton'><BsCartCheckFill />
+                   </button>
+                   <img src={value.image} alt="" className='productimage' />
+                   <Link to="/women"><h6 className='hidenid'>{value.id}</h6></Link>
+                   <h5>{value.brand}</h5>
+                   <h4><span>₹ - </span>{value.price}</h4>
+                   <h6>{value.name}</h6>
+                 </div>
+                  </Link>
               ))}
               
             </div>

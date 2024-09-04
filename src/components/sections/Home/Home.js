@@ -4,26 +4,11 @@ import { NavLink, Link } from 'react-router-dom'
 import axios from 'axios'
 import { BsCartCheckFill } from "react-icons/bs";
 import Footer from './Footer';
+import useProducts from '../../coustom hook/Products';
 
 
 function Home() {
-  const[product, setProduct]=useState([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`http://localhost:3000/Product?_page=${1}&_limit=${8}`);
-        setProduct(res.data);
-        console.log(res.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  console.log(product.image);
-  
+  const[menproduct,womenproduct,product,slicedp]=useProducts()
   return (
     <div className='maincontainner'>
       <div className='mainimagediv'>
@@ -87,8 +72,10 @@ function Home() {
         </div>
       </div>
       <div className='listproducts'>
-        <div className='productrow'>
-          {product.map((value,index)=>(
+       
+       <div className='productrow'>
+          {slicedp.map((value,index)=>(
+            <Link  className='navigatelink' to={`/productdetails/${value.id}`}>
             <div className='singleproductdiv'>
               <button className='kartbutton'><BsCartCheckFill />
               </button>
@@ -98,9 +85,11 @@ function Home() {
               <h4><span>₹ - </span>{value.price}</h4>
               <h6>{value.name}</h6>
             </div>
+             </Link>
           ))}
           
         </div>
+      
 
       </div>
       <div className='resyclipost'>
@@ -120,7 +109,6 @@ function Home() {
         </div>
 
       </div>
-      <Footer/>
     </div>
     
   )

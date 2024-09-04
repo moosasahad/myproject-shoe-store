@@ -16,6 +16,7 @@ function Men() {
         <div className='listproducts'>
         <div className='productrow'>
           {menproduct.map((value,index)=>(
+            <Link  className='navigatelink' to={`/productdetails/${value.id}`}>
             <div className='singleproductdiv'>
               <button className='kartbutton'><BsCartCheckFill />
               </button>
@@ -25,6 +26,7 @@ function Men() {
               <h4><span>₹ - </span>{value.price}</h4>
               <h6>{value.name}</h6>
             </div>
+             </Link>
           ))}
           
         </div>

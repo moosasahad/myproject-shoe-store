@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Navbar, Nav, Form, FormControl, Container, Offcanvas, NavDropdown, } from 'react-bootstrap';
 import { MdAccountCircle } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
@@ -10,7 +10,7 @@ function Navbare() {
   return (
     <Navbar expand="md" className="bg-success mb-3">
     <Container fluid>
-      <Navbar.Brand className='storename' to="/">My Store</Navbar.Brand>
+      <NavLink className='storename'>My Store</NavLink>
       <Navbar.Toggle aria-controls="offcanvasNavbar-expand-md" />
       <Navbar.Offcanvas
         id="offcanvasNavbar-expand-md"

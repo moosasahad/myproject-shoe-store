@@ -12,6 +12,9 @@ import Collection from './components/sections/collectio/Collection';
 import Lookbook from './components/sections/lookbook/Lookbook';
 import Sale from './components/sections/sale/Sale';
 import Women from './components/sections/women/Women';
+import Footer from './components/sections/Home/Footer';
+import Productdetails from './components/sections/productdetails/Productdetails';
+import Cartui from './components/cart/Cartui';
 
 
 function App() {
@@ -30,9 +33,12 @@ function App() {
         <Route path='/collection' element={<Collection/>}/>
         <Route path='/lookbook' element={<Lookbook/>}/>
         <Route path='/sale' element={<Sale/>}/>
+        <Route path='/productdetails/:id' element={<Productdetails/>}/>
+        <Route path='/cartui' element={<Cartui/>}/>
         
 
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }

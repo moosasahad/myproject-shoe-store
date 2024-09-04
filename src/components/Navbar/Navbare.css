@@ -18,6 +18,10 @@
 .inputt{
     height: 30px;
 }
+.storename{
+    color: black;
+    text-decoration: none;
+}
 .button{
     height: 35px;
     border: none;

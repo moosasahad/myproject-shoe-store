@@ -1,0 +1,25 @@
+.pdetalsmain{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.productdetailsdiv{
+    padding: 20px;
+
+}
+.broductdivbutton button{
+    width: auto;
+    height: 40px;
+    border: none;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    margin: 10px;
+    background-color: orangered;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
