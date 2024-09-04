@@ -1,18 +1,19 @@
-import React from 'react'
-import Cart from './Cart'
+import React, { useEffect, useState } from 'react'
+
 
 function Cartui() {
-    const[addcart,cart]=Cart()
-    console.log("crtui",cart);
+   
+    const [state,setState] =useState([])
+   useEffect(()=>{
+    const data = (localStorage.getItem("cartitem"));
+    console.log("localcart",state)
+    setState(data)
+   },[state])
     
   return (
     <div>
       {
-        cart.map(value=>(
-            <h1>
-                {value.id}
-            </h1>
-        ))
+       state.map()
       }
       cartui
     </div>
