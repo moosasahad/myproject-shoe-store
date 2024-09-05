@@ -14,8 +14,8 @@ function Productdetails() {
     const [menproduct, womenproduct, product, slicedp] = useProducts();
     const { id } = useParams();
 
-const handleCart=(id)=>{
-    addcart(id)
+const handleCart=(product)=>{
+    addcart(product)
 }
 
     useEffect(() => {
@@ -70,7 +70,7 @@ const handleCart=(id)=>{
                         <span>Reviews: {product.reviews}</span>
                         <h4>₹ {product.price}</h4>
                         <div className='broductdivbutton'>
-                            <button onClick={()=>handleCart(product.i)}>Add to Cart</button>
+                            <button onClick={()=>handleCart(product)}>Add to Cart</button>
                             <button>Buy Now</button>
                         </div>
                     </div>
@@ -81,14 +81,15 @@ const handleCart=(id)=>{
                 <h1 style={{textAlign: 'center'}}>Related products</h1>
                 <div className='productrow'>
                     {slicedp.map((product, index) => (
-                        <Link 
+                        <div>
+                            <Link 
                             key={product.id} 
                             className='navigatelink' 
                             to={`/productdetails/${product.id}`} 
                             onClick={handleClick}
                         >
                             <div className='singleproductdiv'>
-                                <button className='kartbutton'>
+                                <button className='kartbutton' onClick={()=>handleCart(product)}>
                                     <BsCartCheckFill />
                                 </button>
                                 <img src={product.image} alt={product.name} className='productimage' />
@@ -97,6 +98,7 @@ const handleCart=(id)=>{
                                 <h6>{product.name}</h6>
                             </div>
                         </Link>
+                        </div>
                     ))}
                 </div>
             </div>

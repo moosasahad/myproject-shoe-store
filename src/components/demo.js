@@ -1,101 +1,92 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext   } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { UserProvider } from './CustomLogin';
+import { MyContext } from '../contextFolder/AllContext';
+
 
 function UserCart() {
 
   const navigate = useNavigate();
+  
+               
+               const {activeUser}=UserProvider()
+            
+                      //  const{activeUser}= useContext(MyContext)
+                        
 
-  const storedActiveUser = JSON.parse(localStorage.getItem('activeUserData'));
-  const [activeUser, setActiveUser] = useState(storedActiveUser || null);
+               console.log("on useCart",activeUser);
+               const [cartItems,setCartItems]=useState([])
 
-  const storedCart = JSON.parse(localStorage.getItem('cartData')) || [];
-  const [cart, setCart] = useState(storedCart);
+               useEffect(()=>{
+                if(activeUser){
+                  const  cardItemsChanges=async ()=>{
+                    try {
+                      let response= await axios.get(http://localhost:4000/Users/${activeUser.id});
+                    setCartItems(response.data.cart)
+                    } catch (error) {
+                      alert(error)
+                    }
+                   }
+                   cardItemsChanges()
+                }
+               
+               },[activeUser])
+               
  
-
-  useEffect(() => {
-    localStorage.setItem('cartData', JSON.stringify(cart));
-  }, [cart]);
-
-
-  //this function work when clicking addToCart button
   const addToCart = async (product) => {
-
-    if (activeUser) {
-      
-      setCart((prevCart) => {
-        console.log(prevCart);
-        
-        const existProduct = prevCart.find((item) => item.id === product.id);
-        if (existProduct) {
-          alert('Product is already in the cart');
-          return prevCart;
-        }
-
-        const updatedCart = [...prevCart, { ...product, qty: 1 }];
-        const updatedUser = { ...activeUser, cart: updatedCart };
-
-        setActiveUser(updatedUser);
-        localStorage.setItem('activeUserData', JSON.stringify(updatedUser));
-        updateCartOnBackend(updatedUser);
-
-        return updatedCart;
-      });
-    } else {
-      alert('Please login');
-      navigate('/login');
-    }
-  };
-//remove the items from the crat
-  const removeFromCart = async (itemid) => {
-    const updatedCart = cart.filter((item) => item.id !== itemid);
-    setCart(updatedCart);
-
-    if (activeUser) {
-      const updatedUser = { ...activeUser, cart: updatedCart };
-      setActiveUser(updatedUser);
-      localStorage.setItem('activeUserData', JSON.stringify(updatedUser));
-      await updateCartOnBackend(updatedUser);
-    }
-  };
-
-
-  // cart update on backend 
-  const updateCartOnBackend = async (updatedUser) => {
-    try {
-      await axios.put(http://localhost:4000/Users/${updatedUser.id}, updatedUser);
-      console.log('Cart updated successfully on the backend');
-   
-
-
-
-
-    } catch (error) {
-      console.error('Error updating cart:', error);
-    }
-  };
+    console.log("my product",product);
     
-  const byProduct = () => {
-    navigate("/payment");
+           if(activeUser){ 
+      const itemWithQty={...product,qty:1  }
+           let response= await axios.get(http://localhost:4000/Users/${activeUser.id})
+       let currentUserOnDB= response.data
+       console.log("userCart",currentUserOnDB.cart);
+       
+    
+       
+   let existingItem= currentUserOnDB.cart.find((item)=>item.id===product.id);
+   if(existingItem){
+    alert("this item is already in your cart")
+   }else{
+
+     const updatedItem=[...currentUserOnDB.cart,itemWithQty]
+     console.log("updatedUser",updatedItem);
+     await axios.put(http://localhost:4000/Users/${activeUser.id},{
+      ...currentUserOnDB,cart:updatedItem
+     })
+     setCartItems(updatedItem)
+
+   }
+            
+            }else{
+              navigate("/login")
+              alert("please login")
+            }
   };
 
-  const decrementQuantity = (productId) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === productId && item.qty > 1 ? { ...item, qty: item.qty - 1 } : item
-      )
-    );
-  };  
 
-  const incrementQuantity = (productId) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === productId ? { ...item, qty: item.qty + 1 } : item
-      )
-    );
-  };
+  const removeFromCart=async (itemId,index)=>{
+       try {
+        let response= await  axios.get(http://localhost:4000/Users/${activeUser.id});
+      let userData=response.data;
+            console.log(userData);
+            let updatedCart=userData.cart.filter((item)=>item.id!==itemId)
+            console.log(updatedCart);
+            await axios.patch(http://localhost:4000/Users/${activeUser.id},{
+               ...userData,cart:updatedCart
+           })
+           let newCartItems=[...updatedCart]
+           newCartItems.slice(index,1)
+           setCartItems(newCartItems)
+       } catch (error) {
+        console.error("Error eemoving items from the cart",error)
+        
+       }
+  }
 
-  return { cart, setCart, addToCart, activeUser, removeFromCart, byProduct, incrementQuantity, decrementQuantity, updateCartOnBackend };
+
+  return {addToCart,cartItems,removeFromCart };
 }
 
 export default UserCart;

@@ -15,7 +15,7 @@ function useLogandReg() {
     
     // Correct the parsing of local storage
     const [active, setActive] = useState(storage ? JSON.parse(storage) : null); 
-    console.log("Current User State: ", active); // Log current user to check state updates
+    // console.log("Current User State: ", active); // Log current user to check state updates
 
     const handleSubmit = async (evn) => {
         evn.preventDefault();

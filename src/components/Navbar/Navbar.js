@@ -34,7 +34,7 @@ function Navbare() {
           <Form inline className=" searchbar d-flex ms-auto">
         <FormControl  type="text" placeholder="Search" className="inputt me-1 my-auto" />
         <button className=" button my-auto  me-3">Search</button>
-        <NavLink to="/cart" className='cartlink my-auto'>
+        <NavLink to="/cartui" className='cartlink my-auto'>
         <FaShoppingCart className='cart' />
           </NavLink>
           <NavLink to="/login" className='accountlink my-auto'>

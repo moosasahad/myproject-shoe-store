@@ -6,6 +6,12 @@ import { FiRefreshCw } from "react-icons/fi";
 import { CiTwitter } from "react-icons/ci";
 import { NavLink } from 'react-router-dom';
 function Footer() {
+    const handleClick = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
   return (
     <div className='footermaindiv'>
         <div className='footerspecification'>
@@ -31,10 +37,10 @@ function Footer() {
             <div>
                 <h3>Shop</h3>
                 <h6>
-                    <NavLink to='/men'>shop men</NavLink> <br />
-                    <NavLink to='/women'>Shop Women</NavLink> <br />
-                    <NavLink to='/lookbook'>Lookbook</NavLink> <br />
-                    <NavLink to='/collection'>Collection</NavLink>
+                    <NavLink to='/men' onClick={handleClick}>shop men</NavLink> <br />
+                    <NavLink to='/women' onClick={handleClick}>Shop Women</NavLink> <br />
+                    <NavLink to='/lookbook' onClick={handleClick}>Lookbook</NavLink> <br />
+                    <NavLink to='/collection' onClick={handleClick}>Collection</NavLink>
                 </h6>
             </div>
             <div>

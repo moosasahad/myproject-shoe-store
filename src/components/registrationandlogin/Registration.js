@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './Registration.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Registration() {
+    const navigate = useNavigate()
     const [input, setInput] = useState({
-        id: Date.now(),
         name: '',
         email: '',
         number: '',
@@ -31,7 +32,9 @@ function Registration() {
             alert("login succssesed") 
             try {
                 const response = await axios.post("http://localhost:3000/usere", input);
-                console.log("Form submitted successfully");   
+                console.log("Form submitted successfully"); 
+                navigate('/login')
+
                    
             } catch (error) {
                 console.error("Error submitting form", error);
