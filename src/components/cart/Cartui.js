@@ -37,7 +37,7 @@ function Cartui() {
         console.log("User's Cart:", activeUser.cart);
       }
     }
-  }, [cartproduct, user]);
+  }, [cartproduct, user]);//hjsdhfjhdjfhksd
 
   // Function to handle quantity changes
   const updateQuantity = (id, change) => {
