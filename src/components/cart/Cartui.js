@@ -39,22 +39,6 @@ function Cartui() {
     }
   }, [cartproduct, user]);
 
-  // Function to convert letter-based star rating to visual stars
-  const convertToStars = (stars) => {
-    const rating = parseFloat(stars);
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-
-    return (
-      <span className="star-rating">
-        {'★'.repeat(fullStars)}
-        {hasHalfStar && <span className="half-star">★</span>}
-        {'☆'.repeat(emptyStars)}
-      </span>
-    );
-  };
-
   // Function to handle quantity changes
   const updateQuantity = (id, change) => {
     const updatedProduct = product.map(item => {
@@ -74,6 +58,7 @@ function Cartui() {
     const updatedProduct = product.filter(item => item.id !== id);  // Filter out the item with the given id
     setProduct(updatedProduct);  // Update the state
     updateBackendCart(updatedProduct);  // Update the backend with the new cart
+    saveCartToLocalStorage(updatedProduct);  // Update localStorage if necessary
   };
 
   // Function to update the cart in the backend
@@ -86,6 +71,11 @@ function Cartui() {
     } catch (error) {
       console.error("Error updating cart on backend:", error);
     }
+  };
+
+  // Function to save the cart to localStorage
+  const saveCartToLocalStorage = (cart) => {
+    localStorage.setItem('cart', JSON.stringify(cart));  // Save cart to localStorage
   };
 
   return (
@@ -101,7 +91,7 @@ function Cartui() {
                 <h2>{item.name}</h2>
                 <h5>Type: {item.type}</h5>
                 <h4>Brand: {item.brand}</h4>
-                <span>{item.rating} {convertToStars(item.rating)}</span>
+                <span>{item.rating} </span>
                 <h6>Reviews: {item.reviews}</h6>
               </div>
               <div className='countbutton'>
