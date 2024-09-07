@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Form, FormControl, Container, Offcanvas, NavDropdown, } from 'react-bootstrap';
 import { MdAccountCircle } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
-
 import './Navbare.css'
 import { NavLink } from 'react-router-dom';
 
 function Navbare() {
+  
   return (
     <Navbar expand="md" className="bg-success mb-3">
     <Container fluid>
@@ -35,7 +35,10 @@ function Navbare() {
         <FormControl  type="text" placeholder="Search" className="inputt me-1 my-auto" />
         <button className=" button my-auto  me-3">Search</button>
         <NavLink to="/cartui" className='cartlink my-auto'>
+         {/* <span className="cart-count">{count}</span>
+         <h5>{count}</h5> */}
         <FaShoppingCart className='cart' />
+      
           </NavLink>
           <NavLink to="/login" className='accountlink my-auto'>
           <MdAccountCircle className='accounticon me-5 my-auto'/>

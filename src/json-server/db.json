@@ -249,20 +249,7 @@
       "number": "1234567890",
       "password": "moosa12",
       "cpassword": "moosa12",
-      "cart": [
-        {
-          "id": "2",
-          "name": "Men’s Classic Blue",
-          "type": "men",
-          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg",
-          "price": 1699,
-          "qty": 1,
-          "description": "Classic blue sneakers perfect for everyday wear.",
-          "brand": "Recycled Shoes",
-          "rating": 4.7,
-          "reviews": 8
-        }
-      ]
+      "cart": []
     },
     {
       "id": "d57c",
@@ -272,6 +259,37 @@
       "password": "jkfdghfkj123",
       "cpassword": "jkfdghfkj123",
       "cart": []
+    },
+    {
+      "id": "d9e1",
+      "name": "moosa sahad pk",
+      "email": "moosashad@gmail.com",
+      "number": "8590076749",
+      "password": "moosa12",
+      "cpassword": "moosa12",
+      "cart": []
+    },
+    {
+      "id": "5c41",
+      "name": "Aslah.c",
+      "email": "aslah@gmaI.com",
+      "number": "8138825296",
+      "password": "A1abcde",
+      "cpassword": "A1abcde",
+      "cart": [
+        {
+          "id": "9",
+          "name": "Women’s Blue Training",
+          "type": "women",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-003-600x600.jpg",
+          "price": 660,
+          "qty": 1,
+          "description": "Blue training shoes designed for women.",
+          "brand": "Recycled Shoes",
+          "rating": 4.2,
+          "reviews": 14
+        }
+      ]
     }
   ]
 }

@@ -1,92 +1,98 @@
-import { useState, useEffect, useContext   } from 'react';
+import React, { useContext, useState } from 'react';
+import './HomeStyleFiles/Payment.css'
+import {useNavigate}from "react-router-dom"
+import { LoginContext } from '../contextFolder/UserContext';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { UserProvider } from './CustomLogin';
-import { MyContext } from '../contextFolder/AllContext';
+function PaymentSection() {
+    const navigate= useNavigate()
+    
 
+  const [userDetails, setUserDetails] = useState({
+    name: '',
+    email: '',
+    address: '',
+    phoneNumber: ''
+    
+  });
 
-function UserCart() {
-
-  const navigate = useNavigate();
-  
-               
-               const {activeUser}=UserProvider()
-            
-                      //  const{activeUser}= useContext(MyContext)
-                        
-
-               console.log("on useCart",activeUser);
-               const [cartItems,setCartItems]=useState([])
-
-               useEffect(()=>{
-                if(activeUser){
-                  const  cardItemsChanges=async ()=>{
-                    try {
-                      let response= await axios.get(http://localhost:4000/Users/${activeUser.id});
-                    setCartItems(response.data.cart)
-                    } catch (error) {
-                      alert(error)
-                    }
-                   }
-                   cardItemsChanges()
-                }
-               
-               },[activeUser])
-               
+    const {activeUser,setActiveUser}= useContext(LoginContext)
+    console.log("payment",activeUser);
  
-  const addToCart = async (product) => {
-    console.log("my product",product);
-    
-           if(activeUser){ 
-      const itemWithQty={...product,qty:1  }
-           let response= await axios.get(http://localhost:4000/Users/${activeUser.id})
-       let currentUserOnDB= response.data
-       console.log("userCart",currentUserOnDB.cart);
-       
-    
-       
-   let existingItem= currentUserOnDB.cart.find((item)=>item.id===product.id);
-   if(existingItem){
-    alert("this item is already in your cart")
-   }else{
-
-     const updatedItem=[...currentUserOnDB.cart,itemWithQty]
-     console.log("updatedUser",updatedItem);
-     await axios.put(http://localhost:4000/Users/${activeUser.id},{
-      ...currentUserOnDB,cart:updatedItem
-     })
-     setCartItems(updatedItem)
-
-   }
-            
-            }else{
-              navigate("/login")
-              alert("please login")
-            }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value
+    }));
   };
 
+  const handleSubmit = async (e) => {
+     e.preventDefault();
+      
+      setTimeout( async()=>{
+        const response=  await axios.get(http://localhost:4000/Users/${activeUser.id})
+        let userDetailss=response.data;
+        let clearCart= await axios.put(http://localhost:4000/Users/${activeUser.id},{...userDetailss,cart:[]})
+         setActiveUser(clearCart.data)
+   
+         alert("payment successfully")
+         navigate("/cart")
+      },3000)
+   
+  };
 
-  const removeFromCart=async (itemId,index)=>{
-       try {
-        let response= await  axios.get(http://localhost:4000/Users/${activeUser.id});
-      let userData=response.data;
-            console.log(userData);
-            let updatedCart=userData.cart.filter((item)=>item.id!==itemId)
-            console.log(updatedCart);
-            await axios.patch(http://localhost:4000/Users/${activeUser.id},{
-               ...userData,cart:updatedCart
-           })
-           let newCartItems=[...updatedCart]
-           newCartItems.slice(index,1)
-           setCartItems(newCartItems)
-       } catch (error) {
-        console.error("Error eemoving items from the cart",error)
+  return (
+    <div className="payment-container">
+      <h2>Payment Page</h2>
+      <form onSubmit={handleSubmit} className="payment-form">
+        <div className="form-group">
+          <label>Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={userDetails.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={userDetails.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Address:</label>
+          <input
+            type="text"
+            name="address"
+            value={userDetails.address}
+            onChange={handleChange}
+            required
+          />
+        </div>
+       
+       
+        <div className="form-group">
+          <label>phone Number:</label>
+          <input
+            type="number"
+            name="cardNumber"
+            value={userDetails.cardNumber}
+            onChange={handleChange}
+            required
+          />
+        </div>
         
-       }
-  }
-
-
-  return {addToCart,cartItems,removeFromCart };
+       
+        <button type="submit" className="submit-button">Pay Now</button>
+      </form>
+    </div>
+  );
 }
 
-export default UserCart;
+export default PaymentSection;

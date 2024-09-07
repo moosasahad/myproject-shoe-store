@@ -7,38 +7,40 @@ function Cart() {
   const [cartproduct, setCartproduct] = useState([]);
   const [handleChange, inputValue, handleSubmit, active, setActive] = useLogandReg();
 
-  // Load cart from localStorage when the component mounts
+
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
-      setCartproduct(JSON.parse(savedCart));  // Load cart from localStorage
+      setCartproduct(JSON.parse(savedCart));
     }
   }, []);
+
 
   useEffect(() => {
     setUser(active);
   }, [active]);
 
+  
   const addCart = (product) => {
     setCartproduct(prevCart => {
       const existProduct = prevCart.find((item) => item.id === product.id);
       if (!existProduct) {
+
         const updatedCart = [...prevCart, { ...product, qty: 1 }];
-        updateBackendCart(updatedCart);  // Update backend with new cart
-        saveCartToLocalStorage(updatedCart);  // Save updated cart to localStorage
+        updateBackendCart(updatedCart); 
+        saveCartToLocalStorage(updatedCart);
         return updatedCart;
       } else {
-        alert("Product is already in the cart");
-        return prevCart;  // Return the previous cart if the product already exists
+        alert("Product is already added to the cart.");
       }
     });
   };
 
-  // Function to update the cart in the backend
+
   const updateBackendCart = async (updatedCart) => {
     try {
       if (user.id) {  // Ensure user id exists
-        await axios.put(`http://localhost:3000/usere/${user.id}`, {...user, cart: updatedCart });
+        await axios.put(`http://localhost:3000/usere/${user.id}`, { ...user, cart: updatedCart });
         console.log("Cart updated on backend:", updatedCart);
       }
     } catch (error) {
@@ -46,9 +48,9 @@ function Cart() {
     }
   };
 
-  // Function to save the cart to localStorage
+
   const saveCartToLocalStorage = (cart) => {
-    localStorage.setItem('cart', JSON.stringify(cart));  // Save cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));  
   };
 
   console.log("Cart products:", cartproduct);

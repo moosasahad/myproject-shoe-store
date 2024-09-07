@@ -6,6 +6,7 @@
     font-size: 40px;
     margin-right: 10px;
     color: black;
+    position: relative;
 }
 .navbardiv{
     
@@ -51,3 +52,19 @@
 .nvaigatlinks.active{
     color: white;
 }
+
+
+  
+  .cart-count {
+    position: relative;
+    top: 4px;  /* Adjust top position */
+    left: 10px; /* Adjust left position */
+    background-color: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px; /* Adjust the font size */
+    font-weight: bold;
+    /* line-height: 1; */
+  }
+  

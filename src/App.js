@@ -1,4 +1,5 @@
 
+import React, { useState, createContext } from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,11 +16,21 @@ import Women from './components/sections/women/Women';
 import Footer from './components/sections/Home/Footer';
 import Productdetails from './components/sections/productdetails/Productdetails';
 import Cartui from './components/cart/Cartui';
+import Paymen from './components/payment/Paymen';
 
-
+export const Valuecontext = createContext()
 function App() {
+
+  const[value, setValue]=useState("mooas")
+  const[update,setUpdate]=useState([])
+  const obj={
+    value,setValue,update,setUpdate
+  }
+  
   return (
+   
     <BrowserRouter>
+<Valuecontext.Provider value={obj}>
     <div className="App">
       <Navbare/>
       </div>
@@ -35,11 +46,15 @@ function App() {
         <Route path='/sale' element={<Sale/>}/>
         <Route path='/productdetails/:id' element={<Productdetails/>}/>
         <Route path='/cartui' element={<Cartui/>}/>
+        <Route path='paymentpage' element={<Paymen/>}/>
         
 
       </Routes>
       <Footer/>
+      </Valuecontext.Provider>
+
     </BrowserRouter>
+    
   );
 }
 

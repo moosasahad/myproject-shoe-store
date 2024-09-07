@@ -29,7 +29,6 @@ const handleCart=(product)=>{
         }
     }, [state, id]);
 
-    // Function to convert letter-based star rating to visual stars
     const convertToStars = (stars) => {
         const rating = parseFloat(stars);
         const fullStars = Math.floor(rating);

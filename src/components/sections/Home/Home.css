@@ -19,6 +19,7 @@
 .mainimagedivcontent{
     width: auto;
     height: auto;
+    padding: 20px;
 }
 .mainimagediv h1{
     font-size: 70px;

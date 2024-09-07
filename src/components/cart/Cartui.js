@@ -1,9 +1,13 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import useLogandReg from '../coustom hook/Logincostum';
 import './cartui.css';
+import { Link, useNavigate } from 'react-router-dom';
+import { Valuecontext } from '../../App';
 
 function Cartui() {
+  const navigate = useNavigate();
+  const { value, setValue } = useContext(Valuecontext);
   const [cartproduct, setCartproduct] = useState([]);
   const [user, setUser] = useState([]);
   const [product, setProduct] = useState([]);
@@ -13,20 +17,21 @@ function Cartui() {
   useEffect(() => {
     setUser(active);
   }, [active]);
+  console.log('active user in cart ui', active);
 
   useEffect(() => {
     const fetchCartData = async () => {
       try {
         const response = await axios.get("http://localhost:3000/usere");
         const resData = response.data;
-        setCartproduct(resData); 
+        setCartproduct(resData);
         console.log("Fetched Cart Data:", resData);
       } catch (error) {
         console.error("Error fetching cart data:", error);
       }
     };
 
-    fetchCartData(); 
+    fetchCartData();
   }, []);
 
   useEffect(() => {
@@ -37,7 +42,7 @@ function Cartui() {
         console.log("User's Cart:", activeUser.cart);
       }
     }
-  }, [cartproduct, user]);//hjsdhfjhdjfhksd
+  }, [cartproduct, user]);
 
   // Function to handle quantity changes
   const updateQuantity = (id, change) => {
@@ -48,20 +53,30 @@ function Cartui() {
       }
       return item;
     });
-    
-    setProduct(updatedProduct);  // Update the state
-    updateBackendCart(updatedProduct);  // Update the backend with the new cart
+
+    setProduct(updatedProduct);
+    updateBackendCart(updatedProduct);
   };
 
   // Function to remove an item from the cart
   const removeItem = (id) => {
-    const updatedProduct = product.filter(item => item.id !== id);  // Filter out the item with the given id
-    setProduct(updatedProduct);  // Update the state
-    updateBackendCart(updatedProduct);  // Update the backend with the new cart
-    saveCartToLocalStorage(updatedProduct);  // Update localStorage if necessary
+    const updatedProduct = product.filter(item => item.id !== id);
+    setProduct(updatedProduct);
+    updateBackendCart(updatedProduct);
+    saveCartToLocalStorage(updatedProduct);
   };
 
-  // Function to update the cart in the backend
+  const totalPrice = product.reduce((total, item) => total + item.price * item.qty, 0);
+
+
+  const itembuy = () => {
+    navigate('/paymentpage');
+  };
+
+  useEffect(() => {
+    setValue(() => itembuy); 
+  }, [setValue]);
+
   const updateBackendCart = async (updatedCart) => {
     try {
       if (user.id) {
@@ -73,14 +88,15 @@ function Cartui() {
     }
   };
 
-  // Function to save the cart to localStorage
   const saveCartToLocalStorage = (cart) => {
-    localStorage.setItem('cart', JSON.stringify(cart));  // Save cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
   };
 
   return (
     <div className='pagemaindiv'>
       <div>
+      <button style={{backgroundColor:'green'}} className='removeitemincart' onClick={itembuy}>Buy item</button>
+      <h2>Total Price: {totalPrice}</h2>
         {product.length > 0 ? (
           product.map((item, index) => (
             <div className='cartproductdiv' key={index}>
@@ -91,8 +107,9 @@ function Cartui() {
                 <h2>{item.name}</h2>
                 <h5>Type: {item.type}</h5>
                 <h4>Brand: {item.brand}</h4>
-                <span>{item.rating} </span>
+                <span>{item.rating}</span>
                 <h6>Reviews: {item.reviews}</h6>
+                <h4>₹ {item.price}</h4>
               </div>
               <div className='countbutton'>
                 <button onClick={() => updateQuantity(item.id, 1)}>+</button>
@@ -100,10 +117,14 @@ function Cartui() {
                 <button onClick={() => updateQuantity(item.id, -1)}>-</button>
               </div>
               <button className='removeitemincart' onClick={() => removeItem(item.id)}>Remove item</button>
+              
             </div>
           ))
         ) : (
-          <p>No products in the cart.</p>
+          <div>
+            <p>No products in the cart.</p>
+            <Link to="/" ><button>add product</button></Link>
+          </div>
         )}
       </div>
     </div>
