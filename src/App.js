@@ -1,6 +1,5 @@
-
-import React, { useState, createContext } from 'react';
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import React, { useState, createContext, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/sections/Home/Home';
@@ -10,51 +9,80 @@ import Cart from './components/cart/Cart';
 import Login from './components/registrationandlogin/Login';
 import Men from './components/sections/Men/Men';
 import Collection from './components/sections/collectio/Collection';
-import Lookbook from './components/sections/lookbook/Lookbook';
-import Sale from './components/sections/sale/Sale';
 import Women from './components/sections/women/Women';
 import Footer from './components/sections/Home/Footer';
 import Productdetails from './components/sections/productdetails/Productdetails';
 import Cartui from './components/cart/Cartui';
 import Paymen from './components/payment/Paymen';
+import Adminhome from './components/admin/admin main/Adminhome';
 
-export const Valuecontext = createContext()
+export const Valuecontext = createContext();
+
 function App() {
+  const [value, setValue] = useState("mooas");
+  const [update, setUpdate] = useState([]);
+  const [cartup, setCartup] = useState([]);
+  const [adminstate, setAdminstate] = useState(false);
 
-  const[value, setValue]=useState("mooas")
-  const[update,setUpdate]=useState([])
-  const obj={
-    value,setValue,update,setUpdate
-  }
-  
+
+  const obj = {
+    value,
+    setValue,
+    update,
+    setUpdate,
+    cartup,
+    setCartup,
+    setAdminstate,
+  };
+
+
+console.log("jfdghgjkdfhgkjfdhgjkfdhg app admin on app", adminstate);
+useEffect(()=>{
+const items=localStorage.getItem('admin')
+items&& setAdminstate(JSON.parse(items))
+},[])
   return (
-   
-    <BrowserRouter>
 <Valuecontext.Provider value={obj}>
-    <div className="App">
-      <Navbare/>
-      </div>
-      <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path="/login" element={<Login/>}/>
-        <Route path='/cart' element={<Cart/>}/>
-        <Route path='/registration' element={<Registration/>}/>
-        <Route path='/men' element={<Men/>}/>
-        <Route path='/women' element={<Women/>}/>
-        <Route path='/collection' element={<Collection/>}/>
-        <Route path='/lookbook' element={<Lookbook/>}/>
-        <Route path='/sale' element={<Sale/>}/>
-        <Route path='/productdetails/:id' element={<Productdetails/>}/>
-        <Route path='/cartui' element={<Cartui/>}/>
-        <Route path='paymentpage' element={<Paymen/>}/>
+    <div>
+      {!adminstate ? (
         
-
-      </Routes>
-      <Footer/>
-      </Valuecontext.Provider>
-
-    </BrowserRouter>
-    
+            <div className="App">
+           
+            
+            
+              <Navbare />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/registration" element={<Registration />} />
+                <Route path="/men" element={<Men />} />
+                <Route path="/women" element={<Women />} />
+                <Route path="/collection" element={<Collection />} />
+                <Route path="/productdetails/:id" element={<Productdetails />} />
+                <Route path="/cartui" element={<Cartui />} />
+                <Route path="/paymentpage" element={<Paymen />} />
+              </Routes>
+              <Footer />
+             
+              </div>
+          
+            
+          
+        
+      ) : (
+          <div>
+            
+            <Routes>
+          
+            <Route path="/" element={<Adminhome />} />
+            
+          </Routes>         
+          </div>
+      )}
+  </div>
+  </Valuecontext.Provider>
+   
   );
 }
 

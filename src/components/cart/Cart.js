@@ -4,10 +4,10 @@ import useLogandReg from '../coustom hook/Logincostum';
 
 function Cart() {
   const [user, setUser] = useState([]);
-  const [cartproduct, setCartproduct] = useState([]);
+  const [cartproduct, setCartproduct] = useState([]);  // Initialize cartproduct as an empty array
   const [handleChange, inputValue, handleSubmit, active, setActive] = useLogandReg();
 
-
+  // Load cart from localStorage on component mount
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
@@ -15,28 +15,28 @@ function Cart() {
     }
   }, []);
 
-
+  // Set active user
   useEffect(() => {
     setUser(active);
   }, [active]);
 
-  
+  // Add product to cart or show an alert if it exists
   const addCart = (product) => {
-    setCartproduct(prevCart => {
+    setCartproduct((prevCart = []) => {  // Ensure prevCart is always an array
       const existProduct = prevCart.find((item) => item.id === product.id);
       if (!existProduct) {
-
         const updatedCart = [...prevCart, { ...product, qty: 1 }];
         updateBackendCart(updatedCart); 
         saveCartToLocalStorage(updatedCart);
         return updatedCart;
       } else {
         alert("Product is already added to the cart.");
+        return prevCart;  // Return the existing cart
       }
     });
   };
 
-
+  // Update the backend cart for the user
   const updateBackendCart = async (updatedCart) => {
     try {
       if (user.id) {  // Ensure user id exists
@@ -48,7 +48,7 @@ function Cart() {
     }
   };
 
-
+  // Save the cart to localStorage
   const saveCartToLocalStorage = (cart) => {
     localStorage.setItem('cart', JSON.stringify(cart));  
   };

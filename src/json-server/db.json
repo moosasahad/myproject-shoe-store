@@ -243,53 +243,24 @@
   ],
   "usere": [
     {
-      "id": "c8cc",
+      "id": "8594",
       "name": "moosa",
       "email": "moosa@gmail.com",
       "number": "1234567890",
-      "password": "moosa12",
-      "cpassword": "moosa12",
+      "password": "moosa21",
+      "cpassword": "moosa21",
+      "admin": true,
       "cart": []
     },
     {
-      "id": "d57c",
-      "name": "jhjdfjdh",
-      "email": "jkksdfk@gmail.com",
+      "id": "3a80",
+      "name": "sahad",
+      "email": "sahad@gamil.com",
       "number": "1234567890",
-      "password": "jkfdghfkj123",
-      "cpassword": "jkfdghfkj123",
+      "password": "sahad21",
+      "cpassword": "sahad21",
+      "admin": false,
       "cart": []
-    },
-    {
-      "id": "d9e1",
-      "name": "moosa sahad pk",
-      "email": "moosashad@gmail.com",
-      "number": "8590076749",
-      "password": "moosa12",
-      "cpassword": "moosa12",
-      "cart": []
-    },
-    {
-      "id": "5c41",
-      "name": "Aslah.c",
-      "email": "aslah@gmaI.com",
-      "number": "8138825296",
-      "password": "A1abcde",
-      "cpassword": "A1abcde",
-      "cart": [
-        {
-          "id": "9",
-          "name": "Women’s Blue Training",
-          "type": "women",
-          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-003-600x600.jpg",
-          "price": 660,
-          "qty": 1,
-          "description": "Blue training shoes designed for women.",
-          "brand": "Recycled Shoes",
-          "rating": 4.2,
-          "reviews": 14
-        }
-      ]
     }
   ]
 }

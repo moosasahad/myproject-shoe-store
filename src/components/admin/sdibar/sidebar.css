@@ -1,0 +1,67 @@
+Base sidebar styles
+.sidebar {
+    width: 60px; /* Default width for collapsed sidebar */
+    background-color: rgb(3, 3, 75);
+    color: white;
+    height: 100vh;
+    transition: width 0.6s ease;
+    outline: none;
+    border: none;
+  }
+  
+  .sidebar.expanded {
+    width: 200px; /* Width for expanded sidebar */
+    outline: none;
+    border: none;
+  }
+  
+  .sidebar-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-menu li {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+  }
+  
+  /* Sidebar item style */
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar-item span {
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+  
+  /* Hover effect */
+  .sidebar-item:hover {
+    background-color: #383838;
+  }
+  
+  /* Collapse sidebar icon only view */
+  .collapsed .sidebar-item span {
+    display: none; /* Hide labels when collapsed */
+  }
+  
+  /* Optional: change the menu icon hover or toggle button style */
+  .sidebar-menu li:hover {
+    background-color: #303030;
+  }
+  
+  /* Adjust icon size */
+  .sidebar-item svg {
+    font-size: 24px;
+  }
+  .togilicon{
+    font-size: 25px;
+    font-weight: 100;
+  }
+  

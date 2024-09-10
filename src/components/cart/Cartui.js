@@ -11,6 +11,7 @@ function Cartui() {
   const [cartproduct, setCartproduct] = useState([]);
   const [user, setUser] = useState([]);
   const [product, setProduct] = useState([]);
+  const{cartup,setCartup}=useContext(Valuecontext)
 
   const [handleChange, inputValue, handleSubmit, active, setActive] = useLogandReg();
 
@@ -82,6 +83,9 @@ function Cartui() {
       if (user.id) {
         await axios.put(`http://localhost:3000/usere/${user.id}`, { ...user, cart: updatedCart });
         console.log("Cart updated on backend:", updatedCart);
+        setCartup(updatedCart)
+        console.log("Cart updated on backend in state:",cartup );
+        
       }
     } catch (error) {
       console.error("Error updating cart on backend:", error);
