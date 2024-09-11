@@ -8,11 +8,13 @@
     outline: none;
     border: none;
     padding: 10px;
+    position: fixed;
+
     
 }
 .logicon{
    position: absolute;
-    left: 40px;
+    left: 70px;
     top: 7px;
 }
 .logoname{

@@ -2,6 +2,7 @@ import React, { useState, createContext, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Col, Row } from 'react-bootstrap';
 import Home from './components/sections/Home/Home';
 import Navbare from './components/Navbar/Navbar';
 import Registration from './components/registrationandlogin/Registration';
@@ -14,7 +15,15 @@ import Footer from './components/sections/Home/Footer';
 import Productdetails from './components/sections/productdetails/Productdetails';
 import Cartui from './components/cart/Cartui';
 import Paymen from './components/payment/Paymen';
-import Adminhome from './components/admin/admin main/Adminhome';
+
+import Dashborder from './components/admin/dashbord/Dashborder';
+import Productinsdmin from './components/admin/product/Productinsdmin';
+import Userinadmin from './components/admin/adminuser/Userinadmin';
+import Ordersinadmin from './components/admin/adminorders/Ordersinadmin';
+import Sidebar from './components/admin/sdibar/Sidebar';
+import Navbaradmin from './components/admin/admin main/Navbaradmin';
+import Profiladmin from './components/admin/profileadmin/Profiladmin';
+import Admindetails from './components/admin/details/Admindetails';
 
 export const Valuecontext = createContext();
 
@@ -33,6 +42,7 @@ function App() {
     cartup,
     setCartup,
     setAdminstate,
+    adminstate
   };
 
 
@@ -41,6 +51,7 @@ useEffect(()=>{
 const items=localStorage.getItem('admin')
 items&& setAdminstate(JSON.parse(items))
 },[])
+
   return (
 <Valuecontext.Provider value={obj}>
     <div>
@@ -71,13 +82,30 @@ items&& setAdminstate(JSON.parse(items))
           
         
       ) : (
-          <div>
+          <div className='admindiv'>
             
-            <Routes>
+             
+          <Row>
+            <Col className='admincol'>
+            <Navbaradmin/>
+            </Col>
+        </Row>
           
-            <Route path="/" element={<Adminhome />} />
-            
-          </Routes>         
+        <Row>
+            <Col className='admincoltwo' xs={12} md={1} style={{height: '100vh',msOverflowY: 'auto'}}>
+            <Sidebar/>
+            </Col>
+            <Col  className='maindiveinadminhome'>
+            <Routes>
+            <Route path="/" element={<Dashborder/>}/>
+            <Route path="/products" element={<Productinsdmin/>}/> 
+            <Route path='/users' element={<Userinadmin/>}/>
+            <Route path='/orders' element={<Ordersinadmin/>}/>
+            <Route path='/profile' element={<Profiladmin/>}/>  
+            <Route path='/details/:id' element={<Admindetails/>}/>          
+          </Routes>
+            </Col>
+        </Row>
           </div>
       )}
   </div>
