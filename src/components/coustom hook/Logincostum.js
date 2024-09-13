@@ -44,12 +44,16 @@ function useLogandReg() {
             
 
             if (user) {
-                console.log("Login Successful", user);
+                if(user.status){
+                    console.log("Login Successful", user);
 
                 localStorage.setItem("inputValue", JSON.stringify(user));
                 setActive(user); 
                 navigate('/'); 
                 alert("Login Successful");
+                }else{
+                    alert("your block")
+                }
             } else if (adminUser) {
                 const details= JSON.stringify(adminUser)
                 localStorage.setItem("admin", details);

@@ -6,6 +6,18 @@ prodectlist{
     justify-content: center;
     
 }
+.addproduct{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin: 10px 0px 30px;
+}
+.addproduct button{
+    font-size: 20px;
+    color: white;
+    background-color: green;
+    border: 1px solid black;
+}
 .table{
     border: solid 1px black;
     text-align: center;

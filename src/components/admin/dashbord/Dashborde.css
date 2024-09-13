@@ -1,0 +1,19 @@
+.dashbordemaindiv{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+}
+.productdiv{
+    width: 200px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+    border: 1px solid black;
+}
+.productimagediv {
+    width: 200px;
+}

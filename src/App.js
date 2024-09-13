@@ -24,6 +24,9 @@ import Sidebar from './components/admin/sdibar/Sidebar';
 import Navbaradmin from './components/admin/admin main/Navbaradmin';
 import Profiladmin from './components/admin/profileadmin/Profiladmin';
 import Admindetails from './components/admin/details/Admindetails';
+import Edite from './components/admin/edititem/Edite';
+import Adproduct from './components/admin/addproduct/Adproduct';
+import Userdetaulsview from './components/admin/adminuser/Userdetaulsview';
 
 export const Valuecontext = createContext();
 
@@ -103,6 +106,9 @@ items&& setAdminstate(JSON.parse(items))
             <Route path='/orders' element={<Ordersinadmin/>}/>
             <Route path='/profile' element={<Profiladmin/>}/>  
             <Route path='/details/:id' element={<Admindetails/>}/>          
+            <Route path='/editing/:id' element={<Edite/>}/>
+            <Route path='addingproduct' element={<Adproduct/>}/>
+            <Route path="Userdetaulsview/:id" element={<Userdetaulsview/>}/>
           </Routes>
             </Col>
         </Row>

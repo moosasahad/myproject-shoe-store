@@ -1,6 +1,18 @@
 {
   "Product": [
     {
+      "id": "1",
+      "name": "Men’s Black Running",
+      "type": "men",
+      "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-005-400x400.jpg",
+      "price": 799,
+      "qty": 1,
+      "description": "Comfortable and durable black running shoes for men.",
+      "brand": "Recycled Shoes",
+      "rating": 4.5,
+      "reviews": 12
+    },
+    {
       "id": "2",
       "name": "Men’s Classic Blue",
       "type": "men",
@@ -248,6 +260,89 @@
       "password": "sahad21",
       "cpassword": "sahad21",
       "admin": false,
+      "cart": [
+        {
+          "id": "10",
+          "name": "Women’s Candy City Run",
+          "type": "women",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-014-600x600.jpg",
+          "price": 549,
+          "qty": 1,
+          "description": "Colorful running shoes perfect for urban environments.",
+          "brand": "Recycled Shoes",
+          "rating": 4.3,
+          "reviews": 12
+        },
+        {
+          "id": "1",
+          "name": "Men’s Black Running",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-005-400x400.jpg",
+          "price": 799,
+          "qty": 1,
+          "description": "Comfortable and durable black running shoes for men.",
+          "brand": "Recycled Shoes",
+          "rating": 4.5,
+          "reviews": 12
+        },
+        {
+          "id": "2",
+          "name": "Men’s Classic Blue",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg",
+          "price": 1699,
+          "qty": 1,
+          "description": "Classic blue sneakers perfect for everyday wear.",
+          "brand": "Recycled Shoes",
+          "rating": 4.7,
+          "reviews": 8
+        },
+        {
+          "id": "6",
+          "name": "Men’s Moonstone Sneaker",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-018-600x600.jpg",
+          "price": 749,
+          "qty": 1,
+          "description": "Moonstone sneakers with a modern design.",
+          "brand": "Recycled Shoes",
+          "rating": 4.5,
+          "reviews": 11
+        }
+      ],
+      "status": false
+    },
+    {
+      "id": "833a",
+      "name": "moosa sahad",
+      "email": "moosasahd@gmail.com",
+      "number": "9087654321",
+      "password": "moosa21",
+      "cpassword": "moosa21",
+      "admin": false,
+      "status": true,
+      "cart": []
+    },
+    {
+      "id": "55a2",
+      "name": "gfhjkdhkjh",
+      "email": "jkhkfjhdjkgh@gamil.com",
+      "number": "1234567890",
+      "password": "moosa21",
+      "cpassword": "moosa21",
+      "admin": false,
+      "status": false,
+      "cart": []
+    },
+    {
+      "id": "f366",
+      "name": "dfjkghjfkdhk",
+      "email": "kjfkjsh@gmail.com",
+      "number": "8907654321",
+      "password": "moosa23",
+      "cpassword": "moosa23",
+      "admin": false,
+      "status": false,
       "cart": []
     }
   ]

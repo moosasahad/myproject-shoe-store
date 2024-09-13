@@ -1,0 +1,54 @@
+.edit-form{
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 100px; */
+    width: 700px;
+
+}
+.edit-form label{
+    font-weight: bold;
+    font-size: 20px;
+}
+.formmaindiv{
+    width: 100%;
+    /* height: 100vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding-top: 100px; */
+    padding: 30px;
+}
+.productimagediv{
+    width: 100%;
+    /* height: 200px; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+
+}
+.productimagediv img{
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+}
+.inputandlabelcontainer input{
+    width: 450px;
+}
+.formsubmitbutton{
+    /* width: 100%;
+    display: flex; */
+    /* align-items: center; */
+}
+.formsubmitbutton button{
+  
+    border: 1px solid black;
+    background-color: green;
+    margin-top: 10px;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 25px;
+    width: 100px;
+    height:50px;
+    color: white;
+    
+}

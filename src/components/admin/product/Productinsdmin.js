@@ -41,8 +41,15 @@ function Productinsdmin() {
     
   };
 
+const addproduct=()=>{
+  navigate("/addingproduct")
+}
+
   return (
     <div className='prodectlist'>
+      <div className="addproduct">
+        <button onClick={addproduct}>Addproduct +</button>
+      </div>
       <table className='table' style={{ borderCollapse: 'collapse', width: '100%' }}>
         <thead>
           <tr>

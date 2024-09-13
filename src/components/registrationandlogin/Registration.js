@@ -12,6 +12,7 @@ function Registration() {
         password: '',
         cpassword: '',
         admin : false,
+        status : true,
         cart: []
     });
 
