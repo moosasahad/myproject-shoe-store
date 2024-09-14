@@ -15,7 +15,7 @@ function useLogandReg() {
     let storage = localStorage.getItem("inputValue");
     // let  adminstorage = localStorage.getItem("admin");
     
-    // Correct the parsing of local storage
+  
     const [active, setActive] = useState(storage ? JSON.parse(storage) : null); 
 
     // const [admin, setAdmin] = useState(adminstorage ? JSON.parse(adminstorage) : null);
@@ -25,21 +25,21 @@ function useLogandReg() {
         evn.preventDefault();
 
         try {
-            const res = await axios.get("http://localhost:3000/usere"); // Ensure this URL is correct
+            const res = await axios.get("http://localhost:3000/usere"); 
             const userdata = res.data;
 
-            // Check for regular user (admin === false)
+           
             const user = userdata.find(user => 
                 (user.email === inputValue.email || user.number === inputValue.email) && 
                 user.password === inputValue.password && 
-                user.admin === false // Check as a boolean, not a string
+                user.admin === false 
             );
 
-            // Check for admin user (admin === true)
+           
             const adminUser = userdata.find(user => 
                 (user.email === inputValue.email || user.number === inputValue.email) && 
                 user.password === inputValue.password && 
-                user.admin === true // Check as a boolean
+                user.admin === true 
             );
             
 

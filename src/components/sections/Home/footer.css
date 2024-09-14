@@ -1,33 +1,100 @@
-.footermaindiv{
-    width: 100%;
-    height: auto;
-    background-color: antiquewhite;
-
-}
-.footerspecification{
+.footermaindiv {
+    background-color: #333;
+    color: #fff;
+    padding: 50px 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .footerspecification {
     display: flex;
-    flex-wrap: wrap;
-    width: 100%;
     justify-content: space-around;
-    padding: 20px;
-}
-.foterfeterdiv{
+    padding-bottom: 30px;
+    border-bottom: 1px solid #555;
+  }
+  
+  .foterfeterdiv {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    width: 30%;
-    margin: 20px;
-}
-.footerlinkicon{
+    gap: 10px;
+  }
+  
+  .foterfeterdiv h5 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ffcc80;
+  }
+  
+  .foterfeterdiv svg {
+    font-size: 1.5rem;
+    color: #ff6f61;
+  }
+  
+  .footerlinksanddatas {
     display: flex;
     justify-content: space-between;
-    width: 200px;
-}
-.footerlinksanddatas{
+    margin-top: 40px;
+  }
+  
+  .footerlinksanddatas h1 {
+    font-size: 2.5rem;
+    color: #ffcc80;
+  }
+  
+  .footerlinksanddatas h3 {
+    font-size: 1.5rem;
+    color: #ff6f61;
+    margin-bottom: 20px;
+  }
+  
+  .footerlinksanddatas h6 {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.8;
+  }
+  
+  .footerlinksanddatas h6 a {
+    color: #ffcc80;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footerlinksanddatas h6 a:hover {
+    color: #ff6f61;
+  }
+  
+  .footerlinkicon {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding-top: 50px;
-    padding-bottom: 100px;
-}
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .footerlinkicon svg {
+    font-size: 1.8rem;
+    color: #ffcc80;
+    transition: color 0.3s ease;
+  }
+  
+  .footerlinkicon svg:hover {
+    color: #ff6f61;
+  }
+  
+  .footerlinksanddatas div {
+    max-width: 250px;
+  }
+  
+  @media (max-width: 768px) {
+    .footerspecification, .footerlinksanddatas {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .footerlinksanddatas div {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+  
+    .footerlinkicon {
+      justify-content: center;
+    }
+  }
+  

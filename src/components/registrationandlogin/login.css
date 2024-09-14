@@ -1,84 +1,148 @@
-.maincountainer{
-    width: 100%;
+/* General styling for the main container */
+.maincontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-.firstdiv{
-    width: 30%;
-    height: 70%;
-}
-.firstdivicon{
-    font-size: 60px;
-}
-.seconddiv{
-    width: 40%;
-    height: 70%;
-}
-.loginform{
-    display: flex;
-    flex-direction: column;
-}
-.seconddiv input{
-width: 60%;
-
-}
-.buttonandlinkdiv{
-    display: flex;
-    align-items: center;
-}
-.buttonandlinkdiv button{
-    width: 70px;
-    height: 40px;
-    background-color: rgb(64, 64, 248);
-    border: none;
-    border-radius: 30px;
-    margin-left: 30px;
-    font-size: 15px;
-    padding: 10px;
-    font-weight: bold;
-}
-.maindiv{
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(255, 255, 255);
-}
-.subdiv{
-    width: 50%;
-    height: 50%;
-    background-color: wheat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border-radius: 20px;
-}
-.subdivicon{
-    font-size: 150px;
-}
-.subdiv button{
-    width: auto;
-    border: none;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 10px;
-}
-.button1{
-    background-color: red;
-    color: black;
-    font-size: 20px;
-    font-weight: bold;  
-}
-.button2{
-    background-color: green;
+    background-color: #f9f9f9; /* Matches overall light theme */
+  }
+  
+  .firstdiv {
+    text-align: center;
+    padding: 20px;
+    background-color: #28a745; /* Matches the theme green */
     color: white;
-    font-size: 20px;
-    font-weight: bold;  
-}
-
-
+    border-radius: 12px 0 0 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+  }
+  
+  .firstdivicon {
+    font-size: 4rem;
+    margin-bottom: 10px;
+  }
+  
+  .firstdiv h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+  }
+  
+  .firstdiv h6 {
+    font-size: 1rem;
+  }
+  
+  .seconddiv {
+    padding: 30px;
+    background-color: white;
+    width: 300px;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .seconddiv h4 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .loginform label {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .loginform input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .buttonandlinkdiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .buttonandlinkdiv a {
+    text-decoration: none;
+    color: #28a745;
+    font-size: 0.9rem;
+  }
+  
+  .buttonandlinkdiv button {
+    padding: 8px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .buttonandlinkdiv button:hover {
+    background-color: #218838;
+  }
+  
+  /* Logged-in styling */
+  .maindiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+  }
+  
+  .subdiv {
+    text-align: center;
+    padding: 40px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .subdivicon {
+    font-size: 4rem;
+    color: #28a745;
+  }
+  
+  .subdiv h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .subdiv button {
+    padding: 10px 30px;
+    margin: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .subdiv button:hover {
+    background-color: #218838;
+  }
+  
+  .button1 {
+    background-color: #ff4d4d;
+  }
+  
+  .button1:hover {
+    background-color: #e60000;
+  }
+  
+  .button2 {
+    background-color: #007bff;
+  }
+  
+  .button2:hover {
+    background-color: #0056b3;
+  }
+  

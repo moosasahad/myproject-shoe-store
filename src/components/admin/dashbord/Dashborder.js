@@ -8,27 +8,35 @@ function Dashborder() {
 
   return (
     <div className='dashbordemaindiv'>
-      <div className="productdiv">
-       <div className="productimagediv">
-       <img src="https://media.cnn.com/api/v1/images/stellar/prod/running-sneakers-women-cnnu.jpg?c=16x9&q=h_438,w_780,c_fill" alt="" />
-       </div>
-       <h1>Products</h1>
-       <button onClick={()=>{navigat('/products')}}>Go to page</button>
+     <div className="contanierindiv">
+      <div className='contanierindivimg'>
+        <img src="https://t3.ftcdn.net/jpg/06/12/00/18/360_F_612001823_TkzT0xmIgagoDCyQ0yuJYEGu8j6VNVYT.jpg" alt="" />
       </div>
-      <div className="productdiv">
-       <div>
-       <img  className="productimagediv" src="https://cdn-icons-png.flaticon.com/512/33/33308.png" alt="" />
-       </div>
-       <h1>Users</h1>
-       <button onClick={()=>{navigat('/users')}}>Go to page</button>
+      <div className="containerdetailse">
+        <h1>products</h1>
+        <button onClick={()=>{navigat('/products')}}>go to products</button>
       </div>
-      <div className="productdiv">
-       <div className="productimagediv">
-       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvwDAr-O5M6-xtH-Or1LRbNZon59ZOMBixaQ&s" alt="" />
-       </div>
-       <h1>orders</h1>
-       <button onClick={()=>{navigat('/orders')}}>Go to page</button>
+     </div>
+     {/* users--------------- */}
+     <div className="contanierindiv">
+      <div className='contanierindivimg'>
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt="" />
       </div>
+      <div className="containerdetailse">
+        <h1>users</h1>
+        <button onClick={()=>{navigat('/users')}}>go to users</button>
+      </div>
+     </div>
+     {/* orders-------------- */}
+     <div className="contanierindiv">
+      <div className='contanierindivimg'>
+        <img src="https://www.vardells.co.uk/wp-content/uploads/2018/07/order.jpg" alt="" />
+      </div>
+      <div className="containerdetailse">
+        <h1>Orders</h1>
+        <button onClick={()=>{navigat('/orders')}}>go to orders</button>
+      </div>
+     </div>
     </div>
   );
 }

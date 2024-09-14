@@ -1,74 +1,124 @@
- 
-.nabardivsize{
-    height: 60px;
-}
-.accounticon{
-    font-size: 40px;
-    color: rgb(0, 0, 0);
-}
-.cart{
-    font-size: 40px;
-    margin-right: 10px;
-    color: black;
-    position: relative;
-}
-.navbardiv{
-    
-    padding: 10px;
-    
-}
-.accountlink.active .accounticon {
-    color: rgb(87, 15, 15);
-}
-.inputt{
-    height: 30px;
-}
-.storename{
-    color: black;
-    text-decoration: none;
-}
-.button{
-    height: 35px;
-    border: none;
-    background-color: green;
-    color: white;
-    border-radius: 10px;
-    
-}
-.cartlink.active .cart{
-    color: rgb(87, 15, 15);
-}
-.storename{
-    font-size:30px;
-    font-weight: bold;
-}
-.nvaigatlinksdiv{
-    align-items: center;
-}
-.nvaigatlinks {
-    font-size:20px;
-    font-weight: 500;
-    margin: 10px;
-    margin: 10px;
-    text-decoration: none;
-    color: black;
-}
-.nvaigatlinks.active{
-    color: white;
-}
-
-
+/* General navbar styling */
+.nabardivsize {
+    background-color: #333;
+    color: #fff;
+    padding: 15px 20px;
+    font-family: 'Poppins', sans-serif;
+    border-bottom: 2px solid #ff6f61;
+  }
   
-  .cart-count {
-    position: relative;
-    top: 4px;  /* Adjust top position */
-    left: 10px; /* Adjust left position */
-    background-color: red;
+  .storename {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #ffcc80;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .storename:hover {
+    color: #ff6f61;
+  }
+  
+  /* Navigation links */
+  .nvaigatlinksdiv {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nvaigatlinks {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #fff;
+    margin-right: 20px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .nvaigatlinks:hover {
+    color: #ffcc80;
+  }
+  
+  /* Search bar styling */
+  .searchbar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .inputt {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #222;
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  .inputt::placeholder {
+    color: #aaa;
+  }
+  
+  .button {
+    background-color: #ff6f61;
+    border: none;
+    padding: 10px 15px;
     color: white;
-    padding: 2px 6px;
-    border-radius: 50%;
-    font-size: 12px; /* Adjust the font size */
-    font-weight: bold;
-    /* line-height: 1; */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #ffcc80;
+    color: #333;
+  }
+  
+  /* Cart and account icons */
+  .cartlink, .accountlink {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+  }
+  
+  .cartlink:hover, .accountlink:hover {
+    color: #ffcc80;
+  }
+  
+  .cart, .accounticon {
+    font-size: 1.8rem;
+    color: #ffcc80;
+  }
+  
+  .cart:hover, .accounticon:hover {
+    color: #ff6f61;
+  }
+  
+  /* Offcanvas styling */
+  .offcanvas-body {
+    background-color: #222;
+  }
+  
+  .offcanvas-header {
+    border-bottom: 1px solid #444;
+  }
+  
+  .offcanvas-title {
+    color: #ffcc80;
+  }
+  
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .storename {
+      font-size: 1.8rem;
+    }
+    
+    .nvaigatlinks {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+  
+    .button {
+      font-size: 0.9rem;
+    }
   }
   

@@ -2,6 +2,7 @@ import React,{useContext} from 'react'
 import { AllContext } from '../../Context/MyContext'
 import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import './profiles.css'
 
 function UserFound() {
 

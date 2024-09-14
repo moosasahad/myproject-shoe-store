@@ -67,7 +67,7 @@ const handleCart=(product)=>{
                         <h5>Stock: {product.qty}</h5>
                         <span>{product.rating} {convertToStars(product.rating)}</span> 
                         <span>Reviews: {product.reviews}</span>
-                        <h4>₹ {product.price}</h4>
+                        <h4>₹ - {product.price}</h4>
                         <div className='broductdivbutton'>
                             <button onClick={()=>handleCart(product)}>Add to Cart</button>
                             <button>Buy Now</button>

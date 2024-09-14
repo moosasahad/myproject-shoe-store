@@ -35,6 +35,7 @@ function App() {
   const [update, setUpdate] = useState([]);
   const [cartup, setCartup] = useState([]);
   const [adminstate, setAdminstate] = useState(false);
+  const[displaylgo,setDisplaylog]=useState("")
 
 
   const obj = {
@@ -45,7 +46,9 @@ function App() {
     cartup,
     setCartup,
     setAdminstate,
-    adminstate
+    adminstate,
+    setDisplaylog,
+    displaylgo
   };
 
 

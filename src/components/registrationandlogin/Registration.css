@@ -1,63 +1,100 @@
+/* General styling for the main container */
 .maincontainer {
-    width: 100%;
-    height: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 30px;
+    background-color: #f9f9f9; /* Light background for consistency */
 }
 
 .subcontainer {
-    width: 40%;
-    height: auto;
-    padding: 35px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 30px;
-    background-color: rgb(243, 231, 207);
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
 }
 
-.subcontainer input {
+.subcontainer h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form input and label styling */
+form label {
+    display: block;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+form input {
     width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.subcontainer label {
-    font-size: 20px;
-    font-weight: 500;
+form input:focus {
+    outline: none;
+    border-color: #28a745; /* Green border for focus */
 }
 
-.registrationbutton {
-    width: 100px;
-    height: 30px;
-    border: none;
-    background-color: blueviolet;
-    border-radius: 20px;
-    color: white;
+/* Validation error messages */
+span {
+    display: block;
+    font-size: 0.8rem;
+    color: red;
+    margin-top: -8px;
+    margin-bottom: 10px;
 }
 
+/* Password container for toggle visibility */
 .password-container {
-    display: flex;
-    align-items: center;
-}
-
-.password-container input {
-    width: 100%;
-    margin-right: 10px;
+    position: relative;
 }
 
 .toggle-password {
-    background: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
     border: none;
-    color: blueviolet;
+    color: #28a745; /* Green color for consistency */
     cursor: pointer;
-    font-weight: bold;
 }
 
-.subcontainer span {
-    color: red;
-    display: block;
-    margin-top: 5px;
-    font-size: 14px;
+.toggle-password:hover {
+    color: #218838;
+}
+
+/* Submit button styling */
+.registrationbutton {
+    padding: 10px 20px;
+    width: 100%;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.registrationbutton:hover {
+    background-color: #218838;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+    .subcontainer {
+        width: 90%;
+    }
 }
 

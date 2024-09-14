@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './login.css';
 import useLogandReg from '../coustom hook/Logincostum';
 import { RiAccountCircleFill } from "react-icons/ri";
@@ -22,11 +22,11 @@ function Login() {
     return (
         <div>
           <div className='maincontainer'>
-                <div className='firstdiv'>
+                {/* <div className='firstdiv'>
                     <RiAccountCircleFill className='firstdivicon' />
                     <h1>Sign in</h1>
                     <h6>Use your details</h6>
-                </div>
+                </div> */}
                 <div className='seconddiv'>
                     <h4>Sign in / Sign up</h4>
                     <br />

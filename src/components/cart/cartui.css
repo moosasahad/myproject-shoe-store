@@ -1,64 +1,90 @@
+/* Ensure to import this CSS in your component */
 
-.pagemaindiv{
-    width: 100%;
-    height: auto;
-    padding: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-.cartproductdiv{
-width: 100%;
-max-width: 900px;
-height: auto;
-background-color: rgb(206, 207, 202);
-box-shadow: 5px 15px 15px gray;
-/* border-radius: 30px; */
-padding: 10px;
-border: solid .5px gray;
-display: flex;
-align-items: center;
-justify-content: start;
-margin: 10px;
-margin-top: 10px;
-}
-.cartimagecontainer{
-    width: 200px;
-    height: 200px;   
-}
-.cartimagecontainer img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-}
-.cartitemdetails{
+.pagemaindiv {
     padding: 20px;
+    background-color: #f9f9f9; /* Light background color */
 }
-.countbutton{
-    width: auto;
+
+.removeitemincart {
+    background-color: #28a745; /* Match theme color */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.removeitemincart:hover {
+    background-color: #218838; /* Darker shade on hover */
+}
+
+h2, h4, h5, h6 {
+    color: #333; /* Match the color theme */
+    margin-bottom: 10px;
+}
+
+.cartproductdiv {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 15px;
 }
-.countbutton button{
-    margin: 10px;
-    width: 50px;
+
+.cartimagecontainer img {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 8px;
 }
-.countbutton input{
-    width: 50px;
+
+.cartitemdetails {
+    flex-grow: 1;
+    padding: 0 15px;
 }
-.removeitemincart{
-    width: auto;
-    padding: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: red;
-    border-radius: 10px;
-    margin: 10px;    
+
+.countbutton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-.star-rating{
-    color: rgb(250, 187, 15);
-    font-size: 20px;
+
+.countbutton button {
+    background-color: #28a745; /* Match theme color */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.countbutton button:hover {
+    background-color: #218838; /* Darker shade on hover */
+}
+
+button {
+    background-color: #28a745; /* Match theme color */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #218838; /* Darker shade on hover */
+}
+
+/* Additional styles for empty cart */
+p {
+    color: #333;
+    font-size: 1.2rem;
 }

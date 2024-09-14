@@ -262,42 +262,6 @@
       "admin": false,
       "cart": [
         {
-          "id": "10",
-          "name": "Women’s Candy City Run",
-          "type": "women",
-          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-014-600x600.jpg",
-          "price": 549,
-          "qty": 1,
-          "description": "Colorful running shoes perfect for urban environments.",
-          "brand": "Recycled Shoes",
-          "rating": 4.3,
-          "reviews": 12
-        },
-        {
-          "id": "1",
-          "name": "Men’s Black Running",
-          "type": "men",
-          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-005-400x400.jpg",
-          "price": 799,
-          "qty": 1,
-          "description": "Comfortable and durable black running shoes for men.",
-          "brand": "Recycled Shoes",
-          "rating": 4.5,
-          "reviews": 12
-        },
-        {
-          "id": "2",
-          "name": "Men’s Classic Blue",
-          "type": "men",
-          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg",
-          "price": 1699,
-          "qty": 1,
-          "description": "Classic blue sneakers perfect for everyday wear.",
-          "brand": "Recycled Shoes",
-          "rating": 4.7,
-          "reviews": 8
-        },
-        {
           "id": "6",
           "name": "Men’s Moonstone Sneaker",
           "type": "men",
@@ -308,9 +272,21 @@
           "brand": "Recycled Shoes",
           "rating": 4.5,
           "reviews": 11
+        },
+        {
+          "id": "9",
+          "name": "Women’s Blue Training",
+          "type": "women",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-003-600x600.jpg",
+          "price": 660,
+          "qty": 1,
+          "description": "Blue training shoes designed for women.",
+          "brand": "Recycled Shoes",
+          "rating": 4.2,
+          "reviews": 14
         }
       ],
-      "status": false
+      "status": true
     },
     {
       "id": "833a",

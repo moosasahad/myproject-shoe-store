@@ -7,14 +7,13 @@ import { Valuecontext } from '../../App';
 
 function Cartui() {
   const navigate = useNavigate();
-  const { value, setValue } = useContext(Valuecontext);
+  const { value, setValue,displaylgo,setDisplaylog } = useContext(Valuecontext);
   const [cartproduct, setCartproduct] = useState([]);
   const [user, setUser] = useState([]);
   const [product, setProduct] = useState([]);
   const{cartup,setCartup}=useContext(Valuecontext)
 
   const [handleChange, inputValue, handleSubmit, active, setActive] = useLogandReg();
-
   useEffect(() => {
     setUser(active);
   }, [active]);
@@ -45,12 +44,12 @@ function Cartui() {
     }
   }, [cartproduct, user]);
 
-  // Function to handle quantity changes
+
   const updateQuantity = (id, change) => {
     const updatedProduct = product.map(item => {
       if (item.id === id) {
         const newQty = item.qty + change;
-        return { ...item, qty: Math.max(newQty, 1) };  // Prevent qty from going below 1
+        return { ...item, qty: Math.max(newQty, 1) };
       }
       return item;
     });
@@ -84,7 +83,10 @@ function Cartui() {
         await axios.put(`http://localhost:3000/usere/${user.id}`, { ...user, cart: updatedCart });
         console.log("Cart updated on backend:", updatedCart);
         setCartup(updatedCart)
-        console.log("Cart updated on backend in state:",cartup );
+        setDisplaylog(cartup)
+        console.log("Cart updated on backend in state:",displaylgo );
+        
+
         
       }
     } catch (error) {

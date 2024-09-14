@@ -11,7 +11,7 @@ function Navbaradmin() {
     <div className="nvbarinsdmin">
       <div className="logicon">
       <Link className='logoname'>
-        <span>My Store</span>
+        <span className='adminname'>My Store</span>
         </Link>
       </div>
       <div className="profile">
