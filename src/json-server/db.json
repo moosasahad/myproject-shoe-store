@@ -1,30 +1,6 @@
 {
   "Product": [
     {
-      "id": "1",
-      "name": "Men’s Black Running",
-      "type": "men",
-      "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-005-400x400.jpg",
-      "price": 799,
-      "qty": 1,
-      "description": "Comfortable and durable black running shoes for men.",
-      "brand": "Recycled Shoes",
-      "rating": 4.5,
-      "reviews": 12
-    },
-    {
-      "id": "2",
-      "name": "Men’s Classic Blue",
-      "type": "men",
-      "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg",
-      "price": 1699,
-      "qty": 1,
-      "description": "Classic blue sneakers perfect for everyday wear.",
-      "brand": "Recycled Shoes",
-      "rating": 4.7,
-      "reviews": 8
-    },
-    {
       "id": "3",
       "name": "Men’s Classic Mint",
       "type": "men",
@@ -260,33 +236,14 @@
       "password": "sahad21",
       "cpassword": "sahad21",
       "admin": false,
-      "cart": [
-        {
-          "id": "6",
-          "name": "Men’s Moonstone Sneaker",
-          "type": "men",
-          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-018-600x600.jpg",
-          "price": 749,
-          "qty": 1,
-          "description": "Moonstone sneakers with a modern design.",
-          "brand": "Recycled Shoes",
-          "rating": 4.5,
-          "reviews": 11
-        },
-        {
-          "id": "9",
-          "name": "Women’s Blue Training",
-          "type": "women",
-          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-003-600x600.jpg",
-          "price": 660,
-          "qty": 1,
-          "description": "Blue training shoes designed for women.",
-          "brand": "Recycled Shoes",
-          "rating": 4.2,
-          "reviews": 14
-        }
-      ],
-      "status": true
+      "cart": [],
+      "status": false,
+      "buying": {
+        "name": "moosa",
+        "email": "moosa@gmail.com",
+        "phonenumber": "9087654321",
+        "address": "moosa21"
+      }
     },
     {
       "id": "833a",
@@ -320,6 +277,52 @@
       "admin": false,
       "status": false,
       "cart": []
+    },
+    {
+      "id": "5cab",
+      "name": "sahade",
+      "email": "sahad@gmail.com",
+      "number": "3456789021",
+      "password": "sahad12",
+      "cpassword": "sahad12",
+      "admin": false,
+      "status": true,
+      "cart": [],
+      "buying": {
+        "name": "sahad",
+        "email": "sahad@gamil.com",
+        "phonenumber": "323323232323",
+        "address": "fdsjfhsdjhfdsjkhfskd"
+      }
+    },
+    {
+      "id": "a6b9",
+      "name": "jfhdjkhgdfjkh",
+      "email": "moosa@gmail.com",
+      "number": "1234567890",
+      "password": "moosa23",
+      "cpassword": "moosa23",
+      "admin": false,
+      "status": true,
+      "cart": [],
+      "buying": []
+    },
+    {
+      "id": "0a30",
+      "name": "name",
+      "email": "name@gmail.com",
+      "number": "9087654321",
+      "password": "name21",
+      "cpassword": "name21",
+      "admin": false,
+      "status": true,
+      "cart": [],
+      "buying": {
+        "name": "jghjkfgjk",
+        "email": "khkjkjth@jhkjd",
+        "phonenumber": "hkjghjkg",
+        "address": "jhjkghkjh"
+      }
     }
   ]
 }

@@ -26,6 +26,7 @@ const navigat = useNavigate()
    
   return (
     <div>
+      <h1>Users</h1>
       <table style={{ borderCollapse: 'collapse', width: '100%' }}>
   <thead>
     <tr>

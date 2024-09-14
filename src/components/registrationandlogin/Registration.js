@@ -13,7 +13,8 @@ function Registration() {
         cpassword: '',
         admin : false,
         status : true,
-        cart: []
+        cart: [],
+        buying:[]
     });
 
     const [focus, setFocus] = useState({
@@ -47,7 +48,9 @@ function Registration() {
                 number: '',
                 password: '',
                 cpassword: '',
-                cart: []
+                cart: [],
+                buying:[]
+
             });
             setFocus({
                 name: false,

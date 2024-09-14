@@ -54,7 +54,7 @@ const Sidebar = () => {
           {isExpanded && <span>Users</span>}
         </div>
        </Link>
-        <Link to="/orders" className='sidericonlink'>
+        {/* <Link to="/orders" className='sidericonlink'>
         <div
           className={`sidebar-item ${activeItem === 'orders' ? 'active' : ''}`}
           onClick={() => handleItemClick('orders')}
@@ -62,7 +62,7 @@ const Sidebar = () => {
           <FaCartFlatbed />
           {isExpanded && <span>Orders</span>}
         </div>
-        </Link>
+        </Link> */}
       </ul>
     </div>
   );
