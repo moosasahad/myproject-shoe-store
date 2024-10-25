@@ -6,7 +6,8 @@ import { BsCartCheckFill } from 'react-icons/bs'
 
 function Men() {
     const[menproduct,womenproduct,product]=useProducts()
-    console.log("product",product)
+    const find = product.filter(item=>item.type=='men')
+    console.log("product",find)
 
   return (
     <div className='menmaindiv'>
@@ -15,7 +16,7 @@ function Men() {
         <div className='menproducts'>
         <div className='listproducts'>
         <div className='productrow'>
-          {menproduct.map((value,index)=>(
+          {find.map((value,index)=>(
             <Link  className='navigatelink' to={`/productdetails/${value.id}`}>
             <div className='singleproductdiv'>
               <button className='kartbutton'><BsCartCheckFill />
@@ -23,7 +24,7 @@ function Men() {
               <img src={value.image} alt="" className='productimage' />
               <Link to="/women"><h6 className='hidenid'>{value.id}</h6></Link>
               <h5>{value.brand}</h5>
-              <h4>₹ - {value.price}</h4>
+              <h4>₹  {value.price}</h4>
               <h6>{value.name}</h6>
             </div>
              </Link>

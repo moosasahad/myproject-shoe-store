@@ -7,11 +7,11 @@ import { Valuecontext } from '../../App';
 
 function Cartui() {
   const navigate = useNavigate();
-  const { value, setValue,displaylgo,setDisplaylog } = useContext(Valuecontext);
+  const { value, setValue,displaylgo,setDisplaylog,cartup,setCartup,setCartin } = useContext(Valuecontext);
   const [cartproduct, setCartproduct] = useState([]);
   const [user, setUser] = useState([]);
   const [product, setProduct] = useState([]);
-  const{cartup,setCartup}=useContext(Valuecontext)
+  // const{cartup,setCartup,setCartin}=useContext(Valuecontext)
 
   const [handleChange, inputValue, handleSubmit, active, setActive] = useLogandReg();
   useEffect(() => {
@@ -58,10 +58,11 @@ function Cartui() {
     updateBackendCart(updatedProduct);
   };
 
-  // Function to remove an item from the cart
+  
   const removeItem = (id) => {
     const updatedProduct = product.filter(item => item.id !== id);
     setProduct(updatedProduct);
+    
     updateBackendCart(updatedProduct);
     saveCartToLocalStorage(updatedProduct);
   };
@@ -97,7 +98,7 @@ function Cartui() {
   const saveCartToLocalStorage = (cart) => {
     localStorage.setItem('cart', JSON.stringify(cart));
   };
-
+  setCartin(product);
   return (
     <div className='pagemaindiv'>
       <div>
@@ -129,7 +130,7 @@ function Cartui() {
         ) : (
           <div>
             <p>No products in the cart.</p>
-            <Link to="/" ><button>add product</button></Link>
+            <Link to="/collection" ><button>add product</button></Link>
           </div>
         )}
       </div>

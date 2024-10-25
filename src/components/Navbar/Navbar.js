@@ -6,58 +6,36 @@ import {
   FormControl,
   Container,
   Offcanvas,
-} from "react-bootstrap";
+}
+from "react-bootstrap";
 import { MdAccountCircle } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
 import "./Navbare.css";
 import { NavLink } from "react-router-dom";
 import useLogandReg from "../coustom hook/Logincostum";
 import { Valuecontext } from "../../App";
+import axios from "axios";
 
 function Navbare() {
   const [handleChange, inputValue, handleSubmit, active, setActive] = useLogandReg();
-  const [state, setState] = useState("");
-  const [cart, setCart] = useState([]);
-  const { displaylgo } = useContext(Valuecontext);
-
-  useEffect(() => {
-    setCart(displaylgo);
-  }, [displaylgo]);
-
-  useEffect(() => {
-    if (!displaylgo.length) {
-      const localCart = localStorage.getItem("cart");
-      if (localCart) {
-        try {
-          const parsedCart = JSON.parse(localCart);
-          setCart(parsedCart || []); 
-        } catch (error) {
-          console.error("Error parsing cart data from localStorage:", error);
-          setCart([]);
-        }
-      }
-    }
-  }, []);
-
+  const{cartin,login,logout}=useContext(Valuecontext)
+  const [state,setState]=useState([])
+  // useEffect(()=>{
+  //   setState(login)
+  // },[login])
+  console.log("fkjdhkjsf fetched ",)
+ 
+  console.log(" cart value in cartui context",cartin.length);
+  // console.log("cart navar icon login name",login.name);
+  // console.log("navbar login in active ",active.name);
   
-  useEffect(() => {
-    const storedUser = localStorage.getItem("inputValue");
-    if (storedUser) {
-      try {
-        const userData = JSON.parse(storedUser);
-        setState(userData.name || ""); // Set the user's name
-      } catch (error) {
-        console.error("Error parsing user data from localStorage:", error);
-        setState("");
-      }
-    }
-  }, [active]);
+  
 
   return (
     <div>
       <Navbar expand="md" className="nabardivsize bg-dark mb-3">
         <Container fluid>
-          <NavLink className="storename me-5">My Store</NavLink>
+          <NavLink to='/' className="storename me-5">My Store</NavLink>
           <Navbar.Toggle aria-controls="offcanvasNavbar-expand-md" />
           <Navbar.Offcanvas
             id="offcanvasNavbar-expand-md"
@@ -93,11 +71,11 @@ function Navbare() {
                 <button className="button my-auto me-3">Search</button>
                 <NavLink to="/cartui" className="cartlink my-auto">
                   <FaShoppingCart className="cart" />
-                  {cart.length > 0 && <span className="cart-count">({cart.length})</span>}
+                  {active?cartin.length:''}
                 </NavLink>
                 <NavLink to="/login" className="accountlink my-auto">
                   <MdAccountCircle className="accounticon me-5 my-auto" />
-                  {state && <span>{state}</span>}
+              {active?active.name:''}
                 </NavLink>
               </Form>
             </Offcanvas.Body>

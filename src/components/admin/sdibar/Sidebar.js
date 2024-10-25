@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [activeItem, setActiveItem] = useState('dashboard'); // Track active item
+  const [activeItem, setActiveItem] = useState('dashboard'); 
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);

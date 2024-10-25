@@ -20,7 +20,7 @@ function Collection() {
                    <img src={value.image} alt="" className='productimage' />
                    <Link to="/women"><h6 className='hidenid'>{value.id}</h6></Link>
                    <h5>{value.brand}</h5>
-                   <h4>₹ - {value.price}</h4>
+                   <h4>₹  {value.price}</h4>
                    <h6>{value.name}</h6>
                  </div>
                   </Link>

@@ -3,7 +3,7 @@ import './Dashborde.css';
 import { useNavigate } from 'react-router-dom';
 
 function Dashborder() {
-  // Use the context value
+
   const navigat = useNavigate()
 
   return (
@@ -28,7 +28,7 @@ function Dashborder() {
       </div>
      </div>
      {/* orders-------------- */}
-     <div className="contanierindiv">
+     {/* <div className="contanierindiv">
       <div className='contanierindivimg'>
         <img src="https://www.vardells.co.uk/wp-content/uploads/2018/07/order.jpg" alt="" />
       </div>
@@ -36,7 +36,7 @@ function Dashborder() {
         <h1>Orders</h1>
         <button onClick={()=>{navigat('/orders')}}>go to orders</button>
       </div>
-     </div>
+     </div> */}
     </div>
   );
 }

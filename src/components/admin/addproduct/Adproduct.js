@@ -98,7 +98,7 @@ function Adproduct() {
         />
         <label>Price</label>
         <input 
-        type="text"
+        type="number"
         name='price' 
         id='price'
         value={product.price}

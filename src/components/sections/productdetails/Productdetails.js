@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import useProducts from '../../coustom hook/Products';
 import './productdetails.css';
 import { BsCartCheckFill } from 'react-icons/bs';
 import Cart from '../../cart/Cart';
+import useLogandReg from '../../coustom hook/Logincostum';
 
 function Productdetails() {
     const  [addcart] =Cart()
@@ -12,10 +13,17 @@ function Productdetails() {
     const [value, setValue] = useState([]);
 
     const [menproduct, womenproduct, product, slicedp] = useProducts();
+    const [handleChange, inputValue, handleSubmit, active, setActive] = useLogandReg()
     const { id } = useParams();
-
+const navigate = useNavigate()
 const handleCart=(product)=>{
-    addcart(product)
+    if(active){
+        addcart(product)
+    }else{
+        alert("login please")
+        navigate('/login')
+    }
+   
 }
 
     useEffect(() => {
@@ -67,10 +75,10 @@ const handleCart=(product)=>{
                         <h5>Stock: {product.qty}</h5>
                         <span>{product.rating} {convertToStars(product.rating)}</span> 
                         <span>Reviews: {product.reviews}</span>
-                        <h4>₹ - {product.price}</h4>
+                        <h4>₹  {product.price}</h4>
                         <div className='broductdivbutton'>
                             <button onClick={()=>handleCart(product)}>Add to Cart</button>
-                            <button>Buy Now</button>
+                            <button onClick={()=>{navigate('/paymentpage')}}>Buy Now</button>
                         </div>
                     </div>
                 </div>

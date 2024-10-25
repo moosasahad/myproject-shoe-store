@@ -14,7 +14,7 @@ function Edite() {
     brand: "",
     price: "",
     description: "",
-    rating: "", // "reating" corrected to "rating"
+    rating: "", 
     reviews: "",
   };
   const [editProduct, setEditProduct] = useState(initialState);
@@ -25,7 +25,7 @@ function Edite() {
         const response = await axios.get(`http://localhost:3000/Product/${id}`);
         const res = response.data;
         console.log("Fetched product:", res);
-        setEditProduct(res); // Set the product in the state
+        setEditProduct(res); 
       } catch (error) {
         console.error("Product fetch error:", error);
       }

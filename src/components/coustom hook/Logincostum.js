@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Valuecontext } from '../../App';
 
 function useLogandReg() {
-    const{setAdminstate}=useContext(Valuecontext)
+    const{setAdminstate,SetLOgin}=useContext(Valuecontext)
     const Logincontext = createContext();
     const navigate = useNavigate(); 
     const [inputValue, setInputValue] = useState({
@@ -46,6 +46,7 @@ function useLogandReg() {
             if (user) {
                 if(user.status){
                     console.log("Login Successful", user);
+                    SetLOgin(active)
 
                 localStorage.setItem("inputValue", JSON.stringify(user));
                 setActive(user); 

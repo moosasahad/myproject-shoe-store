@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import useLogandReg from '../coustom hook/Logincostum';
+import { Valuecontext } from '../../App';
 
 function Cart() {
   const [user, setUser] = useState([]);
   const [cartproduct, setCartproduct] = useState([]);  
   const [handleChange, inputValue, handleSubmit, active, setActive] = useLogandReg();
+  const{ cartin,setCartin}=useContext(Valuecontext)
 
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
@@ -14,11 +16,12 @@ function Cart() {
     }
   }, []);
 
-  // Set active user
+
   useEffect(() => {
     setUser(active);
   }, [active]);
 
+  console.log("hfdjkghjfdh cart product icart ui",cartproduct);
   
   const addCart = (product) => {
     setCartproduct((prevCart = []) => {  
@@ -34,7 +37,7 @@ function Cart() {
       }
     });
   };
-
+  setCartin(cartproduct)
   const updateBackendCart = async (updatedCart) => {
     try {
       if (user.id) {

@@ -82,7 +82,7 @@ function Home() {
               <img src={value.image} alt="" className='productimage' />
               <Link to="/women"></Link>
               <h5>{value.brand}</h5>
-              <h4>₹ - {value.price}</h4>
+              <h4>₹  {value.price}</h4>
               <h6>{value.name}</h6>
             </div>
              </Link>

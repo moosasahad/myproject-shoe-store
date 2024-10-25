@@ -4,11 +4,14 @@ import useLogandReg from '../coustom hook/Logincostum';
 import { RiAccountCircleFill } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import { MdAccountBox } from "react-icons/md";
+import { Valuecontext } from '../../App';
 
 
 function Login() {
     const[handleChange,inputValue,handleSubmit,active,setActive]=useLogandReg()
+    const {setLOgout}=useContext(Valuecontext)
     console.log("logut",active);
+    setLOgout(active)
     
     
 

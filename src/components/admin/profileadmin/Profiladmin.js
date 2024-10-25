@@ -21,6 +21,8 @@ function Profiladmin() {
     const gohome = ()=>{
         navigat('/')
     }
+
+    
     
   return (
     <div className='porfilemaindiv'>
@@ -28,7 +30,7 @@ function Profiladmin() {
             <div >
             <BiSolidUserRectangle className='icon' />
             </div>
-            <h3 className='username'>{adminstate.name.toString().toUpperCase()}</h3>
+            <h3 className='username'>{adminstate.name}</h3>
             <h4>{adminstate.email}</h4>
 <div className="prfilepagebutton">
 <button style={{backgroundColor:'red'}} onClick={logout}>log out</button>

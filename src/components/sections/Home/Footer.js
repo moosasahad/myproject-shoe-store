@@ -37,9 +37,9 @@ function Footer() {
             <div>
                 <h3>Shop</h3>
                 <h6>
+                <NavLink to='/' onClick={handleClick}>Home</NavLink> <br />
                     <NavLink to='/men' onClick={handleClick}>shop men</NavLink> <br />
                     <NavLink to='/women' onClick={handleClick}>Shop Women</NavLink> <br />
-                    <NavLink to='/lookbook' onClick={handleClick}>Lookbook</NavLink> <br />
                     <NavLink to='/collection' onClick={handleClick}>Collection</NavLink>
                 </h6>
             </div>
