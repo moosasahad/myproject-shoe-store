@@ -72,7 +72,7 @@ items&& setAdminstate(JSON.parse(items))
     <div>
       {!adminstate ? (
         
-            <div className="App">
+            <div className="App mt-16">
            
             
             
@@ -85,7 +85,7 @@ items&& setAdminstate(JSON.parse(items))
                 <Route path="/men" element={<Men />} />
                 <Route path="/women" element={<Women />} />
                 <Route path="/collection" element={<Collection />} />
-                <Route path="/productdetails/:id" element={<Productdetails />} />
+                <Route path="/productdetails/:_id" element={<Productdetails />} />
                 <Route path="/cartui" element={<Cartui />} />
                 <Route path="/paymentpage" element={<Paymen />} />
               </Routes>

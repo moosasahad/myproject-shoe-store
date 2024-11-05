@@ -5,6 +5,8 @@ import './productdetails.css';
 import { BsCartCheckFill } from 'react-icons/bs';
 import Cart from '../../cart/Cart';
 import useLogandReg from '../../coustom hook/Logincostum';
+import Cookies from 'js-cookie'
+import axios from 'axios';
 
 function Productdetails() {
     const  [addcart] =Cart()
@@ -13,29 +15,62 @@ function Productdetails() {
     const [value, setValue] = useState([]);
 
     const [menproduct, womenproduct, product, slicedp] = useProducts();
-    const [handleChange, inputValue, handleSubmit, active, setActive] = useLogandReg()
-    const { id } = useParams();
+    const [handleChange, inputValue, handleSubmit, setActive] = useLogandReg()
+    const { _id } = useParams();
 const navigate = useNavigate()
-const handleCart=(product)=>{
-    if(active){
-        addcart(product)
-    }else{
-        alert("login please")
-        navigate('/login')
-    }
-   
-}
+const active = Cookies.get("user")
+const token = Cookies.get("token"); 
+console.log("token",token);
 
+const handleCart = async (productId) => {
+    const token = Cookies.get("token");  // Make sure to use the correct key for the token
+  
+    console.log("product1", productId);
+  
+    if (active) {
+      console.log("product2", productId);
+      
+      if (!active) {
+        alert("Please log in first");
+        navigate("/login");
+        return;
+      }
+  
+      try {
+        console.log("product3", productId);
+        const response = await axios.post(
+            "http://localhost:3000/addcart",
+            { productId },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                
+                  // Pass the token in headers
+              },
+            }
+          );
+          
+          
+        console.log("Response:", response.data);
+        alert("Product added to cart successfully");
+      } catch (error) {
+        console.error("There was an error adding the product to cart:", error);
+      }
+    } else {
+      alert("Please log in first");
+      navigate("/login");
+    }
+  };
     useEffect(() => {
         setState(product);
     }, [product]); 
 
     useEffect(() => {
         if (state.length > 0) {
-            const selectedProduct = state.find((product) => product.id == id);
+            const selectedProduct = state.find((product) => product._id == _id);
             setValue(selectedProduct ? [selectedProduct] : []);
         }
-    }, [state, id]);
+    }, [state, _id]);
 
     const convertToStars = (stars) => {
         const rating = parseFloat(stars);
@@ -63,7 +98,7 @@ const handleCart=(product)=>{
     return (
         <div>
             {value.map(product => (
-                <div className='pdetalsmain' key={product.id}>
+                <div className='pdetalsmain' key={product._id}>
                     <div>
                         <img src={product.image} alt={product.name} />
                     </div>
@@ -77,7 +112,7 @@ const handleCart=(product)=>{
                         <span>Reviews: {product.reviews}</span>
                         <h4>₹  {product.price}</h4>
                         <div className='broductdivbutton'>
-                            <button onClick={()=>handleCart(product)}>Add to Cart</button>
+                            <button onClick={()=>handleCart(product._id)}>Add to Cart</button>
                             <button onClick={()=>{navigate('/paymentpage')}}>Buy Now</button>
                         </div>
                     </div>
@@ -90,13 +125,13 @@ const handleCart=(product)=>{
                     {slicedp.map((product, index) => (
                         <div>
                             <Link 
-                            key={product.id} 
+                            key={product._id} 
                             className='navigatelink' 
-                            to={`/productdetails/${product.id}`} 
+                            to={`/productdetails/${product._id}`} 
                             onClick={handleClick}
                         >
                             <div className='singleproductdiv'>
-                                <button className='kartbutton' onClick={()=>handleCart(product)}>
+                                <button className='kartbutton' onClick={()=>handleCart(product._id)}>
                                     <BsCartCheckFill />
                                 </button>
                                 <img src={product.image} alt={product.name} className='productimage' />

@@ -197,3 +197,7 @@
     text-decoration: none;
     color: black;
   }
+  .pagination-controls{
+    display: flex;
+    justify-content: center;
+  }

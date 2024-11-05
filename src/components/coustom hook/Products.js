@@ -12,7 +12,7 @@ function useProducts() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/Product");
+        const res = await axios.get("http://localhost:3000/product");
         const menProducts = res.data.filter(Product => Product.type === "men");
         const womenproduct = res.data.filter(Product => Product.type === "women");
         const slicproduct = res.data.slice(4,12);

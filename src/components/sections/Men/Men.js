@@ -17,7 +17,7 @@ function Men() {
         <div className='listproducts'>
         <div className='productrow'>
           {find.map((value,index)=>(
-            <Link  className='navigatelink' to={`/productdetails/${value.id}`}>
+            <Link  className='navigatelink' to={`/productdetails/${value._id}`}>
             <div className='singleproductdiv'>
               <button className='kartbutton'><BsCartCheckFill />
               </button>

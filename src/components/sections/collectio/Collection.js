@@ -13,7 +13,7 @@ function Collection() {
             <div className='listproducts'>
             <div className='productrow'>
               {product.map((value,index)=>(
-                 <Link  className='navigatelink' to={`/productdetails/${value.id}`}>
+                 <Link  className='navigatelink' to={`/productdetails/${value._id}`}>
                  <div className='singleproductdiv'>
                    <button className='kartbutton'><BsCartCheckFill />
                    </button>

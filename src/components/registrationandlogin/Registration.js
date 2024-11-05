@@ -10,11 +10,8 @@ function Registration() {
         email: '',
         number: '',
         password: '',
-        cpassword: '',
-        admin : false,
-        status : true,
-        cart: [],
-        buying:[]
+        confirmpassword: '',
+        
     });
 
     const [focus, setFocus] = useState({
@@ -22,7 +19,7 @@ function Registration() {
         email: false,
         number: false,
         password: false,
-        cpassword: false
+        confirmpassword: false
     });
 
     const [showPassword, setShowPassword] = useState(false);
@@ -32,32 +29,33 @@ function Registration() {
         evn.preventDefault();
         setSubmitted(true);
         if (evn.target.checkValidity()) {
-            alert("login succssesed") 
+            // alert("login succssesed") 
             try {
-                const response = await axios.post("http://localhost:3000/usere", input);
+                const response = await axios.post("http://localhost:3000/signup", input);
                 console.log("Form submitted successfully"); 
+                console.log(response.data.massage);
+                
                 navigate('/login')
 
                    
             } catch (error) {
                 console.error("Error submitting form", error);
+                console.log(error.response.data);
+                
             }
-            setInput({
-                name: '',
-                email: '',
-                number: '',
-                password: '',
-                cpassword: '',
-                cart: [],
-                buying:[]
-
-            });
+            // setInput({
+            //     name: '',
+            //     email: '',
+            //     number: '',
+            //     password: '',
+            //     confirmpassword: '',
+            // });
             setFocus({
                 name: false,
                 email: false,
                 number: false,
                 password: false,
-                cpassword: false
+                confirmpassword: false
             });
             setSubmitted(false);
         }
@@ -165,16 +163,16 @@ function Registration() {
 
                     <label>Confirm Password</label>
                     <input
-                        name='cpassword'
+                        name='confirmpassword'
                         type={showPassword ? "text" : "password"}
-                        value={input.cpassword}
+                        value={input.confirmpassword}
                         onChange={getInputValues}
                         required
                         pattern={input.password}
                         onBlur={handleFocus}
-                        focus={focus.cpassword.toString()}
+                        focus={focus.confirmpassword.toString()}
                     />
-                    {(submitted || focus.cpassword) && input.password !== input.cpassword && (
+                    {(submitted || focus.confirmpassword) && input.password !== input.confirmpassword && (
                         <span>Password does not match</span>
                     )}
                     <br />

@@ -1,87 +1,91 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Container,
-  Offcanvas,
-}
-from "react-bootstrap";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
-import "./Navbare.css";
-import { NavLink } from "react-router-dom";
-import useLogandReg from "../coustom hook/Logincostum";
-import { Valuecontext } from "../../App";
-import axios from "axios";
+import { HiMenu, HiX } from "react-icons/hi";
 
 function Navbare() {
-  const [handleChange, inputValue, handleSubmit, active, setActive] = useLogandReg();
-  const{cartin,login,logout}=useContext(Valuecontext)
-  const [state,setState]=useState([])
-  // useEffect(()=>{
-  //   setState(login)
-  // },[login])
-  console.log("fkjdhkjsf fetched ",)
- 
-  console.log(" cart value in cartui context",cartin.length);
-  // console.log("cart navar icon login name",login.name);
-  // console.log("navbar login in active ",active.name);
-  
-  
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div>
-      <Navbar expand="md" className="nabardivsize bg-dark mb-3">
-        <Container fluid>
-          <NavLink to='/' className="storename me-5">My Store</NavLink>
-          <Navbar.Toggle aria-controls="offcanvasNavbar-expand-md" />
-          <Navbar.Offcanvas
-            id="offcanvasNavbar-expand-md"
-            aria-labelledby="offcanvasNavbarLabel-expand-md"
-            placement="end"
+    <div className="bg-sky-500 shadow-md fixed top-0 w-full z-20">
+      <nav className="max-w-screen-xl mx-auto flex items-center justify-between p-3">
+        
+        {/* Brand Name */}
+        <NavLink
+          to="/"
+          className="text-gray-800 text-4xl  font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline"
+        >
+          My Store
+        </NavLink>
+
+        {/* Toggle Icon for Mobile */}
+        <div className="md:hidden">
+          <button onClick={() => setMenuOpen(!menuOpen)} className="text-gray-800 focus:outline-none">
+            {menuOpen ? <HiX className="text-3xl" /> : <HiMenu className="text-3xl" />}
+          </button>
+        </div>
+
+        {/* Main Navigation Links (Responsive) */}
+        <div
+          className={`flex-col md:flex-row items-center md:flex text-lg space-y-4 md:space-y-0 md:space-x-6 absolute md:relative w-full md:w-auto md:block top-full left-0 md:top-auto bg-sky-500 md:bg-transparent transition-all duration-300 ease-in ${
+            menuOpen ? "flex" : "hidden"
+          }`}
+        >
+          <NavLink
+            to="/"
+            className="text-gray-700 font-bold hover:text-blue-500 transition duration-200 no-underline focus:text-blue-500"
           >
-            <Offcanvas.Header closeButton>
-              <Offcanvas.Title id="offcanvasNavbarLabel-expand-md">
-                Offcanvas
-              </Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-              <Nav className="nvaigatlinksdiv justify-content-start flex-grow-1 pe-3">
-                <NavLink to="/" className="nvaigatlinks">
-                  Home
-                </NavLink>
-                <NavLink to="/men" className="nvaigatlinks">
-                  Men
-                </NavLink>
-                <NavLink to="/women" className="nvaigatlinks">
-                  Women
-                </NavLink>
-                <NavLink to="/collection" className="nvaigatlinks">
-                  Collection
-                </NavLink>
-              </Nav>
-              <Form inline className="searchbar d-flex ms-auto">
-                <FormControl
-                  type="text"
-                  placeholder="Search"
-                  className="inputt me-1 my-auto"
-                />
-                <button className="button my-auto me-3">Search</button>
-                <NavLink to="/cartui" className="cartlink my-auto">
-                  <FaShoppingCart className="cart" />
-                  {active?cartin.length:''}
-                </NavLink>
-                <NavLink to="/login" className="accountlink my-auto">
-                  <MdAccountCircle className="accounticon me-5 my-auto" />
-              {active?active.name:''}
-                </NavLink>
-              </Form>
-            </Offcanvas.Body>
-          </Navbar.Offcanvas>
-        </Container>
-      </Navbar>
+            Home
+          </NavLink>
+          <NavLink
+            to="/men"
+            className="text-gray-700 font-bold hover:text-blue-500 transition duration-200 no-underline focus:text-blue-500"
+          >
+            Men
+          </NavLink>
+          <NavLink
+            to="/women"
+            className="text-gray-700 font-bold hover:text-blue-500 transition duration-200 no-underline focus:text-blue-500"
+          >
+            Women
+          </NavLink>
+          <NavLink
+            to="/collection"
+            className="text-gray-700 font-bold hover:text-blue-500 transition duration-200 no-underline focus:text-blue-500"
+          >
+            Collection
+          </NavLink>
+        </div>
+
+        {/* Right Side (Search, Cart, Account) */}
+        <div className="flex items-center space-x-4 text-gray-700">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="hidden md:block px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+          />
+          <button className="hidden md:block bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-200">
+            Search
+          </button>
+          <NavLink
+            to="/cartui"
+            className="relative text-gray-700 hover:text-blue-500 transition duration-200"
+          >
+            <FaShoppingCart className="text-2xl" />
+            <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              3
+            </span>
+          </NavLink>
+          <NavLink
+            to="/login"
+            className="flex items-center text-gray-700 hover:text-blue-500 transition duration-200"
+          >
+            <MdAccountCircle className="text-2xl" />
+            <span className="ml-2 hidden md:inline">Account</span>
+          </NavLink>
+        </div>
+      </nav>
     </div>
   );
 }
