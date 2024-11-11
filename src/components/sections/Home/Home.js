@@ -4,7 +4,7 @@ import axios from 'axios';
 import { BsCartCheckFill } from "react-icons/bs";
 import useProducts from '../../coustom hook/Products';
 import { Productscontext } from '../../context/ProductCOntext';
-import Navbare from '../../Navbar/Navbar';
+
 
 function Home() {
   const { product } = useContext(Productscontext);
@@ -17,8 +17,8 @@ function Home() {
 
   return (
     <>
-    {/* <Navbare/> */}
-    <div className='bg-gray-100 mt-16 '>
+    
+    <div className=' bg-yellow-100'>
   <div className='bg-cover bg-center h-screen w-full relative' style={{ backgroundImage: "url('https://png.pngtree.com/thumb_back/fh260/background/20230527/pngtree-nike-running-shoes-on-black-background-with-colorful-splashes-image_2671040.jpg')" }}>
   <div className='absolute inset-0 bg-black opacity-20'></div>
   

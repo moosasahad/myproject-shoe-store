@@ -1,6 +1,7 @@
 
-import axios from 'axios';
+// import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react'
+import axiosinstance from '../../axiosinstance';
 
 export const Productscontext = createContext();
 function ProductCOntext({children}) {
@@ -9,7 +10,7 @@ function ProductCOntext({children}) {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get("http://localhost:3000/product");
+            const response = await axiosinstance.get("/product");
             setProducts(response.data);
             console.log("response.data",response.data);
             

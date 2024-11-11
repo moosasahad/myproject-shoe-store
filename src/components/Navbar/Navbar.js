@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
 import { HiMenu, HiX } from "react-icons/hi";
@@ -7,15 +7,33 @@ import { HiMenu, HiX } from "react-icons/hi";
 function Navbare() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const home = location.pathname == '/'
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > window.innerHeight) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+//className="bg-transparent shadow-md fixed top-0 w-full z-20"
   return (
-    <div className="bg-sky-500 shadow-md fixed top-0 w-full z-20">
+    <div  className={`${home ? `fixed w-full transition-colors duration-300  top-0 z-20 ${scrolled ? 'bg-slate-200 shadow-md' : 'bg-transparent'}` : 'fixed w-full transition-colors duration-300  top-0 z-20 bg-slate-200 '}`}>
+
       <nav className="max-w-screen-xl mx-auto flex items-center justify-between p-3">
         
         {/* Brand Name */}
         <NavLink
           to="/"
-          className="text-gray-800 text-4xl  font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline"
-        >
+          className={`${home ? `text-gray-800 text-4xl  font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline ${scrolled ? ' text-gray-800' : 'text-slate-200'}` : 'text-gray-800 text-4xl  font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline'}`}>
+        
           My Store
         </NavLink>
 
@@ -34,26 +52,27 @@ function Navbare() {
         >
           <NavLink
             to="/"
-            className="text-gray-700 font-bold hover:text-blue-500 transition duration-200 no-underline focus:text-blue-500"
+            className={`${home ? `text-gray-800 font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline ${scrolled ? ' text-gray-800' : 'text-slate-200'}` : 'text-gray-800 font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline '}`}
           >
             Home
           </NavLink>
           <NavLink
             to="/men"
-            className="text-gray-700 font-bold hover:text-blue-500 transition duration-200 no-underline focus:text-blue-500"
+            className={`${home ? `text-gray-800 font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline ${scrolled ? ' text-gray-800' : 'text-slate-200'}` : 'text-gray-800 font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline '}`}
           >
             Men
           </NavLink>
           <NavLink
             to="/women"
-            className="text-gray-700 font-bold hover:text-blue-500 transition duration-200 no-underline focus:text-blue-500"
+            className={`${home ? `text-gray-800 font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline ${scrolled ? ' text-gray-800' : 'text-slate-200'}` : 'text-gray-800 font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline '}`}
           >
             Women
           </NavLink>
           <NavLink
             to="/collection"
-            className="text-gray-700 font-bold hover:text-blue-500 transition duration-200 no-underline focus:text-blue-500"
+            className={`${home ? `text-gray-800 font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline ${scrolled ? ' text-gray-800' : 'text-slate-200'}` : 'text-gray-800 font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline '}`}
           >
+            {/* "text-gray-700 font-bold hover:text-blue-500 transition duration-200 no-underline focus:text-blue-500" */}
             Collection
           </NavLink>
         </div>
@@ -70,19 +89,20 @@ function Navbare() {
           </button>
           <NavLink
             to="/cartui"
-            className="relative text-gray-700 hover:text-blue-500 transition duration-200"
+            className={`${home ? `text-gray-800 font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline ${scrolled ? ' text-gray-800' : 'text-slate-200'}` : 'text-gray-800 font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline '}`}
           >
             <FaShoppingCart className="text-2xl" />
-            <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            {/* <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
               3
-            </span>
+            </span> */}
           </NavLink>
           <NavLink
             to="/login"
-            className="flex items-center text-gray-700 hover:text-blue-500 transition duration-200"
+            className={`${home ? `text-gray-800 font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline ${scrolled ? ' text-gray-800' : 'text-slate-200'}` : 'text-gray-800 font-bold tracking-wider hover:text-blue-500 transition duration-200 no-underline '}`}
+            // "flex items-center text-gray-700 hover:text-blue-500 transition duration-200"
           >
-            <MdAccountCircle className="text-2xl" />
-            <span className="ml-2 hidden md:inline">Account</span>
+             <MdAccountCircle className="text-2xl" />
+            {/*<span className="ml-2 hidden md:inline">Account</span> */}
           </NavLink>
         </div>
       </nav>

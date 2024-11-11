@@ -1,138 +1,100 @@
-import axios from 'axios';
-import React, { useEffect, useState, useContext } from 'react';
-import useLogandReg from '../coustom hook/Logincostum';
+import React, { useEffect, useState } from 'react';
+import { RiDeleteBin6Line } from "react-icons/ri";
 import './cartui.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { Valuecontext } from '../../App';
+import { useNavigate } from 'react-router-dom';
+import { MdShoppingCartCheckout } from "react-icons/md";
+import { axiosPrivate } from '../../axiosinstance';
 
 function Cartui() {
   const navigate = useNavigate();
-  const { value, setValue,displaylgo,setDisplaylog,cartup,setCartup,setCartin } = useContext(Valuecontext);
   const [cartproduct, setCartproduct] = useState([]);
-  const [user, setUser] = useState([]);
-  const [product, setProduct] = useState([]);
-  // const{cartup,setCartup,setCartin}=useContext(Valuecontext)
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const [handleChange, inputValue, handleSubmit, active, setActive] = useLogandReg();
-  useEffect(() => {
-    setUser(active);
-  }, [active]);
-  console.log('active user in cart ui', active);
-
-  useEffect(() => {
-    const fetchCartData = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/usere");
-        const resData = response.data;
-        setCartproduct(resData);
-        console.log("Fetched Cart Data:", resData);
-      } catch (error) {
-        console.error("Error fetching cart data:", error);
-      }
-    };
-
-    fetchCartData();
-  }, []);
-
-  useEffect(() => {
-    if (user && user.id) {
-      const activeUser = cartproduct.find(activeUser => activeUser.id === user.id);
-      if (activeUser) {
-        setProduct(activeUser.cart);
-        console.log("User's Cart:", activeUser.cart);
-      }
-    }
-  }, [cartproduct, user]);
-
-
-  const updateQuantity = (id, change) => {
-    const updatedProduct = product.map(item => {
-      if (item.id === id) {
-        const newQty = item.qty + change;
-        return { ...item, qty: Math.max(newQty, 1) };
-      }
-      return item;
-    });
-
-    setProduct(updatedProduct);
-    updateBackendCart(updatedProduct);
-  };
-
-  
-  const removeItem = (id) => {
-    const updatedProduct = product.filter(item => item.id !== id);
-    setProduct(updatedProduct);
-    
-    updateBackendCart(updatedProduct);
-    saveCartToLocalStorage(updatedProduct);
-  };
-
-  const totalPrice = product.reduce((total, item) => total + item.price * item.qty, 0);
-
-
-  const itembuy = () => {
-    navigate('/paymentpage');
-  };
-
-  useEffect(() => {
-    setValue(() => itembuy); 
-  }, [setValue]);
-
-  const updateBackendCart = async (updatedCart) => {
+  // Fetch cart data
+  const fetchCartData = async () => {
     try {
-      if (user.id) {
-        await axios.put(`http://localhost:3000/usere/${user.id}`, { ...user, cart: updatedCart });
-        console.log("Cart updated on backend:", updatedCart);
-        setCartup(updatedCart)
-        setDisplaylog(cartup)
-        console.log("Cart updated on backend in state:",displaylgo );
-        
-
-        
-      }
+      const response = await axiosPrivate.get("/getcart");
+      setCartproduct(response.data.product);
     } catch (error) {
-      console.error("Error updating cart on backend:", error);
+      console.error("Error fetching cart data:", error);
     }
   };
 
-  const saveCartToLocalStorage = (cart) => {
-    localStorage.setItem('cart', JSON.stringify(cart));
+  // Fetch cart data on component mount
+  useEffect(() => {
+    fetchCartData();
+  }, []); 
+
+  // Function to update product count
+  const updateproductcount = async (id, action) => {
+    try {
+      await axiosPrivate.post("/updatecartcount", {
+        productId: id,
+        action: action
+      });
+      fetchCartData(); 
+    } catch (error) {
+      console.error("Error updating product count:", error);
+    }
   };
-  setCartin(product);
+
+  // Function to clear the cart
+  const clearCart = async () => {
+    try {
+      await axiosPrivate.delete("/clearcart");
+      setCartproduct([]); 
+      setTotalPrice(0); 
+    } catch (error) {
+      console.error("Error clearing cart:", error);
+    }
+  };
+
+  // Calculate total price
+  useEffect(() => {
+    const total = cartproduct.reduce((acc, item) => acc + item.productId.price * item.quantity, 0);
+    setTotalPrice(total);
+  }, [cartproduct]);
+
   return (
-    <div className='pagemaindiv'>
-      <div>
-      <button style={{backgroundColor:'green'}} className='removeitemincart' onClick={itembuy}>Buy item</button>
-      <h2>Total Price: {totalPrice}</h2>
-        {product.length > 0 ? (
-          product.map((item, index) => (
-            <div className='cartproductdiv' key={index}>
-              <div className='cartimagecontainer'>
-                <img src={item.image} alt={item.name} />
-              </div>
-              <div className='cartitemdetails'>
-                <h2>{item.name}</h2>
-                <h5>Type: {item.type}</h5>
-                <h4>Brand: {item.brand}</h4>
-                <span>{item.rating}</span>
-                <h6>Reviews: {item.reviews}</h6>
-                <h4>₹ {item.price}</h4>
-              </div>
-              <div className='countbutton'>
-                <button onClick={() => updateQuantity(item.id, 1)}>+</button>
-                {item.qty}
-                <button onClick={() => updateQuantity(item.id, -1)}>-</button>
-              </div>
-              <button className='removeitemincart' onClick={() => removeItem(item.id)}>Remove item</button>
-              
-            </div>
-          ))
-        ) : (
-          <div>
-            <p>No products in the cart.</p>
-            <Link to="/collection" ><button>add product</button></Link>
+    <div className="p-6 space-y-4 mt-28 bg-yellow-100">
+      {cartproduct.map((item, index) => (
+        <div key={index} className="flex flex-col md:flex-row items-center bg-slate-100 shadow-lg rounded-lg p-4 md:p-6 space-y-4 md:space-y-0 md:space-x-6">
+          {/* Product Image */}
+          <div className="w-full md:w-1/4">
+            <img src={item.productId.image} alt={item.productId.name} className="w-full h-32 object-cover rounded-lg" />
           </div>
-        )}
+          
+          {/* Product Details */}
+          <div className="flex-1 space-y-2">
+            <h2 className="text-xl font-semibold text-gray-800">{item.productId.name}</h2>
+            <p className="text-sm text-gray-500">Type: {item.productId.type}</p>
+            <p className="text-sm text-gray-500">Brand: {item.productId.brand}</p>
+            <div className="flex items-center space-x-2">
+              <span className="text-yellow-500 font-semibold">{item.productId.rating}</span>
+              <p className="text-xs text-gray-400">Reviews: {item.productId.reviews}</p>
+            </div>
+            <p className="text-lg font-bold text-gray-800">₹ {item.productId.price}</p>
+          </div>
+          
+          {/* Quantity and Action Buttons */}
+          <div className="flex flex-col md:flex-row items-center md:space-x-4 space-y-4 md:space-y-0">
+            <div className="flex items-center space-x-2">
+              <button className="px-3 py-1 text-lg font-semibold bg-gray-500 hover:bg-gray-700 rounded" onClick={() => updateproductcount(item.productId._id, "increment")}>+</button>
+              <span className="text-xl font-bold mt-2">{item.quantity}</span>
+              <button className="px-3 py-1 text-lg font-semibold bg-gray-500 hover:bg-gray-700 rounded" onClick={() => updateproductcount(item.productId._id, "decrement")}>-</button>
+            </div>
+            <button className="bg-red-700 text-white hover:bg-red-800 font-semibold">Remove</button>
+          </div>
+        </div>
+      ))}
+      
+      {/* Total Price and Clear Cart */}
+      <div className="flex justify-between items-center mt-8">
+        <span className="font-bold text-black text-2xl">Total Price: ₹ {totalPrice}</span>
+        <div className="space-x-4">
+          <button className="m-2 bg-green-600 hover:bg-green-700 p-2 rounded"><MdShoppingCartCheckout /></button>
+          <button className="m-2 bg-red-600 hover:bg-red-700 p-2 rounded" onClick={clearCart}><RiDeleteBin6Line /></button>
+        </div>
       </div>
     </div>
   );

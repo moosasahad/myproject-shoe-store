@@ -2,7 +2,7 @@ import React, { useState, createContext, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row} from 'react-bootstrap';
 import Home from './components/sections/Home/Home';
 import Navbare from './components/Navbar/Navbar';
 import Registration from './components/registrationandlogin/Registration';
@@ -27,6 +27,7 @@ import Admindetails from './components/admin/details/Admindetails';
 import Edite from './components/admin/edititem/Edite';
 import Adproduct from './components/admin/addproduct/Adproduct';
 import Userdetaulsview from './components/admin/adminuser/Userdetaulsview';
+import { ToastContainer } from 'react-toastify';
 
 export const Valuecontext = createContext();
 
@@ -72,11 +73,9 @@ items&& setAdminstate(JSON.parse(items))
     <div>
       {!adminstate ? (
         
-            <div className="App mt-16">
-           
-            
-            
-              <Navbare />
+            <div className="App">
+              <Navbare/>
+
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
@@ -126,6 +125,7 @@ items&& setAdminstate(JSON.parse(items))
         </Row>
           </div>
       )}
+<ToastContainer/>
   </div>
   </Valuecontext.Provider>
    
