@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useProducts from "../../coustom hook/Products";
 import "./productdetails.css";
@@ -6,9 +6,9 @@ import { BsCartCheckFill } from "react-icons/bs";
 import Cart from "../../cart/Cart";
 import useLogandReg from "../../coustom hook/Logincostum";
 import Cookies from "js-cookie";
-import axios from "axios";
 import { axiosPrivate } from "../../../axiosinstance";
 import { toast } from "react-toastify";
+import { Valuecontext } from "../../../App";
 
 function Productdetails() {
   const [addcart] = Cart();
@@ -20,27 +20,34 @@ function Productdetails() {
   const [handleChange, inputValue, handleSubmit, setActive] = useLogandReg();
   const { _id } = useParams();
   const navigate = useNavigate();
+  const user = Cookies.get("users")
 
-  const handleCart = async (productId) => {
-    try {
-      const response = await axiosPrivate.post(
-        "/addcart",
-        { productId },
-        {
-          withCredentials: true,
-        }
-      );
-      if(response.data == "product quantity increased"){
-        toast.success("Product already in Cart");
-      }else{
-        toast.success("Product added");
-      }
-
-      console.log("Response:", response.data);
+ const handleCart = async (productId) => {
+    console.log("jkahsdjkas",user);
+    if(!user){
+      toast.error("Place login")
+      navigate("/login")
+        }else{
+          try {
+            const response = await axiosPrivate.post(
+              "/addcart",
+              { productId }
+            );
+            if(response.data == "product quantity increased"){
+              toast.success("Product already in Cart");
+            }else{
+              toast.success("Product added");
+            }
       
-    } catch (error) {
-      console.error("There was an error adding the product to cart:", error);
-    }
+            console.log("Response:", response.data);
+            
+          } catch (error) {
+            console.error("There was an error adding the product to cart:", error);
+          }
+        }
+    
+
+    
   };
   useEffect(() => {
     setState(product);

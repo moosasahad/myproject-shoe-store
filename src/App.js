@@ -60,9 +60,6 @@ function App() {
      logout,
      setLOgout
   };
-
-
-console.log("jfdghgjkdfhgkjfdhgjkfdhg app admin on app", adminstate);
 useEffect(()=>{
 const items=localStorage.getItem('admin')
 items&& setAdminstate(JSON.parse(items))
@@ -125,7 +122,17 @@ items&& setAdminstate(JSON.parse(items))
         </Row>
           </div>
       )}
-<ToastContainer/>
+<ToastContainer
+  position="top-center"
+  autoClose={1500}
+  hideProgressBar={true}
+  newestOnTop={false}
+  closeOnClick
+  rtl={false}
+  pauseOnFocusLoss
+  draggable
+  pauseOnHover
+/>
   </div>
   </Valuecontext.Provider>
    

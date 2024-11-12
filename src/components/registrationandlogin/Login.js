@@ -5,18 +5,28 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { MdAccountBox } from "react-icons/md";
+import { FiLogOut } from "react-icons/fi";
+import { IoMdHome } from "react-icons/io";
+
 
 import axios from "axios";
+import { axiosPrivate } from "../../axiosinstance";
 
 function Login() {
   const [status, setStatus] = useState();
 
   const logout = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/logut",{},{withCredentials:true});
+      const response = await axiosPrivate.post(
+        "/logut",{});
       setStatus()
-      toast.error('Logout');
+      toast.success("Logout!", {
+        position: "top-center",
+        autoClose:500,
+        style: { backgroundColor: "red", color: "#fff", fontSize: "16px" },
+        icon: "🚀",
+        
+      });
       setStatus()
     } catch (error) {
       console.error("There was an error logging in:", error);
@@ -42,26 +52,32 @@ function Login() {
     console.log("Email:", inputValue.email);
     console.log("Password:", inputValue.password);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/login",
+      const response = await axiosPrivate.post(
+        "/login",
         {
           email: inputValue.email,
           password: inputValue.password,
-        },{withCredentials:true}
+        }
       );
       console.log("Response:", response.data.token);
-      toast.success('Login Success');
-      
-
-      // Cookies.set("user", JSON.stringify(response.data));
-      // Cookies.set("token", response.data.token);
+      toast.success("Login Successful!", {
+        position: "top-center",
+        autoClose:1500,
+        style: { backgroundColor: "#4CAF50", color: "#fff", fontSize: "16px" },
+        icon: "🚀",
+        
+      });
+  
+      // Store user information in cookies
+      Cookies.set("users", JSON.stringify(response.data));
+  
+      // Update the status immediately
+      setStatus(response.data);
+  
     } catch (error) {
       console.error("There was an error logging in:", error);
       toast.error('Login Error');
     }
-  };
-  const tost = () => {
-    toast.success("This is a success message!");
   };
   const navigate = useNavigate();
   // let users = Cookies.get("user");
@@ -70,10 +86,9 @@ function Login() {
    useEffect(()=>{
     let users = Cookies.get("users");
     if(users){
-      setStatus(JSON.parse(users))
-    console.log("activeUser",JSON.parse(users));
+      setStatus(JSON.parse(users))   
     }
-   },[status])
+   },[])
 console.log("status",status);
 
   if (!status) {
@@ -127,23 +142,24 @@ console.log("status",status);
       <div className="flex justify-center items-center min-h-screen bg-pattern bg-slate-200">
         <div className="p-6 bg-emerald-50 shadow-lg border border-gray-500 rounded-md flex flex-col items-center w-80">
           <MdAccountBox className="text-5xl text-blue-500 mb-4" />
-          <h1 className="text-xl font-semibold text-gray-800 mb-3">Faslu</h1>
-          <button className="w-56 m-2 bg-gray-500 opacity-75 boredr-4">
+          <h1 className="text-xl font-semibold text-gray-800 mb-3">{status.name.name}</h1>
+          <button className="w-36 m-2 bg-gray-500 opacity-75 boredr-4">
             Orders
           </button>
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 m-2">
             <button
-              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+              className="mx-1 bg-red-500 text-white rounded-md hover:bg-red-600"
               onClick={logout}
             >
-              Logout
+             <FiLogOut />
+
             </button>
             <Link to="/">
-              <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                Go Home
+              <button className="mx-1 bg-blue-500 text-white text-3xl rounded-md hover:bg-blue-600">
+              <IoMdHome />
+
               </button>
             </Link>
-            <button onClick={tost}>clcikme</button>
           </div>
         </div>
       </div>

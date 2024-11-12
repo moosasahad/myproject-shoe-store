@@ -15,6 +15,8 @@ function Cartui() {
     try {
       const response = await axiosPrivate.get("/getcart");
       setCartproduct(response.data.product);
+      console.log("response.data.product",response.data);
+      
     } catch (error) {
       console.error("Error fetching cart data:", error);
     }
@@ -55,8 +57,25 @@ function Cartui() {
     setTotalPrice(total);
   }, [cartproduct]);
 
+  const deletecartitem = async (id) => {
+    
+    
+    try {
+      const res = await axiosPrivate.delete("/cartdelete", {
+        data: { productId: id }
+      });
+      
+      fetchCartData()
+      
+    } catch (error) {
+      console.error("Error deleting cart item:", error);
+    }
+  };
+  
+
+
   return (
-    <div className="p-6 space-y-4 mt-28 bg-yellow-100">
+    <div className="p-6 space-y-4 mt-16 bg-yellow-100">
       {cartproduct.map((item, index) => (
         <div key={index} className="flex flex-col md:flex-row items-center bg-slate-100 shadow-lg rounded-lg p-4 md:p-6 space-y-4 md:space-y-0 md:space-x-6">
           {/* Product Image */}
@@ -83,7 +102,8 @@ function Cartui() {
               <span className="text-xl font-bold mt-2">{item.quantity}</span>
               <button className="px-3 py-1 text-lg font-semibold bg-gray-500 hover:bg-gray-700 rounded" onClick={() => updateproductcount(item.productId._id, "decrement")}>-</button>
             </div>
-            <button className="bg-red-700 text-white hover:bg-red-800 font-semibold">Remove</button>
+            <button className="bg-red-700 text-white hover:bg-red-800 font-semibold" onClick={() => deletecartitem(item.productId._id)}>Remove</button>
+
           </div>
         </div>
       ))}
