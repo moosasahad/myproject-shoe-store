@@ -21,12 +21,11 @@ function Home() {
     indexOfLastProduct
   );
   const totalPages = Math.ceil(product.length / itemsPerPage);
-  const {value} = useContext(Cartcontext)
+  const {handleCart,whishlist} = useContext(Cartcontext)
 
   return (
     <>
       <div className=" bg-yellow-100">
-        {value?(value):"jmhdkj,shdjk,ashdkjsa,hdkajsh"}
         <div
           className="bg-cover bg-center h-screen w-full relative"
           style={{
@@ -127,14 +126,14 @@ function Home() {
                     className="text-gray-500 hover:text-red-500 transition duration-300"
                   />
                 </span> */}
-                <button className="absolute top-2 right-12 h-8 w-8 pt-2 bg-gray-50 rounded-full p-2 shadow-lg hover:bg-blue-500">
+                <button onClick={()=>whishlist(value._id)} className="absolute top-2 right-12 h-8 w-8 pt-2 bg-gray-50 rounded-full p-2 shadow-lg hover:bg-blue-500">
                 <FontAwesomeIcon
                     icon={faHeart}
                     className="text-gray-950 mx-auto text-xl"
                   />
                 </button>
                 {/* cart button */}
-                <button className=" absolute top-2 right-2 bg-gray-50 rounded-full p-2 shadow-lg hover:bg-blue-500">
+                <button onClick={()=>handleCart(value._id)} className=" absolute top-2 right-2 bg-gray-50 rounded-full p-2 shadow-lg hover:bg-blue-500">
                   <BsCartCheckFill className="text-gray-700 text-xl hover:text-white" />
                 </button>
               </div>

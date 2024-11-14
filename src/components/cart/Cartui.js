@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import './cartui.css';
 import { useNavigate } from 'react-router-dom';
 import { MdShoppingCartCheckout } from "react-icons/md";
 import { axiosPrivate } from '../../axiosinstance';
+import { Cartcontext } from '../context/Addcart';
 
 function Cartui() {
   const navigate = useNavigate();
   const [cartproduct, setCartproduct] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const {order} = useContext(Cartcontext)
 
   // Fetch cart data
   const fetchCartData = async () => {
@@ -71,6 +73,12 @@ function Cartui() {
       console.error("Error deleting cart item:", error);
     }
   };
+
+    const orderhandil = ()=>{
+      order()
+      navigate('/paymentpage')
+    }
+  
   
 
 
@@ -112,7 +120,7 @@ function Cartui() {
       <div className="flex justify-between items-center mt-8">
         <span className="font-bold text-black text-2xl">Total Price: ₹ {totalPrice}</span>
         <div className="space-x-4">
-          <button className="m-2 bg-green-600 hover:bg-green-700 p-2 rounded"><MdShoppingCartCheckout /></button>
+          <button className="m-2 bg-green-600 hover:bg-green-700 p-2 rounded" onClick={orderhandil}><MdShoppingCartCheckout /></button>
           <button className="m-2 bg-red-600 hover:bg-red-700 p-2 rounded" onClick={clearCart}><RiDeleteBin6Line /></button>
         </div>
       </div>

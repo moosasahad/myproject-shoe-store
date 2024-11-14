@@ -28,6 +28,9 @@ import Edite from './components/admin/edititem/Edite';
 import Adproduct from './components/admin/addproduct/Adproduct';
 import Userdetaulsview from './components/admin/adminuser/Userdetaulsview';
 import { ToastContainer } from 'react-toastify';
+import Wishlist from './components/whislist/Wishlist';
+import Success from './components/payment/success';
+import Orders from './components/payment/Orders';
 
 export const Valuecontext = createContext();
 
@@ -83,7 +86,11 @@ items&& setAdminstate(JSON.parse(items))
                 <Route path="/collection" element={<Collection />} />
                 <Route path="/productdetails/:_id" element={<Productdetails />} />
                 <Route path="/cartui" element={<Cartui />} />
+                <Route path="/Wishlist" element={<Wishlist/>}/>
                 <Route path="/paymentpage" element={<Paymen />} />
+                <Route path="/success/:sctionId" element={<Success />} />
+                <Route path="/orders" element={<Orders />} />
+
               </Routes>
               <Footer />
              

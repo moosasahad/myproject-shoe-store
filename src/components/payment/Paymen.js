@@ -1,104 +1,29 @@
-import React, { useState } from 'react';
-import useLogandReg from '../coustom hook/Logincostum';
+import React, { useContext } from 'react';
+import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js';
+import { Cartcontext } from '../context/Addcart';
 
-import './pymetn.css';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+const stripePromise = loadStripe("pk_test_51QKaD7J7Mcf8zmejWW7oKrpHj1ncGG364Rb89Ngf22nxR1EWKqT2Zga7iFVwNnKvsw0gokO6NulH7KoMjFd2aXnb00QM1NCCub");
+export default function Paymen() {
+  const {clientSecret} = useContext(Cartcontext)
 
-function PaymentPage() {
-  const [handleChange, inputValue, handleSubmit, active, setActive] = useLogandReg();
-  const navigating = useNavigate();
+  //const clientSecret = "cs_test_a1fuINAakGHzSulOPVEjEWknGcOeFH48UxfbSUkDvnAzp7G8Dgj0YHX5ID_secret_fidwbEhqYWAnPydgaGdgYWFgYScpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ3dgYWx3YGZxSmtGamh1aWBxbGprJz8nZGlyZHx2J3gl"
+
+
+  const option = { clientSecret }
+  console.log("option",option);
   
-  const initiol = {
-    name: '',
-    email: '',
-    phonenumber: '',
-    address: '',
-  };
-  const [valu, setValue] = useState(initiol);
-
-  const handilchange = (e) => {
-    const { name, value } = e.target;
-    setValue((prevState) => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
-
-  const handleSubmi = async (e) => {
-    e.preventDefault();
-    if (!active) {
-      alert("User is not logged in.");
-      return;
-    }
-
-    try {
-      
-      const response = await axios.put(`http://localhost:3000/usere/${active.id}`, {
-        ...active,
-        buying: valu,
-        cart: [] 
-      });
-      localStorage.removeItem('cart');
-
-      alert("Payment successful!");
-
-      navigating('/cartui');
-    } catch (error) {
-      console.error("Error during payment:", error);
-      alert("Payment failed, please try again.");
-    }
-  };
-  const navigateing = () => {
-    navigating('/login');
-  };
 
   return (
-    <div className='paydivmain'>
-      {active ? (
-        <form onSubmit={handleSubmi} className='payingform'>
-          <label>Name</label>
-          <input 
-            type="text" 
-            name='name'
-            value={valu.name}
-            onChange={handilchange}
-            required
-          />
-          <label>Email</label>
-          <input
-            type="email"
-            name='email'
-            value={valu.email}
-            onChange={handilchange}
-            required
-          />
-          <label>Phone Number</label>
-          <input 
-            type="tel"
-            name='phonenumber'
-            value={valu.phonenumber}
-            onChange={handilchange}
-            required
-          />
-          <label>Address</label>
-          <input 
-            type="text"
-            name='address'
-            value={valu.address}
-            onChange={handilchange}
-            required
-          />
-          <button type='submit'>Submit</button>
-        </form>
-      ) : (
-        <div>
-          <h1>Please log in and try again</h1>
-          <button onClick={navigateing}>Go to login page</button>
-        </div>
-      )}
-    </div>
-  );
-}
+    <div className='bg-yellow-100 mt-16'>
+  <div className="m-auto max-w-2xl p-6 text-blue-900 pt-16 bg-white rounded-lg shadow-lg">
+    <h1 className="text-3xl py-2 text-center font-semibold">Payment</h1>
+    <EmbeddedCheckoutProvider className="bg-gray-600 p-4 rounded-md" stripe={stripePromise} options={option}>
+      <EmbeddedCheckout />
+    </EmbeddedCheckoutProvider>
+  </div>
+</div>
 
-export default PaymentPage;
+
+  )
+}

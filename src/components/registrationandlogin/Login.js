@@ -143,7 +143,7 @@ console.log("status",status);
         <div className="p-6 bg-emerald-50 shadow-lg border border-gray-500 rounded-md flex flex-col items-center w-80">
           <MdAccountBox className="text-5xl text-blue-500 mb-4" />
           <h1 className="text-xl font-semibold text-gray-800 mb-3">{status.name.name}</h1>
-          <button className="w-36 m-2 bg-gray-500 opacity-75 boredr-4">
+          <button onClick={()=>navigate('/orders')} className="w-36 m-2 bg-gray-500 opacity-75 boredr-4">
             Orders
           </button>
           <div className="flex space-x-2 m-2">

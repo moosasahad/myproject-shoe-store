@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import { axiosPrivate } from "../../../axiosinstance";
 import { toast } from "react-toastify";
 import { Valuecontext } from "../../../App";
+import { Cartcontext } from "../../context/Addcart";
 
 function Productdetails() {
   const [addcart] = Cart();
@@ -22,33 +23,7 @@ function Productdetails() {
   const navigate = useNavigate();
   const user = Cookies.get("users")
 
- const handleCart = async (productId) => {
-    console.log("jkahsdjkas",user);
-    if(!user){
-      toast.error("Place login")
-      navigate("/login")
-        }else{
-          try {
-            const response = await axiosPrivate.post(
-              "/addcart",
-              { productId }
-            );
-            if(response.data == "product quantity increased"){
-              toast.success("Product already in Cart");
-            }else{
-              toast.success("Product added");
-            }
-      
-            console.log("Response:", response.data);
-            
-          } catch (error) {
-            console.error("There was an error adding the product to cart:", error);
-          }
-        }
-    
-
-    
-  };
+const {handleCart} = useContext(Cartcontext)
   useEffect(() => {
     setState(product);
   }, [product]);
