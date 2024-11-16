@@ -31,6 +31,7 @@ import { ToastContainer } from 'react-toastify';
 import Wishlist from './components/whislist/Wishlist';
 import Success from './components/payment/success';
 import Orders from './components/payment/Orders';
+import Cookies from 'js-cookie'
 
 export const Valuecontext = createContext();
 
@@ -43,6 +44,7 @@ function App() {
   const [cartin, setCartin]=useState([])
   const [login,SetLOgin]=useState([])
   const [logout,setLOgout]=useState([])
+  const [userInitial, setUserInitial] = useState("");
 
 
   const obj = {
@@ -61,12 +63,17 @@ function App() {
      SetLOgin,
      login,
      logout,
-     setLOgout
+     setLOgout,
+     setUserInitial,
+     userInitial
+     
   };
 useEffect(()=>{
-const items=localStorage.getItem('admin')
-items&& setAdminstate(JSON.parse(items))
+const items=Cookies.get('adminuser')
+// console.log("adminuser",items);
+items&& setAdminstate(items)
 },[])
+console.log("adminstate",adminstate);
 
   return (
 <Valuecontext.Provider value={obj}>
@@ -89,6 +96,7 @@ items&& setAdminstate(JSON.parse(items))
                 <Route path="/Wishlist" element={<Wishlist/>}/>
                 <Route path="/paymentpage" element={<Paymen />} />
                 <Route path="/success/:sctionId" element={<Success />} />
+                <Route path="/orders/:sctionId" element={<Orders />} />
                 <Route path="/orders" element={<Orders />} />
 
               </Routes>
@@ -101,14 +109,6 @@ items&& setAdminstate(JSON.parse(items))
         
       ) : (
           <div className='admindiv'>
-            
-             
-          <Row>
-            <Col className='admincol'>
-            <Navbaradmin/>
-            </Col>
-        </Row>
-          
         <Row>
             <Col className='admincoltwo' xs={12} md={1} style={{height: '100vh',msOverflowY: 'auto'}}>
             <Sidebar/>

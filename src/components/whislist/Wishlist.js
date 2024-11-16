@@ -55,6 +55,12 @@ function Wishlist() {
               >
                 Remove
               </button>
+              <button
+                onClick={() => removeFromWishlist(item._id)} // Pass the product _id to the function
+                className="mt-4 px-4 py-2 ml-4 bg-black text-white rounded-full hover:bg-red-600 transition duration-200"
+              >
+                Addcart
+              </button>
             </div>
           </div>
         ))}

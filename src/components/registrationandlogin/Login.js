@@ -3,7 +3,7 @@ import "./login.css";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link, useNavigate } from "react-router-dom";
+import { json, Link, useNavigate } from "react-router-dom";
 import { MdAccountBox } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { IoMdHome } from "react-icons/io";
@@ -11,15 +11,18 @@ import { IoMdHome } from "react-icons/io";
 
 import axios from "axios";
 import { axiosPrivate } from "../../axiosinstance";
+import { Valuecontext } from "../../App";
 
 function Login() {
   const [status, setStatus] = useState();
+  const {setUserInitial,setAdminstate}= useContext(Valuecontext)
 
   const logout = async () => {
     try {
       const response = await axiosPrivate.post(
         "/logut",{});
       setStatus()
+      setUserInitial()
       toast.success("Logout!", {
         position: "top-center",
         autoClose:500,
@@ -60,6 +63,11 @@ function Login() {
         }
       );
       console.log("Response:", response.data.token);
+      console.log("response",response.data.admin)
+      if(response.data.admin){
+        setAdminstate(response.data)
+      }
+      
       toast.success("Login Successful!", {
         position: "top-center",
         autoClose:1500,
@@ -67,6 +75,10 @@ function Login() {
         icon: "🚀",
         
       });
+        let initial = response.data.name.name.charAt(0).toUpperCase();
+        console.log("initial",initial);
+        
+        setUserInitial(initial)
   
       // Store user information in cookies
       Cookies.set("users", JSON.stringify(response.data));
@@ -90,6 +102,19 @@ function Login() {
     }
    },[])
 console.log("status",status);
+const userss = Cookies.get("users");
+let parseuser = userss ? JSON.parse(userss) : null;
+
+if (parseuser) {
+  const userInitial = parseuser.name.name.charAt(0).toUpperCase();
+  console.log("initial", userInitial);
+  setUserInitial(userInitial);
+} else {
+  console.log("User data is missing or invalid.");
+  setUserInitial("");
+}
+
+
 
   if (!status) {
     return (

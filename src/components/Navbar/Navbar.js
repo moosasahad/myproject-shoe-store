@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
@@ -8,50 +8,65 @@ import { IoSearch } from "react-icons/io5";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Import the heart icon
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { Valuecontext } from "../../App";
 
 function Navbare() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [userInitial, setUserInitial] = useState("");
+  const {userInitial} = useContext(Valuecontext)
+
 
   const location = useLocation();
   const home = location.pathname === "/";
 
-  const updateUserInitial = () => {
-    const user = Cookies.get("users");
-    let initial = "";
+  //const updateUserInitial = () => {
+//     const user = Cookies.get("users");
+//     let initial = "";
+//     console.log("hdshfgsdjfds",user);
+    
   
-    if (user) {
-      try {
-        const jsuser = JSON.parse(user);
-        if (jsuser && typeof jsuser.name === "string") {
-          initial = jsuser.name.charAt(0).toUpperCase();
-        }
-      } catch (error) {
-        console.error("Error parsing user cookie:", error);
-      }
-    }
-  }
+//     if (user) {
+//       try {
+//         const jsuser = JSON.parse(user);
+//         console.log("jsuser",jsuser.name.name);
+        
+//         if (jsuser && typeof jsuser.name.name === "string") {
+//           initial = jsuser.name.name.charAt(0).toUpperCase();
+//           setUserInitial(initial)
+//           console.log("initial",initial);
+          
+//         }
+//         console.log("ghdskjfhdsjkfhdfhjkdshfkjsd............");
+        
+//       } catch (error) {
+//         console.error("Error parsing user cookie:", error);
+//       }
+//     }
+//   }
+// // console.log("initial",initial);
 
-  useEffect(() => {
-    updateUserInitial();
+//   useEffect(() => {
+//     updateUserInitial();
 
-    const handleScroll = () => {
-      setScrolled(window.scrollY > window.innerHeight);
-    };
+//     const handleScroll = () => {
+//       setScrolled(window.scrollY > window.innerHeight);
+//     };
 
-    window.addEventListener("scroll", handleScroll);
-    const intervalId = setInterval(updateUserInitial, 1000);
+//     window.addEventListener("scroll", handleScroll);
+//     const intervalId = setInterval(updateUserInitial, 1000);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearInterval(intervalId);
-    };
-  }, []);
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//       clearInterval(intervalId);
+//     };
+//   }, []);
 
   const search = (e) => {
     console.log("search bar", e.target.value);
   };
+//   useEffect(()=>{
+//     updateUserInitial()
+//   })
 
   return (
     <div
@@ -115,11 +130,11 @@ function Navbare() {
           </NavLink>
           <NavLink to="/login">
             {userInitial ? (
-              <span className="text-xl bg-gray-500 text-white rounded-full h-10 w-10 flex items-center justify-center hover:bg-blue-500">
+              <span className="text-xl bg-gray-500 text-white rounded-full h-7 w-7 flex items-center justify-center hover:bg-blue-500 no-underline relative top-2">
                 {userInitial}
               </span>
             ) : (
-              <MdAccountCircle className="text-3xl text-gray-500 hover:text-blue-500" />
+              <MdAccountCircle className="text-3xl text-gray-500" />
             )}
           </NavLink>
         </div>

@@ -9,6 +9,7 @@ function Addcart({children}) {
     const navigate = useNavigate()
     const user = Cookies.get("users")
     const [clientSecret,setClientSecret]=useState(null)
+    const [sessionID,setsessionID]=useState(null)
 
 
 
@@ -72,13 +73,12 @@ function Addcart({children}) {
       const order = async ()=>{
         try {
           const res =await axiosPrivate.post("/order")
-          console.log("order res",res.data);
+          console.log("order res",res.data.data.order.sessionID);
           setClientSecret(res.data.data.clientsecret)
+          setsessionID(res.data.data.order.sessionID)
           
         } catch (error) {
-          console.log("error roder",error);
-          
-          
+          console.log("error roder",error);          
         }
     
       }
@@ -86,7 +86,7 @@ function Addcart({children}) {
 
       
     return (
-        <Cartcontext.Provider value={{handleCart,whishlist,order,clientSecret}}>
+        <Cartcontext.Provider value={{handleCart,whishlist,order,clientSecret,sessionID}}>
             {children}
         </Cartcontext.Provider>
       )

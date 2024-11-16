@@ -1,10 +1,10 @@
-import React from 'react'
-import './footer.css'
-import { FaFacebook, FaInstagram, FaLock, FaWhatsapp } from 'react-icons/fa'
+import React from 'react';
+import { FaFacebook, FaInstagram, FaLock, FaWhatsapp } from 'react-icons/fa';
 import { TbTruckDelivery } from "react-icons/tb";
 import { FiRefreshCw } from "react-icons/fi";
 import { CiTwitter } from "react-icons/ci";
 import { NavLink } from 'react-router-dom';
+
 function Footer() {
     const handleClick = () => {
         window.scrollTo({
@@ -12,60 +12,95 @@ function Footer() {
             behavior: 'smooth'
         });
     }
-  return (
-    <div className='footermaindiv'>
-        <div className='footerspecification'>
-        <div className='foterfeterdiv'><FaLock /> <h5>Secure Payment</h5></div>
-        <div className='foterfeterdiv'><TbTruckDelivery /> <h5>Express Shipping</h5></div>
-        <div className='foterfeterdiv'><FiRefreshCw /> <h5>Free Return</h5></div>
-        </div>
-        <hr />
-        <div className='footerlinksanddatas'>
-            <div footeraboutdata>
-                <h1>My-Store</h1>
-                <h6>
-                Praesent eget tortor sit risus egestas <br /> nulla pharetra ornare quis <br /> bibendum est bibendum <br /> sapien proin nascetur
-                </h6>
-                <div className='footerlinkicon'>
-                <FaInstagram />
-                <FaWhatsapp />
-                <FaFacebook />
-                <CiTwitter />
 
+  return (
+    <div className="bg-gray-800 text-white py-1">
+        {/* <div className="max-w-screen-xl mx-auto flex justify-between items-center px-6">
+            <div className="flex space-x-8">
+                <div className="flex items-center space-x-2">
+                    <FaLock className="text-2xl text-yellow-500" />
+                    <h5 className="font-semibold">Secure Payment</h5>
+                </div>
+                <div className="flex items-center space-x-2">
+                    <TbTruckDelivery className="text-2xl text-yellow-500" />
+                    <h5 className="font-semibold">Express Shipping</h5>
+                </div>
+                <div className="flex items-center space-x-2">
+                    <FiRefreshCw className="text-2xl text-yellow-500" />
+                    <h5 className="font-semibold">Free Return</h5>
                 </div>
             </div>
+        </div> */}
+        
+        <hr className="my-8 border-gray-600" />
+        
+        {/* Footer Links and Data */}
+        <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 px-6">
+            {/* About Section */}
             <div>
-                <h3>Shop</h3>
-                <h6>
-                <NavLink to='/' onClick={handleClick}>Home</NavLink> <br />
-                    <NavLink to='/men' onClick={handleClick}>shop men</NavLink> <br />
-                    <NavLink to='/women' onClick={handleClick}>Shop Women</NavLink> <br />
-                    <NavLink to='/collection' onClick={handleClick}>Collection</NavLink>
-                </h6>
+                <h1 className="text-3xl font-bold text-yellow-500">My-Store</h1>
+                <p className="text-gray-400 mt-4">
+                    Praesent eget tortor sit risus egestas <br />
+                    Nulla pharetra ornare quis <br />
+                    Bibendum est bibendum sapien proin nascetur
+                </p>
+                <div className="flex space-x-4 mt-6">
+                    <FaInstagram className="text-2xl hover:text-yellow-500 cursor-pointer" />
+                    <FaWhatsapp className="text-2xl hover:text-yellow-500 cursor-pointer" />
+                    <FaFacebook className="text-2xl hover:text-yellow-500 cursor-pointer" />
+                    <CiTwitter className="text-2xl hover:text-yellow-500 cursor-pointer" />
+                </div>
             </div>
-            <div>
-                <h3>About</h3>
-                <h6>Our Story <br />
-                Our Materials <br />
-                Our Value <br />
-                Sustainability <br />
-                Manufacture</h6>
-            </div>
-            <div>
-                <h3>Need Help?</h3>
-                <h6>
-                FAQs <br />
-                Shipping & Returns <br />
-                Shoe Care <br />
-                Size Chart <br />
-                Contact Us <br />
-                </h6>
 
+            {/* Shop Section */}
+            <div>
+                <h3 className="text-xl font-semibold text-yellow-500">Shop</h3>
+                <ul className="mt-4 text-gray-400">
+                    <li>
+                        <NavLink to="/" onClick={handleClick} className="hover:text-yellow-500">Home</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/men" onClick={handleClick} className="hover:text-yellow-500">Shop Men</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/women" onClick={handleClick} className="hover:text-yellow-500">Shop Women</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/collection" onClick={handleClick} className="hover:text-yellow-500">Collection</NavLink>
+                    </li>
+                </ul>
+            </div>
+
+            {/* About Section */}
+            <div>
+                <h3 className="text-xl font-semibold text-yellow-500">About</h3>
+                <ul className="mt-4 text-gray-400">
+                    <li>Our Story</li>
+                    <li>Our Materials</li>
+                    <li>Our Value</li>
+                    <li>Sustainability</li>
+                    <li>Manufacture</li>
+                </ul>
+            </div>
+
+            {/* Need Help Section */}
+            <div>
+                <h3 className="text-xl font-semibold text-yellow-500">Need Help?</h3>
+                <ul className="mt-4 text-gray-400">
+                    <li>FAQs</li>
+                    <li>Shipping & Returns</li>
+                    <li>Shoe Care</li>
+                    <li>Size Chart</li>
+                    <li>Contact Us</li>
+                </ul>
             </div>
         </div>
-      
+        
+        <div className="text-center mt-8 text-gray-400">
+            <p>&copy; 2024 My-Store. All rights reserved.</p>
+        </div>
     </div>
-  )
+  );
 }
 
-export default Footer
+export default Footer;
