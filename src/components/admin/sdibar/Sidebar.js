@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
-import './sidebar.css'; 
-import { PiListDashesBold } from "react-icons/pi";
-import { MdSpaceDashboard } from "react-icons/md";
-import { AiFillProduct } from "react-icons/ai";
-import { FaUser } from "react-icons/fa";
-import { FaCartFlatbed } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import "./sidebar.css";
+import { BiSolidDashboard } from "react-icons/bi";
+import { Link, NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [activeItem, setActiveItem] = useState('dashboard'); 
+  const [activeItem, setActiveItem] = useState("dashboard");
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
@@ -20,50 +16,65 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`sidebar ${isExpanded ? 'expanded' : 'collapsed'}`}>
-      <ul className="sidebar-menu">
-        <li onClick={toggleSidebar} className="toggle-icon">
-          <PiListDashesBold />
-        </li>
-        <Link to="/" className='sidericonlink'>
-        <div
-          className={`sidebar-item ${activeItem === 'dashboard' ? 'active' : ''}`}
-          onClick={() => handleItemClick('dashboard')}
-        >
-          
-          <MdSpaceDashboard />
-          {isExpanded && <span>Dashboard</span>}
-          
-        </div>
-        </Link>
-        <Link to="/products" className='sidericonlink'>
-        <div
-          className={`sidebar-item ${activeItem === 'products' ? 'active' : ''}`}
-          onClick={() => handleItemClick('products')}
-        >
-          <AiFillProduct />
-          {isExpanded && <span>Products</span>}
-        </div>
-        </Link>
-       <Link to="/users" className='sidericonlink'>
-       <div
-          className={`sidebar-item ${activeItem === 'users' ? 'active' : ''}`}
-          onClick={() => handleItemClick('users')}
-        >
-          <FaUser />
-          {isExpanded && <span>Users</span>}
-        </div>
-       </Link>
-        {/* <Link to="/orders" className='sidericonlink'>
-        <div
-          className={`sidebar-item ${activeItem === 'orders' ? 'active' : ''}`}
-          onClick={() => handleItemClick('orders')}
-        >
-          <FaCartFlatbed />
-          {isExpanded && <span>Orders</span>}
-        </div>
-        </Link> */}
-      </ul>
+    <div className="flex flex-col w-52 h-screen bg-gray-900 text-white">
+      {/* Logo Section */}
+      <div className="p-4 text-lg font-bold border-b border-gray-700">
+        <span className="text-yellow-400 text-center text-4xl">My Store</span>
+      </div>
+
+      {/* Navigation Items */}
+      <nav className="flex-1 mt-4">
+        <ul className="space-y-2">
+          {/* Dashboard */}
+          <NavLink
+          to={"/"}
+           className="flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline focus:bg-slate-700 focus:text-yellow-200">
+            <BiSolidDashboard className="text-2xl text-gray-400 hover:text-yellow-200 focus:text-yellow-200" />
+            <span className="my-auto text-base ml-3 text-gray-400 hover:text-yellow-200 focus:text-yellow-200">
+              Dashboard
+            </span>
+          </NavLink>
+          <NavLink className="flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline focus:bg-slate-700 focus:text-yellow-200">
+            <BiSolidDashboard className="text-2xl text-gray-400 hover:text-yellow-200 focus:text-yellow-200" />
+            <span className="my-auto text-base ml-3 text-gray-400 hover:text-yellow-200 focus:text-yellow-200">
+              Dashboard
+            </span>
+          </NavLink>
+          <NavLink className="flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline focus:bg-slate-700 focus:text-yellow-200">
+            <BiSolidDashboard className="text-2xl text-gray-400 hover:text-yellow-200 focus:text-yellow-200" />
+            <span className="my-auto text-base ml-3 text-gray-400 hover:text-yellow-200 focus:text-yellow-200">
+              Dashboard
+            </span>
+          </NavLink>
+          <NavLink className="flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline focus:bg-slate-700 focus:text-yellow-200">
+            <BiSolidDashboard className="text-2xl text-gray-400 hover:text-yellow-200 focus:text-yellow-200" />
+            <span className="my-auto text-base ml-3 text-gray-400 hover:text-yellow-200 focus:text-yellow-200">
+              Dashboard
+            </span>
+          </NavLink>
+          <NavLink className="flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline focus:bg-slate-700 focus:text-yellow-200">
+            <BiSolidDashboard className="text-2xl text-gray-400 hover:text-yellow-200 focus:text-yellow-200" />
+            <span className="my-auto text-base ml-3 text-gray-400 hover:text-yellow-200 focus:text-yellow-200">
+              Dashboard
+            </span>
+          </NavLink>
+          <NavLink className="flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline focus:bg-slate-700 focus:text-yellow-200">
+            <BiSolidDashboard className="text-2xl text-gray-400 hover:text-yellow-200 focus:text-yellow-200" />
+            <span className="my-auto text-base ml-3 text-gray-400 hover:text-yellow-200 focus:text-yellow-200">
+              Dashboard
+            </span>
+          </NavLink>
+        </ul>
+      </nav>
+
+      {/* User Info */}
+      <div className="p-4 border-t border-gray-700">
+        <p className="text-sm">Ann Smith</p>
+        <p className="text-xs text-gray-400">Administrator</p>
+        <button className="mt-2 px-4 py-1 text-sm bg-gray-800 hover:bg-gray-700 rounded-lg">
+          Log Out
+        </button>
+      </div>
     </div>
   );
 };

@@ -108,26 +108,25 @@ console.log("adminstate",adminstate);
           
         
       ) : (
-          <div className='admindiv'>
-        <Row>
-            <Col className='admincoltwo' xs={12} md={1} style={{height: '100vh',msOverflowY: 'auto'}}>
-            <Sidebar/>
-            </Col>
-            <Col  className='maindiveinadminhome'>
-            <Routes>
-            <Route path="/" element={<Dashborder/>}/>
-            <Route path="/products" element={<Productinsdmin/>}/> 
-            <Route path='/users' element={<Userinadmin/>}/>
-            <Route path='/orders' element={<Ordersinadmin/>}/>
-            <Route path='/profile' element={<Profiladmin/>}/>  
-            <Route path='/details/:id' element={<Admindetails/>}/>          
-            <Route path='/editing/:id' element={<Edite/>}/>
-            <Route path='addingproduct' element={<Adproduct/>}/>
-            <Route path="Userdetaulsview/:id" element={<Userdetaulsview/>}/>
+        <div className="flex h-screen">
+        {/* Sidebar */}
+        <Sidebar />
+  
+        {/* Main content area */}
+        <div className="flex-1 bg-gray-100 overflow-auto">
+          <Routes>
+            <Route path="/" element={<Dashborder />} />
+            <Route path="/products" element={<Productinsdmin />} />
+            <Route path="/users" element={<Userinadmin />} />
+            <Route path="/orders" element={<Ordersinadmin />} />
+            <Route path="/profile" element={<Profiladmin />} />
+            <Route path="/details/:id" element={<Admindetails />} />
+            <Route path="/editing/:id" element={<Edite />} />
+            <Route path="/addingproduct" element={<Adproduct />} />
+            <Route path="Userdetaulsview/:id" element={<Userdetaulsview />} />
           </Routes>
-            </Col>
-        </Row>
-          </div>
+        </div>
+      </div>
       )}
 <ToastContainer
   position="top-center"
