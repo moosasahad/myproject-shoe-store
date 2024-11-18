@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./sidebar.css";
 import { BiSolidDashboard } from "react-icons/bi";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { FiShoppingCart } from "react-icons/fi"; // Import an order icon
+import { axiosPrivate } from "../../../axiosinstance";
+import { Valuecontext } from "../../../App";
+
+
 
 const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [activeItem, setActiveItem] = useState("dashboard");
-
-  const toggleSidebar = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  const handleItemClick = (item) => {
-    setActiveItem(item); // Set active item
-  };
-
+  const {setAdminstate} = useContext(Valuecontext)
+  const loguteadmin =async ()=>{
+    try {
+      const res = await axiosPrivate.post("adminlogut")
+      console.log("adminlogut",res);
+      setAdminstate()
+      
+    } catch (error) {
+      console.log(error);
+      
+      
+    }
+  }
   return (
     <div className="flex flex-col w-52 h-screen bg-gray-900 text-white">
       {/* Logo Section */}
@@ -27,43 +36,50 @@ const Sidebar = () => {
         <ul className="space-y-2">
           {/* Dashboard */}
           <NavLink
-          to={"/"}
-           className="flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline focus:bg-slate-700 focus:text-yellow-200">
-            <BiSolidDashboard className="text-2xl text-gray-400 hover:text-yellow-200 focus:text-yellow-200" />
-            <span className="my-auto text-base ml-3 text-gray-400 hover:text-yellow-200 focus:text-yellow-200">
-              Dashboard
-            </span>
+            to="/"
+            className={({ isActive }) =>
+              `flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline ${
+                isActive ? "bg-slate-700 text-yellow-200" : "text-gray-400"
+              } hover:bg-slate-700 hover:text-yellow-200`
+            }
+          >
+            <BiSolidDashboard className="text-2xl" />
+            <span className="my-auto text-base ml-3 text-slate-400">Dashboard</span>
           </NavLink>
-          <NavLink className="flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline focus:bg-slate-700 focus:text-yellow-200">
-            <BiSolidDashboard className="text-2xl text-gray-400 hover:text-yellow-200 focus:text-yellow-200" />
-            <span className="my-auto text-base ml-3 text-gray-400 hover:text-yellow-200 focus:text-yellow-200">
-              Dashboard
-            </span>
+          <NavLink
+            to="/products"
+            className={({ isActive }) =>
+              `flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline ${
+                isActive ? "bg-slate-700 text-yellow-200" : "text-gray-400"
+              } hover:bg-slate-700 hover:text-yellow-200`
+            }
+          >
+            <FaShoppingCart className="text-2xl" />
+            <span className="my-auto text-base ml-3 text-slate-400">Products</span>
           </NavLink>
-          <NavLink className="flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline focus:bg-slate-700 focus:text-yellow-200">
-            <BiSolidDashboard className="text-2xl text-gray-400 hover:text-yellow-200 focus:text-yellow-200" />
-            <span className="my-auto text-base ml-3 text-gray-400 hover:text-yellow-200 focus:text-yellow-200">
-              Dashboard
-            </span>
+          <NavLink
+            to="/users"
+            className={({ isActive }) =>
+              `flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline ${
+                isActive ? "bg-slate-700 text-yellow-200" : "text-gray-400"
+              } hover:bg-slate-700 hover:text-yellow-200`
+            }
+          >
+            <FaUser className="text-2xl" />
+            <span className="my-auto text-base ml-3 text-slate-400">User</span>
           </NavLink>
-          <NavLink className="flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline focus:bg-slate-700 focus:text-yellow-200">
-            <BiSolidDashboard className="text-2xl text-gray-400 hover:text-yellow-200 focus:text-yellow-200" />
-            <span className="my-auto text-base ml-3 text-gray-400 hover:text-yellow-200 focus:text-yellow-200">
-              Dashboard
-            </span>
+          <NavLink
+            to="/orders"
+            className={({ isActive }) =>
+              `flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline ${
+                isActive ? "bg-slate-700 text-yellow-200" : "text-gray-400"
+              } hover:bg-slate-700 hover:text-yellow-200`
+            }
+          >
+            <FiShoppingCart className="mr-2 text-xl" />
+            <span className="my-auto text-base ml-3 text-slate-400">Orders</span>
           </NavLink>
-          <NavLink className="flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline focus:bg-slate-700 focus:text-yellow-200">
-            <BiSolidDashboard className="text-2xl text-gray-400 hover:text-yellow-200 focus:text-yellow-200" />
-            <span className="my-auto text-base ml-3 text-gray-400 hover:text-yellow-200 focus:text-yellow-200">
-              Dashboard
-            </span>
-          </NavLink>
-          <NavLink className="flex ml-4 p-2 rounded-s-xl cursor-pointer no-underline focus:bg-slate-700 focus:text-yellow-200">
-            <BiSolidDashboard className="text-2xl text-gray-400 hover:text-yellow-200 focus:text-yellow-200" />
-            <span className="my-auto text-base ml-3 text-gray-400 hover:text-yellow-200 focus:text-yellow-200">
-              Dashboard
-            </span>
-          </NavLink>
+          
         </ul>
       </nav>
 
@@ -71,7 +87,7 @@ const Sidebar = () => {
       <div className="p-4 border-t border-gray-700">
         <p className="text-sm">Ann Smith</p>
         <p className="text-xs text-gray-400">Administrator</p>
-        <button className="mt-2 px-4 py-1 text-sm bg-gray-800 hover:bg-gray-700 rounded-lg">
+        <button onClick={loguteadmin} className="mt-2 px-4 py-1 text-sm bg-gray-800 hover:bg-gray-700 rounded-lg">
           Log Out
         </button>
       </div>

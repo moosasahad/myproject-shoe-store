@@ -67,7 +67,7 @@ function Login() {
       if(response.data.admin){
         setAdminstate(response.data)
       }
-      
+      navigate('/')
       toast.success("Login Successful!", {
         position: "top-center",
         autoClose:1500,
@@ -85,10 +85,11 @@ function Login() {
   
       // Update the status immediately
       setStatus(response.data);
+      
   
     } catch (error) {
       console.error("There was an error logging in:", error);
-      toast.error('Login Error');
+      // toast.error('Login Error');
     }
   };
   const navigate = useNavigate();

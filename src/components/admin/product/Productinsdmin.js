@@ -1,13 +1,21 @@
-import axios from 'axios'
-import './productinadmin.css'
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import axios from "axios";
+import "./productinadmin.css";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
+import { axiosPrivate } from "../../../axiosinstance";
+import { FaPlus } from "react-icons/fa6";
+
+
+
+
 
 function Productinsdmin() {
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
+
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3000/Product");
@@ -18,7 +26,7 @@ function Productinsdmin() {
         console.error("Product fetch error:", error);
       }
     };
-
+    useEffect(() => {
     fetchData();
   }, []);
 
@@ -26,66 +34,76 @@ function Productinsdmin() {
     navigate(`/details/${id}`);
   };
   const deleteitem = async (id) => {
-    const deliteing = window.confirm("you delete item in list")
+    const deliteing = window.confirm("you delete item in list");
 
-    if(deliteing){
+    if (deliteing) {
       try {
         await axios.delete(`http://localhost:3000/Product/${id}`);
         console.log(`Product with ID ${id} deleted successfully.`);
-        
-        setProduct(prevProducts => prevProducts.filter(item => item.id !== id));
+
+        setProduct((prevProducts) =>
+          prevProducts.filter((item) => item.id !== id)
+        );
       } catch (error) {
         console.error("Error deleting product:", error);
       }
     }
-    
   };
 
-const addproduct=()=>{
-  navigate("/addingproduct")
-}
+  const addproduct = () => {
+    navigate("/addingproduct");
+  };
+  
+  const deleteproduct = async (id)=>{
+    try {
+      const res = await axiosPrivate.delete(`admin/deletproduct/${id}`)
+      fetchData();
+      console.log("delet res",res);
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
+  }
 
   return (
-    <div className='prodectlist'>
-      <div className="addproduct">
-        <button onClick={addproduct}>Addproduct +</button>
-      </div>
-      <table className='table' style={{ borderCollapse: 'collapse', width: '100%' }}>
-        <thead>
-          <tr>
-            <th style={{ border: '1px solid black', width: '20px', textAlign: 'center' }}>Id</th>
-            <th style={{ border: '1px solid black', width: '100px', textAlign: 'center' }}>Image</th>
-            <th style={{ border: '1px solid black', width: '150px', textAlign: 'center' }}>Name</th>
-            <th style={{ border: '1px solid black', width: '50px', textAlign: 'center' }}>Brand</th>
-            <th style={{ border: '1px solid black', width: '50px', textAlign: 'center' }}>Type</th>
-            <th style={{ border: '1px solid black', width: '30px', textAlign: 'center' }}>Quantity</th>
-            <th style={{ border: '1px solid black', width: '50px', textAlign: 'center' }}>Price</th>
-            <th style={{ border: '1px solid black', width: '50px', textAlign: 'center' }}>View</th>
-            <th style={{ border: '1px solid black', width: '50px', textAlign: 'center' }}>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {product.map((item) => (
-            <tr key={item.id}>
-              <td style={{ textAlign: 'center' }}>{item.id}</td>
-              <td style={{ border: '1px solid black', textAlign: 'center' }}>
-                <img src={item.image} alt="" className='listimage' style={{ width: '50px', height: '50px' }} />
-              </td>
-              <td style={{ border: '1px solid black', textAlign: 'center' }}>{item.name}</td>
-              <td style={{ border: '1px solid black', textAlign: 'center' }}>{item.brand}</td>
-              <td style={{ border: '1px solid black', textAlign: 'center' }}>{item.type}</td>
-              <td style={{ border: '1px solid black', textAlign: 'center' }}>{item.qty}</td>
-              <td style={{ border: '1px solid black', textAlign: 'center' }}>{item.price}</td>
-              <td style={{ border: '1px solid black', textAlign: 'center' }}>
-                <button className='viewbutton' onClick={() => handleView(item.id)}>View</button>
-              </td>
-              <td style={{ border: '1px solid black', textAlign: 'center' }}>
-                <button onClick={() => deleteitem(item.id)} className='dellitebutton'>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+   
+    <div className="m-2 bg-orange-100">
+      
+     <div className="flex justify-between m-4">
+     <h3 className="m-4">Products</h3>
+     <button 
+     onClick={()=>navigate("/addingproduct")}
+     className="h-14 w-40 flex items-center justify-center p-2 bg-blue-600 text-white text-xl hover:bg-blue-600">
+  <FaPlus />
+  <span className="text-white my-auto text-lg font-semibold ml-2"> Create new</span>
+</button>
+     </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-6 ">
+      {product.map((product)=>(
+        
+        <div className="w-60 p-3 border rounded-md shadow-md bg-slate-100 ">
+          <Link to={`/details/${product._id}`}>
+        <img src={product.image} alt="" />
+        </Link>
+        <div className="relative bottom-0">
+        <p className="text-slate-500">{product.name}</p>
+        <span className="text-xl font-bold text-black">₹ {product.price}</span>
+        <div className="flex gap-2">
+        <button  onClick={()=>navigate(`/editing/${product._id}`)} className="flex bg-transparent text-black border border-gray-500 font-bold">
+  <MdEdit className="text-gray-500 m-auto" /> Edit
+</button>
+<button onClick={()=>deleteproduct(product._id)} className="flex bg-transparent text-red-800 border border-gray-500 font-bold">
+  <MdDelete className="text-red-600 m-auto" /> Delet
+</button>
+        </div>
+        </div>
+        </div>
+     
+        ))
+      }
+     
+    </div>
     </div>
   );
 }
