@@ -45,6 +45,7 @@ function App() {
   const [login,SetLOgin]=useState([])
   const [logout,setLOgout]=useState([])
   const [userInitial, setUserInitial] = useState("");
+  const [token,setToken]=useState()
 
 
   const obj = {
@@ -65,7 +66,8 @@ function App() {
      logout,
      setLOgout,
      setUserInitial,
-     userInitial
+     userInitial,
+     setToken
      
   };
 useEffect(()=>{

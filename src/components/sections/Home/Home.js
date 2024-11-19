@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsCartCheckFill } from "react-icons/bs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,6 +7,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { Productscontext } from "../../context/ProductCOntext";
 import { Cartcontext } from "../../context/Addcart";
 import myimage from '../../../image/image.webp'
+import images from '../../../image/image3.png'
 
 function Home() {
   const { product } = useContext(Productscontext);
@@ -17,6 +18,7 @@ function Home() {
   const currentProducts = product.slice(indexOfFirstProduct, indexOfLastProduct);
   const totalPages = Math.ceil(product.length / itemsPerPage);
   const { handleCart, whishlist } = useContext(Cartcontext);
+  const navigat = useNavigate()
 
   return (
     <>
@@ -37,13 +39,13 @@ function Home() {
               <div className="mt-6">
                 <NavLink
                   to="/men"
-                  className="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 mr-4"
+                  className="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 mr-4 no-underline"
                 >
                   SHOP MEN
                 </NavLink>
                 <NavLink
                   to="/women"
-                  className="bg-pink-600 text-white py-3 px-6 rounded-lg hover:bg-pink-700 transition duration-300"
+                  className="bg-pink-600 text-white py-3 px-6 rounded-lg hover:bg-pink-700 transition duration-300 no-underline"
                 >
                   SHOP WOMEN
                 </NavLink>
@@ -67,6 +69,68 @@ function Home() {
   </div>
 </div>
 
+<div className="flex flex-wrap gap- justify-evenly align-middle mt-10 mb-8 ">
+<div className="bg-orange-100 p-2 w-72 border rounded-xl shadow-lg flex-wrap justify-center align-middle">
+    <img 
+      className="relative bottom-20 right-2" 
+      src="https://imgs.search.brave.com/ol4E7mhLxsCnP1OBjN6bkVq6uUHtT0xe17ZceFZd_Kg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAxNi8w/My9TaG9lcy1GcmVl/LURvd25sb2FkLVBO/Ry5wbmc" 
+      alt="" 
+    />
+    <div className="relative bottom-12 mx-auto text-center flex justify-center align-middle">
+      <div>
+      <h6 className="mb-8">New Collection</h6>
+      <span
+      onClick={()=>navigat("/collection")} 
+       className="bg-transparent text-black border-2 border-black font-semibold rounded-3xl p-2 w-32 cursor-pointer ">
+        SHOP NOW >
+      </span>
+      </div>
+      {/* <button className="bg-transparent text-black border-2 border-amber-400 hover:border-blue-500 rounded-3xl py-2 px-4">
+        Shop now
+      </button> */}
+    </div>
+  </div>
+  <div className="bg-orange-100 p-2 w-72 border rounded-xl shadow-lg flex-wrap justify-center align-middle">
+    <img 
+      className="relative bottom-20 right-2" 
+      src="https://png.pngtree.com/png-vector/20231230/ourmid/pngtree-dropshipping-men-hole-sole-jogging-shoes-png-image_11389148.png" 
+      alt="" 
+    />
+    <div className="relative bottom-12 mx-auto text-center flex justify-center align-middle">
+      <div>
+      <h6 className="mb-8">Men Collection</h6>
+      <span 
+      onClick={()=>navigat("/men")} 
+      className="bg-transparent text-black border-2 border-black font-semibold rounded-3xl p-2 w-32 cursor-pointer ">
+        SHOP NOW >
+      </span>
+      </div>
+      {/* <button className="bg-transparent text-black border-2 border-amber-400 hover:border-blue-500 rounded-3xl py-2 px-4">
+        Shop now
+      </button> */}
+    </div>
+  </div>
+  <div className="bg-orange-100 p-2 w-72 border rounded-xl shadow-lg flex-wrap justify-center align-middle">
+    <img 
+      className="relative bottom-20 right-2" 
+      src="https://parspng.com/wp-content/uploads/2023/02/shoespng.parspng.com_.png" 
+      alt="" 
+    />
+    <div className="relative bottom-12 mx-auto text-center flex justify-center align-middle">
+      <div>
+      <h6 className="mb-8">Women Collection</h6>
+      <span 
+      onClick={()=>navigat("/women")} 
+      className="bg-transparent text-black border-2 border-black font-semibold rounded-3xl p-2 w-32 cursor-pointer ">
+        SHOP NOW >
+      </span>
+      </div>
+      {/* <button className="bg-transparent text-black border-2 border-amber-400 hover:border-blue-500 rounded-3xl py-2 px-4">
+        Shop now
+      </button> */}
+    </div>
+  </div>  
+</div>
 
         <div className="flex flex-col md:flex-row justify-center items-center my-10 px-4">
           <div className="md:w-1/2 mb-6 md:mb-0">

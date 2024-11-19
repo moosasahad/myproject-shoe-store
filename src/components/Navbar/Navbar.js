@@ -14,59 +14,60 @@ function Navbare() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const {userInitial} = useContext(Valuecontext)
+  const [initial,setUserInitial]=useState('')
 
 
   const location = useLocation();
   const home = location.pathname === "/";
 
-  //const updateUserInitial = () => {
-//     const user = Cookies.get("users");
-//     let initial = "";
-//     console.log("hdshfgsdjfds",user);
+  const updateUserInitial = () => {
+    const user = Cookies.get("users");
+    let initial = "";
+    console.log("hdshfgsdjfds",user);
     
   
-//     if (user) {
-//       try {
-//         const jsuser = JSON.parse(user);
-//         console.log("jsuser",jsuser.name.name);
+    if (user) {
+      try {
+        const jsuser = JSON.parse(user);
+        console.log("jsuser",jsuser.name.name);
         
-//         if (jsuser && typeof jsuser.name.name === "string") {
-//           initial = jsuser.name.name.charAt(0).toUpperCase();
-//           setUserInitial(initial)
-//           console.log("initial",initial);
+        if (jsuser && typeof jsuser.name.name === "string") {
+          initial = jsuser.name.name.charAt(0).toUpperCase();
+          setUserInitial(initial)
+          console.log("initial",initial);
           
-//         }
-//         console.log("ghdskjfhdsjkfhdfhjkdshfkjsd............");
+        }
+        console.log("ghdskjfhdsjkfhdfhjkdshfkjsd............");
         
-//       } catch (error) {
-//         console.error("Error parsing user cookie:", error);
-//       }
-//     }
-//   }
-// // console.log("initial",initial);
+      } catch (error) {
+        console.error("Error parsing user cookie:", error);
+      }
+    }
+  }
+console.log("initial",initial);
 
-//   useEffect(() => {
-//     updateUserInitial();
+  useEffect(() => {
+    updateUserInitial();
 
-//     const handleScroll = () => {
-//       setScrolled(window.scrollY > window.innerHeight);
-//     };
+    const handleScroll = () => {
+      setScrolled(window.scrollY > window.innerHeight);
+    };
 
-//     window.addEventListener("scroll", handleScroll);
-//     const intervalId = setInterval(updateUserInitial, 1000);
+    window.addEventListener("scroll", handleScroll);
+    const intervalId = setInterval(updateUserInitial, 1000);
 
-//     return () => {
-//       window.removeEventListener("scroll", handleScroll);
-//       clearInterval(intervalId);
-//     };
-//   }, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearInterval(intervalId);
+    };
+  }, []);
 
   const search = (e) => {
     console.log("search bar", e.target.value);
   };
-//   useEffect(()=>{
-//     updateUserInitial()
-//   })
+  useEffect(()=>{
+    updateUserInitial()
+  })
 
   return (
     <div
