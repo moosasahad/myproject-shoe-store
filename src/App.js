@@ -123,7 +123,7 @@ console.log("adminstate",adminstate);
             <Route path="/details/:id" element={<Admindetails />} />
             <Route path="/editing/:id" element={<Edite />} />
             <Route path="/addingproduct" element={<Adproduct />} />
-            <Route path="Userdetaulsview/:id" element={<Userdetaulsview />} />
+            <Route path="userorderview/:id" element={<Userdetaulsview />} />
           </Routes>
         </div>
       </div>

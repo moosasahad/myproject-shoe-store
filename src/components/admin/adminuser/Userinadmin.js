@@ -61,17 +61,18 @@ const navigate = useNavigate()
           <h2 className="text-lg font-bold text-gray-700">{user.name}</h2>
           <p className="text-sm text-gray-600">user ID: {user._id}</p>
           <p className="text-sm text-gray-600">{user.email}</p>
+          <p className="text-sm text-gray-600">{user.number}</p>
           <p className="text-sm text-gray-600">{!user.status?"active":"blocked"}</p>
           <div className="flex gap-4">
           <button
-          onClick={()=>navigate(`/Userdetaulsview/${user._id}`)}
+          onClick={()=>navigate(`/userorderview/${user._id}`)}
           className="mt-4 px-4 py-2 bg-white border border-gray-300 rounded-lg text-black font-bold  hover:bg-gray-100 shadow">
-            Profile
+            Orders
           </button>
           <button
           onClick={()=>userblock(user._id)}
            className="mt-4 px-4 py-2 bg-white border border-gray-300 rounded-lg text-black font-bold  hover:bg-gray-100 shadow">
-           {user.status?"block":"unblock"}
+           {!user.status?"block":"unblock"}
           </button>
           </div>
         </div>

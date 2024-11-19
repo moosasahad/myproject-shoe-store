@@ -1,18 +1,13 @@
 
 import './Dashborde.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsShop } from "react-icons/bs";
 import { PiNotebookDuotone } from "react-icons/pi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import Linechart from './Linechart';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { PieChart } from '@mui/x-charts';
 import React, { useState, useEffect } from 'react';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
-import { Rating } from 'primereact/rating';
-import { Tag } from 'primereact/tag';
+
 import { axiosPrivate } from '../../../axiosinstance';
 // import { ProductService } from './service/ProductService';
 
@@ -21,6 +16,7 @@ function Dashborder() {
   const navigat = useNavigate()
   const [revanu,setrevanu]=useState(0)
   const[totalproduct,settotalproduct]=useState(0)
+  const[most,setMost]=useState([])
 
   const totalRevenue = async ()=>{
     try {
@@ -40,14 +36,31 @@ function Dashborder() {
  useEffect(()=>{
   totalRevenue()
  },[])
-  // console.log("dfghjkl",revanu);
+
+ const resendorders = async ()=>{
+  try {
+    const res = await axiosPrivate.get("admin/resenduser")
+    console.log("res resend",res.data.mostorder)
+
+    setMost(res.data.mostorder)
+  } catch (error) {
+    console.log(error)
+    
+  }
+ }
+ useEffect(()=>{
+  resendorders()
+ },[])
+
+  // console.log("dfghjkl",most);
   
 
   return (
-   <div className=''>
-    {/* --Daily Revenue--  */}
-    <div className='flex flex-wrap gap-5 m-5 justify-center align-middle'>
-      <div className='bg-emerald-500 w-56 h-32  rounded-xl flex items-center justify-center'>
+   <div className='bg-orange-100'>
+    <div>
+      {/* --Daily Revenue--  */}
+    <div className='flex flex-wrap gap-5 p-5 justify-center align-middle'>
+      <div className='bg-emerald-500 w-56 h-32  rounded-xl flex items-center justify-center shadow-xl'>
      <div className='mt-3'>
      <span className="bg-emerald-600 w-16 h-16 rounded-full text-lg flex items-center justify-center">
   <BsShop className="text-4xl text-white"/>
@@ -70,7 +83,7 @@ function Dashborder() {
 </span>
      </div>
     {/* --Total Orders--- */}
-      <div className='ml-3 text-white mt-3'>
+      <div className='ml-3 text-white mt-3 shadow-xl'>
       <spna className="font-semibold">Total Orders</spna>
       <br />
       <spna className="text-2xl font-bold">{totalproduct.totalProductCount}</spna>
@@ -94,7 +107,24 @@ function Dashborder() {
       <p className="bg-yellow-600 rounded-3xl w-14 text-center text-white mt-2 ">57%</p>
       </div>
       </div>
-      <PieChart
+    </div>
+   {/* --graph-- */}
+   <div className='m-5 shadow-xl'>
+    <h3 className='text-center p-10'>Monthly Sales Report </h3>
+    <div className='flex'>
+    <BarChart
+    className='max-w-96'
+      series={[
+        { data: [revanu.dailyRevenue, 44, 24, 34] },
+        { data: [totalproduct.totalProductCount,6, 49, 30] },
+        { data: [revanu.dailyRevenue, 25, 30, 50] },
+        { data: [revanu.totalRevenue, 50, 15, 25] },
+      ]}
+      height={290}
+      xAxis={[{ data: ['Q1', 'Q2', 'Q3', 'Q4'], scaleType: 'band' }]}
+      margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
+    />
+    <PieChart
       series={[
         {
           data: [
@@ -108,34 +138,72 @@ function Dashborder() {
       height={200}
     />
     </div>
-   {/* --graph-- */}
-   <div className='m-5'>
-    <h3 className='text-center p-10'>Monthly Sales Report </h3>
-    <BarChart
-      series={[
-        { data: [revanu.dailyRevenue, 44, 24, 34] },
-        { data: [totalproduct.totalProductCount,6, 49, 30] },
-        { data: [revanu.dailyRevenue, 25, 30, 50] },
-        { data: [revanu.totalRevenue, 50, 15, 25] },
-      ]}
-      height={290}
-      xAxis={[{ data: ['Q1', 'Q2', 'Q3', 'Q4'], scaleType: 'band' }]}
-      margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
-    />
-   {/* <Linechart className="w-20 m-10"/> */}
    </div>
    {/* -- Recent orders */}
-   <h3 className='text-center p-10'>Recent Order</h3>
-   {/* <div className="card">
-            <DataTable value={"xcvbnm"} header={"header"} footer={"footer"} tableStyle={{ minWidth: '60rem' }}>
-                <Column field="name" header="Name"></Column>
-                <Column header="Image" body={"jfgjhgjfh"}></Column>
-                <Column field="price" header="Price" body={"jfgjhgjfh"}></Column>
-                <Column field="category" header="Category"></Column>
-                <Column field="rating" header="Reviews" body={"jfgjhgjfh"}></Column>
-                <Column header="Status" body={"jfgjhgjfh"}></Column>
-            </DataTable>
-        </div> */}
+
+   <div className="container mx-auto p-6">
+  <div className="mb-6">
+    <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
+      Recent Orders
+    </h2>
+   <div className='m-6 rounded-lg shadow-lg'>
+   <table className="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
+      <thead>
+        <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+        
+          <th className="py-3 px-6 text-center">Order ID</th>
+          <th className="py-3 px-6 text-center">User</th>
+          <th className="py-3 px-6 text-center">Date</th>
+          <th className="py-3 px-6 text-center">Total Amount</th>
+          <th className="py-3 px-6 text-center">Payment Status</th>
+          <th className="py-3 px-6 text-center">Shipping Status</th>
+          <th className="py-3 px-6 text-center"></th>
+        </tr>
+      </thead>
+      <tbody className="text-gray-700 text-sm font-light">
+        {most.map((item, index) => (
+          <tr
+            key={index}
+            className={`border-b border-gray-200 hover:bg-gray-100 text-center ${
+              index % 2 === 0 ? "bg-gray-50" : ""
+            }`}
+          >
+           
+            <td className="py-3 px-6 text-lg font-semibold whitespace-nowrap">
+              {index+1}
+            </td>
+            <td className="py-3 px-6 text-lg font-semibold whitespace-nowrap flex my-auto"><span className='text-white bg-orange-500 rounded-full w-8 h-8 text-xl my-auto mr-3'>{item.userId.name.slice(0,1).toUpperCase()}</span>{item.userId.name}</td>
+            <td className="py-3 px-6 text-lg font-semibold whitespace-nowrap">
+              {new Date(item.purchaseDate).toLocaleDateString()}
+            </td>
+            <td className="py-3 px-6 text-lg font-semibold whitespace-nowrap">₹ {item.amount}</td>
+            <td className="py-3 px-6 text-lg font-semibold whitespace-nowrap">
+              <span
+                className={"px-2 py-1 rounded-full text-lg font-semibold "}
+              >
+                {item.paymentStatus}
+              </span>
+            </td>
+            <td className="py-3 px-6 text-lg font-semibold whitespace-nowrap">
+              <span
+                className={"px-2 py-1 text-lg font-semibold  rounded-full"}
+              >
+                {item.shippingStatus}
+              </span>
+            </td>
+            <td className="py-3 px-6 text-base font-semibold whitespace-nowrap"><Link to={(`/userorderview/${item.userId._id}`)} className='no-underline bg-blue-600 text-white p-1 rounded-md'>
+            view
+            </Link></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+   </div>
+  </div>
+</div>
+
+  
+    </div>
    </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./sidebar.css";
 import { BiSolidDashboard } from "react-icons/bi";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi"; // Import an order icon
@@ -12,11 +12,13 @@ import { Valuecontext } from "../../../App";
 
 const Sidebar = () => {
   const {setAdminstate} = useContext(Valuecontext)
+  const navigate = useNavigate()
   const loguteadmin =async ()=>{
     try {
       const res = await axiosPrivate.post("adminlogut")
       console.log("adminlogut",res);
       setAdminstate()
+      navigate("/login")
       
     } catch (error) {
       console.log(error);
