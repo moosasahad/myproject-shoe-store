@@ -1,96 +1,127 @@
-import React, { createContext, useState } from 'react'
-import Cookies from 'js-cookie'
-import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
-import { axiosPrivate } from '../../axiosinstance'
+import React, { createContext, useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { axiosPrivate } from "../../axiosinstance";
 
-export const Cartcontext = createContext()
-function Addcart({children}) {
-    const navigate = useNavigate()
-    const user = Cookies.get("users")
-    const [clientSecret,setClientSecret]=useState(null)
-    const [sessionID,setsessionID]=useState(null)
+export const Cartcontext = createContext();
+function Addcart({ children }) {
+  const navigate = useNavigate();
+  const user = Cookies.get("users");
+  const [clientSecret, setClientSecret] = useState(null);
+  const [sessionID, setsessionID] = useState(null);
+  const [cartproduct, setCartproduct] = useState([]);
+  const [cartCount, setCartcount] = useState(null);
+  const [product, setProduct] = useState([]);
+  const [wishCount, setwishcount] = useState(null);
 
+  const fetchCartData = async () => {
+    try {
+      const response = await axiosPrivate.get("/getcart");
+      setCartproduct(response.data.product);
+      // console.log("response.data.product",response.data);
+      setCartcount(response.data.product.length);
+    } catch (error) {
+      console.error("Error fetching cart data:", error);
+    }
+  };
 
+  useEffect(() => {
+    fetchCartData();
+  }, []);
 
-    const handleCart = async (productId) => {
-        console.log("jkahsdjkas",user);
-        if(!user){
-          toast.error("Place login")
-          navigate("/login")
-            }else{
-              try {
-                const response = await axiosPrivate.post(
-                  "/addcart",
-                  { productId }
-                );
-                if(response.data == "product quantity increased"){
-                  toast.success("Product already in Cart");
-                }else{
-                  toast.success("Product added to cart");
-                }
-          
-                console.log("Response:", response.data);
-                
-              } catch (error) {
-                console.error("There was an error adding the product to cart:", error);
-              }
-            }
-      };
-
-
-      //wishlish ....
-
-
-      const whishlist = async (productId) => {
-        console.log("jkahsdjkas",user);
-        if(!user){
-          toast.error("Place login")
-          navigate("/login")
-            }else{
-              try {
-                const response = await axiosPrivate.post(
-                  "/wishlist",
-                  { productId }
-                );
-                if(response.data.message == "products already added to the wishlist"){
-                  toast.success("Product already in wishlist");
-                }else{
-                  toast.success("Product added to whislist");
-                }
-          
-                console.log("Response:", response);
-                
-              } catch (error) {
-                console.error("There was an error adding the product to cart:", error);
-              }
-            }
-
-      };
-
-      // order ------
-
-      const order = async ()=>{
-        try {
-          const res =await axiosPrivate.post("/order")
-          console.log("order res",res.data.data.order.sessionID);
-          setClientSecret(res.data.data.clientsecret)
-          setsessionID(res.data.data.order.sessionID)
-          
-        } catch (error) {
-          console.log("error roder",error);          
+  const handleCart = async (productId) => {
+    if (!user) {
+      toast.error("Place login");
+      navigate("/login");
+    } else {
+      try {
+        const response = await axiosPrivate.post("/addcart", { productId });
+        fetchCartData();
+        if (response.data == "product quantity increased") {
+          toast.success("Product already in Cart");
+        } else {
+          toast.success("Product added to cart");
         }
-    
-      }
-      console.log("setClientSecret",clientSecret)
 
-      
-    return (
-        <Cartcontext.Provider value={{handleCart,whishlist,order,clientSecret,sessionID}}>
-            {children}
-        </Cartcontext.Provider>
-      )
+        // console.log("Response:", response.data);
+      } catch (error) {
+        console.error("There was an error adding the product to cart:", error);
+      }
+    }
+  };
+
+  //wishlish ....
+
+  const whishlist = async (productId) => {
+    console.log("jkahsdjkas", user);
+    if (!user) {
+      toast.error("Place login");
+      navigate("/login");
+    } else {
+      try {
+        const response = await axiosPrivate.post("/wishlist", { productId });
+        wishlist();
+        if (response.data.message == "products already added to the wishlist") {
+          toast.success("Product already in wishlist");
+        } else {
+          toast.success("Product added to whislist");
+        }
+
+        // console.log("Response:", response);
+      } catch (error) {
+        console.error("There was an error adding the product to cart:", error);
+      }
+    }
+  };
+
+  // order ------
+
+  const order = async () => {
+    try {
+      const res = await axiosPrivate.post("/order");
+      // console.log("order res",res.data.data.order.sessionID);
+      setClientSecret(res.data.data.clientsecret);
+      setsessionID(res.data.data.order.sessionID);
+    } catch (error) {
+      console.log("error roder", error);
+    }
+  };
+  // console.log("setClientSecret",clientSecret)
+
+  const wishlist = async () => {
+    try {
+      const res = await axiosPrivate.get("/whislistget");
+      setProduct(res.data.product);
+      setwishcount(res.data.product.length);
+    } catch (error) {
+      console.log("Error fetching wishlist", error);
+    }
+  };
+  useEffect(() => {
+    wishlist();
+  }, []);
+
+  return (
+    <Cartcontext.Provider
+      value={{
+        handleCart,
+        whishlist,
+        order,
+        clientSecret,
+        sessionID,
+        cartproduct,
+        setCartproduct,
+        fetchCartData,
+        cartCount,
+        product,
+        wishlist,
+        wishCount,
+      }}
+    >
+      {children}
+    </Cartcontext.Provider>
+  );
 }
 
-export default Addcart
-
+export default Addcart;

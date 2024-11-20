@@ -7,6 +7,8 @@ import Cookies from "js-cookie";
 import "./productdetails.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { Productscontext } from "../../context/ProductCOntext";
+import axiosinstance from "../../../axiosinstance";
 
 function Productdetails() {
   const [state, setState] = useState([]);
@@ -16,16 +18,30 @@ function Productdetails() {
   const navigate = useNavigate();
   const user = Cookies.get("users");
   const { handleCart,whishlist } = useContext(Cartcontext);
+  const {relateproduct,relate} = useContext(Productscontext)
 
   useEffect(() => {
     setState(product);
   }, [product]);
 
   useEffect(() => {
-    if (state.length > 0) {
-      const selectedProduct = state.find((product) => product._id == _id);
-      setValue(selectedProduct ? [selectedProduct] : []);
+    const detalifunction = async ()=>{
+      try {
+        const response = await axiosinstance.get(`/productid/${_id}`)
+        console.log("detail response",response.data)
+        setValue(response.data)
+        relateproduct(response.data.type)
+      } catch (error) {
+        console.log("detaile page",error)
+        
+      }
     }
+    detalifunction()
+    // if (state.length > 0) {
+    //   const selectedProduct = state.find((product) => product._id == _id);
+    //   setValue(selectedProduct ? [selectedProduct] : []);
+    // }
+    
   }, [state, _id]);
 
   const convertToStars = (stars) => {
@@ -51,45 +67,80 @@ function Productdetails() {
   };
 
   return (
-    <div className="py-12 bg-gray-100 mt-24">
-      {value.map((product) => (
-        <div className="max-w-7xl mx-auto px-6 sm:px-12 md:px-24" key={product._id}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            <div>
-              <img src={product.image} alt={product.name} className="w-full h-auto rounded-lg shadow-lg"/>
-            </div>
-            <div className="space-y-6">
-              <h3 className="text-3xl font-bold text-gray-800">{product.name}</h3>
-              <h6 className="text-xl text-gray-500">Brand: {product.brand}</h6>
-              <p className="text-gray-700">{product.description}</p>
-              <div className="flex items-center space-x-2">
-                <div className="text-lg text-yellow-500">{convertToStars(product.rating)}</div>
-                <span className="text-sm text-gray-600">({product.reviews} reviews)</span>
-              </div>
-              <h4 className="text-2xl text-gray-900">₹ {product.price}</h4>
+    <div className="py-12 bg-gray-100 mt-24 ">
+      <div className="max-w-7xl mx-auto p-8 bg-white shadow-lg rounded-lg mb-10" key={value._id}>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    {/* Image Section */}
+    <div className="relative">
+      <img
+        src={value.image}
+        alt={value.name}
+        className="w-full h-auto rounded-lg shadow-lg object-cover"
+      />
+      <span className="absolute top-4 left-4 px-3 py-1 bg-yellow-500 text-white text-sm font-semibold rounded">
+        Featured
+      </span>
+    </div>
 
-              <div className="flex space-x-4">
-                <button
-                  onClick={() => handleCart(product._id)}
-                  className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-500 transition duration-300"
-                >
-                  Add to Cart
-                </button>
-                <button
-                  onClick={() => navigate("/paymentpage")}
-                  className="px-6 py-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-500 transition duration-300"
-                >
-                  Buy Now
-                </button>
-              </div>
-            </div>
-          </div>
+    {/* Details Section */}
+
+    <div className="space-y-6">
+    <h6 className="text-base text-gray-600">
+        Brand: {value.brand}
+      </h6>
+      {/* Product Name */}
+      <h3 className="text-4xl font-extrabold text-gray-900">{value.name}</h3>
+
+      {/* Brand */}
+      <h6 className="text-base text-gray-600">
+        Brand: {value.brand}
+      </h6>
+
+      {/* Description */}
+      <p className="text-base text-gray-700 leading-relaxed">
+      Description: {value.description}
+      </p>
+      <p>Type: {value.type}</p>
+
+      {/* Rating and Reviews */}
+      <div className="flex items-center space-x-2">
+        <div className="flex text-yellow-500 text-lg">
+          {convertToStars(value.rating)}
         </div>
-      ))}
+        <h4 className="text-sm text-gray-600">
+          ({value.reviews} Reviews)
+        </h4>
+      </div>
+
+      {/* Price */}
+      <h4 className="text-3xl font-bold text-blue-600">
+        ₹ {value.price}
+      </h4>
+
+      {/* Buttons */}
+      <div className="flex space-x-4">
+        <button
+          onClick={() => handleCart(value._id)}
+          className=" bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:bg-blue-500 transition duration-300"
+        >
+          Add to Cart
+        </button>
+        {/* <button
+          onClick={() => navigate("/paymentpage")}
+          className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-lg hover:bg-green-500 transition duration-300"
+        >
+          Buy Now
+        </button> */}
+      </div>
+    </div>
+  </div>
+</div>
+
+      {/* ))} */}
 
       {/* Related Products Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-6">
-            {product.map((product) => (
+            {relate.map((product) => (
                 <div
                     key={product._id}
                     className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition duration-300"
@@ -120,7 +171,7 @@ function Productdetails() {
                     </div>
                     
                     {/* Product Info */}
-                    <Link to={`/productdetails/${product._id}`} className="no-underline">
+                    <Link to={`/productdetails/${product._id}`} className="no-underline" onClick={()=>handleClick()}>
                         <div className="p-4">
                             <h5 className="text-lg font-semibold text-gray-800">{product.brand}</h5>
                             <h6 className="text-xl font-bold text-gray-900">₹ {product.price}</h6>

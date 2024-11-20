@@ -7,10 +7,15 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Cartcontext } from '../../context/Addcart';
 
 function Collection() {
-    const [menproduct, womenproduct, product] = useProducts();
+    const [product] = useProducts();
     const { handleCart, whishlist } = useContext(Cartcontext);
 
-
+    const handleClick = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
     return (
         <div className="py-12 bg-gray-50 mt-24">
             <h1 className="text-3xl font-bold text-center text-gray-800 mb-12">Collection</h1>
@@ -48,7 +53,7 @@ function Collection() {
                         </div>
 
                         {/* Product Info */}
-                        <Link to={`/productdetails/${value._id}`} className="no-underline">
+                        <Link to={`/productdetails/${value._id}`} className="no-underline" onClick={()=>handleClick()}>
                             <div className="p-4">
                                 <h5 className="text-lg font-semibold text-gray-800">{value.brand}</h5>
                                 <h6 className="text-xl font-bold text-gray-900">₹ {value.price}</h6>

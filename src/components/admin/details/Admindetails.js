@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './Admindproductdetails.css'
@@ -26,28 +26,10 @@ function Admindetails() {
     fetchData();
   }, [id]); 
   const navigate = useNavigate()
-  const deleteitem = async (id) => {
-    const deliteing = window.confirm("you delete item in list")
-
-    if(deliteing){
-      try {
-        await axios.delete(`http://localhost:3000/Product/${id}`);
-        console.log(`Product with ID ${id} deleted successfully.`);
-        
-        setProduct(prevProducts => prevProducts.filter(item => item.id !== id));
-      } catch (error) {
-        console.error("Error deleting product:", error);
-      }
-      navigate("/products")
-    }
-    
-  }; 
+  
   
   if (!product) {
     return <p>Loading product details...</p>; 
-  }
-  const editing = (id)=>{
-    navigate(`/editing/${id}`)
   }
   const fullStars = Math.floor(product.rating); // Number of full stars
   const halfStar = product.rating % 1 >= 0.5; // Check for a half star

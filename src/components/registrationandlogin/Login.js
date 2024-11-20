@@ -1,15 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./login.css";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { json, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdAccountBox } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { IoMdHome } from "react-icons/io";
-
-
-import axios from "axios";
 import { axiosPrivate } from "../../axiosinstance";
 import { Valuecontext } from "../../App";
 

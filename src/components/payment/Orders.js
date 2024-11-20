@@ -7,28 +7,27 @@ function Orders() {
   const [orders, setOrders] = useState([]);
   const [expandedOrders, setExpandedOrders] = useState({});
   const { sctionId } = useParams();
-  console.log("Session ID", sctionId);
+  // console.log("Session ID", sctionId);
 
-  const verify = async () => {  
+  const verify = async () => {
     try {
       const res = await axiosPrivate.post(`/verifyOrder/${sctionId}`);
-      console.log("Verify Order Response:", res);
-      toast.success("payment verifyde")
+      // console.log("Verify Order Response:", res);
+      toast.success("payment verifyde");
     } catch (error) {
-      console.error('Error verifying the order:', error);
+      console.error("Error verifying the order:", error);
     }
   };
 
   useEffect(() => {
-        verify();
+    verify();
   }, [sctionId]);
-
 
   const fetchOrders = async () => {
     try {
       const res = await axiosPrivate.get("/getallorders");
-      setOrders(res.data); // Assuming the response data is the orders array
-      console.log("Fetched orders:", res);
+      setOrders(res.data.orders); // Assuming the response data is the orders array
+      // console.log("Fetched orders:", res);
     } catch (error) {
       console.log("Error fetching orders", error);
     }
@@ -44,15 +43,16 @@ function Orders() {
       [orderId]: !prev[orderId],
     }));
   };
+  // console.log("orders",orders);
 
   const cancelOrder = async (id) => {
     try {
       const res = await axiosPrivate.post(`/ordercancel/${id}`);
-      console.log(res.data);
+      // console.log(res.data);
       // Assuming the canceled order status is returned
       fetchOrders();
     } catch (error) {
-      console.error('Error canceling order:', error);
+      console.error("Error canceling order:", error);
     }
   };
 
@@ -63,10 +63,11 @@ function Orders() {
         {orders.map((order) => (
           <div
             key={order._id}
-            className={`border border-gray-300 rounded-lg p-4 shadow-sm ${order.status === 'canceled' ? 'bg-red-100' : ''}`} // Highlight canceled orders
+            className={`border border-gray-300 rounded-lg p-4 shadow-sm ${
+              order.status === "canceled" ? "bg-red-100" : ""
+            }`}
           >
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center">
-              {/* Order Details */}
               <div className="mb-4 flex-1">
                 <p>
                   <strong>Order ID:</strong> {order._id}
@@ -85,8 +86,10 @@ function Orders() {
                   <strong>Shipping Status:</strong> {order.shippingStatus}
                 </p>
                 {/* Show "Canceled" label if the order is canceled */}
-                {order.status === 'canceled' && (
-                  <span className="text-red-500 font-semibold">Order Canceled</span>
+                {order.status === "canceled" && (
+                  <span className="text-red-500 font-semibold">
+                    Order Canceled
+                  </span>
                 )}
               </div>
               {/* First Product Details */}
@@ -121,7 +124,7 @@ function Orders() {
                 : "View All Products"}
             </button>
             {/* Cancel order button */}
-            {order.status !== 'canceled' && ( // Disable cancel button if already canceled
+            {order.status !== "canceled" && (
               <div className="flex justify-end mt-4">
                 <button
                   onClick={() => cancelOrder(order.sessionID)}

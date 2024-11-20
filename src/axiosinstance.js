@@ -51,30 +51,29 @@ export default axios.create({
     }
   };
   
-  // Add Axios response interceptor
+
   axiosPrivate.interceptors.response.use(
-    (response) => response, // Pass successful responses through
+    (response) => response, 
     async (error) => {
       const originalRequest = error.config;
 
-      const refretokens = Cookies.get("refreshToken")
-      const adminrefresh = Cookies.get("adminrefreshToken")
-      if(!refretokens || !adminrefresh){
-        alert("login plese")
-        window.location.href = "/login";
-        console.log("refretokens",refretokens)
-      }
+      // const refretokens = Cookies.get("refreshToken")
+      // const adminrefresh = Cookies.get("adminrefreshToken")
+      // if(!refretokens || !adminrefresh){
+      //   alert("login plese")
+      //   window.location.href = "/login";
+      //   console.log("refretokens",refretokens)
+      // }
       
   
       if (error.response?.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true; // Avoid retry loops
+        originalRequest._retry = true; 
   
         try {
-          await refreshtoken(); // Call refresh token function
-          return axiosPrivate(originalRequest); // Retry the original request
+          await refreshtoken(); 
+          return axiosPrivate(originalRequest);
         } catch (refreshError) {
           console.error("Token refresh failed, redirecting to login:", refreshError);
-          // Handle logout or redirect to login
           return Promise.reject(refreshError);
         }
       }

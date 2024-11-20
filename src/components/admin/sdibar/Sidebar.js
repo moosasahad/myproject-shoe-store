@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./sidebar.css";
 import { BiSolidDashboard } from "react-icons/bi";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -8,24 +8,19 @@ import { FiShoppingCart } from "react-icons/fi"; // Import an order icon
 import { axiosPrivate } from "../../../axiosinstance";
 import { Valuecontext } from "../../../App";
 
-
-
 const Sidebar = () => {
-  const {setAdminstate} = useContext(Valuecontext)
-  const navigate = useNavigate()
-  const loguteadmin =async ()=>{
+  const { setAdminstate } = useContext(Valuecontext);
+  const navigate = useNavigate();
+  const loguteadmin = async () => {
     try {
-      const res = await axiosPrivate.post("adminlogut")
-      console.log("adminlogut",res);
-      setAdminstate()
-      navigate("/login")
-      
+      const res = await axiosPrivate.post("adminlogut");
+      console.log("adminlogut", res);
+      setAdminstate();
+      navigate("/login");
     } catch (error) {
       console.log(error);
-      
-      
     }
-  }
+  };
   return (
     <div className="flex flex-col w-52 h-screen bg-gray-900 text-white">
       {/* Logo Section */}
@@ -46,7 +41,9 @@ const Sidebar = () => {
             }
           >
             <BiSolidDashboard className="text-2xl" />
-            <span className="my-auto text-base ml-3 text-slate-400">Dashboard</span>
+            <span className="my-auto text-base ml-3 text-slate-400">
+              Dashboard
+            </span>
           </NavLink>
           <NavLink
             to="/products"
@@ -57,7 +54,9 @@ const Sidebar = () => {
             }
           >
             <FaShoppingCart className="text-2xl" />
-            <span className="my-auto text-base ml-3 text-slate-400">Products</span>
+            <span className="my-auto text-base ml-3 text-slate-400">
+              Products
+            </span>
           </NavLink>
           <NavLink
             to="/users"
@@ -79,9 +78,10 @@ const Sidebar = () => {
             }
           >
             <FiShoppingCart className="mr-2 text-xl" />
-            <span className="my-auto text-base ml-3 text-slate-400">Orders</span>
+            <span className="my-auto text-base ml-3 text-slate-400">
+              Orders
+            </span>
           </NavLink>
-          
         </ul>
       </nav>
 
@@ -89,7 +89,10 @@ const Sidebar = () => {
       <div className="p-4 border-t border-gray-700">
         <p className="text-sm">Ann Smith</p>
         <p className="text-xs text-gray-400">Administrator</p>
-        <button onClick={loguteadmin} className="mt-2 px-4 py-1 text-sm bg-gray-800 hover:bg-gray-700 rounded-lg">
+        <button
+          onClick={loguteadmin}
+          className="mt-2 px-4 py-1 text-sm bg-gray-800 hover:bg-gray-700 rounded-lg"
+        >
           Log Out
         </button>
       </div>

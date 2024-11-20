@@ -1,33 +1,51 @@
-
-// import axios from 'axios';
-import React, { createContext, useEffect, useState } from 'react'
-import axiosinstance from '../../axiosinstance';
+import React, { createContext, useEffect, useState } from "react";
+import axiosinstance from "../../axiosinstance";
 
 export const Productscontext = createContext();
-function ProductCOntext({children}) {
-    const [product,setProducts] = useState([])
+function ProductCOntext({ children }) {
+  const [product, setProducts] = useState([]);
+  const [menproduct, setMenproduct] = useState([]);
+  const [womenproduct, setWomenproduct] = useState([]);
+  const [relate, setRelate] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosinstance.get("/product");
+        const menrespons = await axiosinstance.get("/product/men");
+        const womenresponse = await axiosinstance.get("/product/women");
 
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await axiosinstance.get("/product");
-            setProducts(response.data);
-            console.log("response.data",response.data);
-            
-          } catch (error) {
-            console.error("Error fetching products:", error);
-          }
-        };
-    
-        fetchData();
-      }, []);
+        // console.log("menrespons",menrespons.data);
+        // console.log("womenresponse",womenresponse.data);
+        setMenproduct(menrespons.data);
+        setWomenproduct(womenresponse.data);
+
+        setProducts(response.data);
+        // console.log("response.data",response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const relateproduct = async (type) => {
+    try {
+      const response = await axiosinstance.get(`/product/${type}`);
+      // console.log("response",response.data);
+      setRelate(response.data);
+    } catch (error) {
+      console.log("relate product ", relateproduct);
+    }
+  };
 
   return (
-    <Productscontext.Provider value={{product}}>
-        {children}
+    <Productscontext.Provider
+      value={{ product, menproduct, womenproduct, relateproduct, relate }}
+    >
+      {children}
     </Productscontext.Provider>
-  )
+  );
 }
 
-export default ProductCOntext
-
+export default ProductCOntext;

@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { FaUser, FaShippingFast, FaMapMarkerAlt } from "react-icons/fa";
 import { axiosPrivate } from '../../../axiosinstance';
 import { FaRegCalendar } from "react-icons/fa6";
 
 
 function FetchBuyingDetails() {
-  const [buyingDetails, setBuyingDetails] = useState(null);
   const [orders,setOrders]=useState([])
-  const userId = '3a80'; // The user's ID
-  const [orderprod,setOrderprod]= useState([])
+  const userId = '3a80'; 
   // setOrderprod()
   // console.log(orders[0].product[0].productId);
   

@@ -1,10 +1,8 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { MdDelete } from "react-icons/md";
-import { MdEdit } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+
 import { axiosPrivate } from "../../../axiosinstance";
-import { FaPlus } from "react-icons/fa6";
 
 function Userinadmin() {
   const[user, setUser]=useState([])

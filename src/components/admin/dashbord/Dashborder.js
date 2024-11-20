@@ -1,6 +1,5 @@
 
-import './Dashborde.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BsShop } from "react-icons/bs";
 import { PiNotebookDuotone } from "react-icons/pi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -13,7 +12,7 @@ import { axiosPrivate } from '../../../axiosinstance';
 
 
 function Dashborder() {
-  const navigat = useNavigate()
+  
   const [revanu,setrevanu]=useState(0)
   const[totalproduct,settotalproduct]=useState(0)
   const[most,setMost]=useState([])

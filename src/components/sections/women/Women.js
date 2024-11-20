@@ -1,24 +1,27 @@
 import React, { useContext } from 'react';
-import useProducts from '../../coustom hook/Products';
 import { Link } from 'react-router-dom';
 import { BsCartCheckFill } from 'react-icons/bs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Cartcontext } from '../../context/Addcart';
+import { Productscontext } from '../../context/ProductCOntext';
 
 function Women() {
-    const [menproduct, womenproduct, product] = useProducts();
-    const women = womenproduct.filter(item => item.type === 'women');
-    console.log("Women's Products", women);
+   const {womenproduct} = useContext(Productscontext)
     const { handleCart, whishlist } = useContext(Cartcontext);
-
+    const handleClick = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
     return (
         <div className="py-12 bg-gray-50 mt-24">
             <h1 className="text-3xl font-bold text-center text-gray-800 mb-12">Women's Collection</h1>
 
             {/* Product Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-6">
-                {women.map((product) => (
+                {womenproduct.map((product) => (
                     <div
                         key={product._id}
                         className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition duration-300"
@@ -49,7 +52,7 @@ function Women() {
                         </div>
 
                         {/* Product Info */}
-                        <Link to={`/productdetails/${product._id}`} className="no-underline">
+                        <Link to={`/productdetails/${product._id}`} className="no-underline" onClick={()=>handleClick()}>
                             <div className="p-4">
                                 <h5 className="text-lg font-semibold text-gray-800">{product.brand}</h5>
                                 <h6 className="text-xl font-bold text-gray-900">₹ {product.price}</h6>
