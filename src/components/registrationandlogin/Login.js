@@ -11,29 +11,26 @@ import { Valuecontext } from "../../App";
 
 function Login() {
   const [status, setStatus] = useState();
-  const {setUserInitial,setAdminstate}= useContext(Valuecontext)
+  const { setUserInitial, setAdminstate } = useContext(Valuecontext);
 
   const logout = async () => {
     try {
-      const response = await axiosPrivate.post(
-        "/logut",{});
-      setStatus()
-      setUserInitial()
+      const response = await axiosPrivate.post("/logut", {});
+      setStatus();
+      setUserInitial();
       toast.success("Logout!", {
         position: "top-center",
-        autoClose:500,
+        autoClose: 500,
         style: { backgroundColor: "red", color: "#fff", fontSize: "16px" },
         icon: "🚀",
-        
       });
-      setStatus()
+      setStatus();
     } catch (error) {
       console.error("There was an error logging in:", error);
-      toast.error('Login Error');
+      toast.error("Login Error");
     }
-    
 
-  //  navigate("/login");
+    //  navigate("/login");
   };
   const [inputValue, setInputValue] = useState({
     email: "",
@@ -48,41 +45,35 @@ function Login() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Email:", inputValue.email);
-    console.log("Password:", inputValue.password);
+    // console.log("Email:", inputValue.email);
+    // console.log("Password:", inputValue.password);
     try {
-      const response = await axiosPrivate.post(
-        "/login",
-        {
-          email: inputValue.email,
-          password: inputValue.password,
-        }
-      );
-      console.log("Response:", response.data.token);
-      console.log("response",response.data.admin)
-      if(response.data.admin){
-        setAdminstate(response.data)
+      const response = await axiosPrivate.post("/login", {
+        email: inputValue.email,
+        password: inputValue.password,
+      });
+      // console.log("Response:", response.data.token);
+      // console.log("response",response.data.admin)
+      if (response.data.admin) {
+        setAdminstate(response.data);
       }
-      navigate('/')
+      navigate("/");
       toast.success("Login Successful!", {
         position: "top-center",
-        autoClose:1500,
+        autoClose: 1500,
         style: { backgroundColor: "#4CAF50", color: "#fff", fontSize: "16px" },
         icon: "🚀",
-        
       });
-        let initial = response.data.name.name.charAt(0).toUpperCase();
-        console.log("initial",initial);
-        
-        setUserInitial(initial)
-  
+      let initial = response.data.name.name.charAt(0).toUpperCase();
+      // console.log("initial",initial);
+
+      setUserInitial(initial);
+
       // Store user information in cookies
       Cookies.set("users", JSON.stringify(response.data));
-  
+
       // Update the status immediately
       setStatus(response.data);
-      
-  
     } catch (error) {
       console.error("There was an error logging in:", error);
       // toast.error('Login Error');
@@ -92,26 +83,24 @@ function Login() {
   // let users = Cookies.get("user");
   // console.log("activeUser",users);
   // const [state, setState] = useState(false);
-   useEffect(()=>{
+  useEffect(() => {
     let users = Cookies.get("users");
-    if(users){
-      setStatus(JSON.parse(users))   
+    if (users) {
+      setStatus(JSON.parse(users));
     }
-   },[])
-console.log("status",status);
-const userss = Cookies.get("users");
-let parseuser = userss ? JSON.parse(userss) : null;
+  }, []);
+  // console.log("status", status);
+  const userss = Cookies.get("users");
+  let parseuser = userss ? JSON.parse(userss) : null;
 
-if (parseuser) {
-  const userInitial = parseuser.name.name.charAt(0).toUpperCase();
-  console.log("initial", userInitial);
-  setUserInitial(userInitial);
-} else {
-  console.log("User data is missing or invalid.");
-  setUserInitial("");
-}
-
-
+  if (parseuser) {
+    const userInitial = parseuser.name.name.charAt(0).toUpperCase();
+    // console.log("initial", userInitial);
+    setUserInitial(userInitial);
+  } else {
+    // console.log("User data is missing or invalid.");
+    setUserInitial("");
+  }
 
   if (!status) {
     return (
@@ -161,30 +150,44 @@ if (parseuser) {
     );
   } else {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-pattern bg-slate-200">
-        <div className="p-6 bg-emerald-50 shadow-lg border border-gray-500 rounded-md flex flex-col items-center w-80">
-          <MdAccountBox className="text-5xl text-blue-500 mb-4" />
-          <h1 className="text-xl font-semibold text-gray-800 mb-3">{status.name.name}</h1>
-          <button onClick={()=>navigate('/orders')} className="w-36 m-2 bg-gray-500 opacity-75 boredr-4">
-            Orders
-          </button>
-          <div className="flex space-x-2 m-2">
-            <button
-              className="mx-1 bg-red-500 text-white rounded-md hover:bg-red-600"
-              onClick={logout}
-            >
-             <FiLogOut />
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-slate-200 to-gray-300">
+  <div className="p-8 bg-white shadow-lg border border-gray-300 rounded-lg flex flex-col items-center w-96">
+    {/* Profile Icon */}
+    <MdAccountBox className="text-6xl text-blue-500 mb-4" />
 
-            </button>
-            <Link to="/">
-              <button className="mx-1 bg-blue-500 text-white text-3xl rounded-md hover:bg-blue-600">
-              <IoMdHome />
+    {/* Profile Name */}
+    <h1 className="text-2xl font-bold text-gray-800 mb-6">
+      {status.name.name}
+    </h1>
 
-              </button>
-            </Link>
-          </div>
-        </div>
-      </div>
+    {/* Orders Button */}
+    <button
+      onClick={() => navigate("/orderse")}
+      className="w-40 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-all duration-300 mb-4"
+    >
+      View Orders
+    </button>
+
+    {/* Action Buttons */}
+    <div className="flex space-x-4">
+      {/* Logout Button */}
+      <button
+        className="p-3 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all duration-300"
+        onClick={logout}
+      >
+        <FiLogOut className="text-lg" />
+      </button>
+
+      {/* Home Button */}
+      <Link to="/">
+        <button className="p-3 bg-green-500 text-white rounded-full hover:bg-green-600 transition-all duration-300">
+          <IoMdHome className="text-lg" />
+        </button>
+      </Link>
+    </div>
+  </div>
+</div>
+
     );
   }
 }

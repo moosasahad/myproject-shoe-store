@@ -3,15 +3,15 @@ import { axiosPrivate } from "../../axiosinstance";
 import { Cartcontext } from "../context/Addcart";
 
 function Wishlist() {
-  const {handleCart,product,wishlist} = useContext(Cartcontext)
+  const { handleCart, product, wishlist } = useContext(Cartcontext);
 
   const removeFromWishlist = async (productId) => {
     try {
       const res = await axiosPrivate.delete("/wishlistremive", {
         data: { productId },
       });
-      console.log("res.wishlist",res);
-      
+      // console.log("res.wishlist",res);
+
       wishlist();
     } catch (error) {
       console.log("Error removing product from wishlist", error);
@@ -29,11 +29,10 @@ function Wishlist() {
   // useEffect(() => {
   //   wishlist();
   // }, []);
-  const adtocartformwish = (id)=>{
-    handleCart(id)
-    removeFromWishlist(id)
-
-  }
+  const adtocartformwish = (id) => {
+    handleCart(id);
+    removeFromWishlist(id);
+  };
   return (
     <div className="mt-24 px-4 md:px-10 mb-5">
       <h2 className="text-3xl font-bold text-center mb-6">Wishlist</h2>
@@ -61,7 +60,7 @@ function Wishlist() {
                 Remove
               </button>
               <button
-                onClick={()=>adtocartformwish(item._id)} // Pass the product _id to the function
+                onClick={() => adtocartformwish(item._id)} // Pass the product _id to the function
                 className="mt-4 px-4 py-2 ml-4 bg-black text-white rounded-full hover:bg-red-600 transition duration-200"
               >
                 Addcart

@@ -164,7 +164,7 @@ function Navbare() {
           </NavLink>
           <NavLink onClick={handleClick} to="/login">
             {userInitial ? (
-              <span className="text-xl bg-gray-500 text-white rounded-full h-7 w-7 flex items-center justify-center hover:bg-blue-500 no-underline relative top-2">
+              <span className="text-xl bg-gray-500 text-white rounded-full h-7 w-7 flex items-center justify-center hover:bg-blue-500 no-underline relative top-2 mb-3">
                 {userInitial}
               </span>
             ) : (

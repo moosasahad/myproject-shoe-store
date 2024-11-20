@@ -11,10 +11,10 @@ function Men() {
   const { handleCart, whishlist } = useContext(Cartcontext);
   const handleClick = () => {
     window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+      top: 0,
+      behavior: "smooth",
     });
-}
+  };
   return (
     <div className="py-12 bg-gray-50 mt-24">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-12">
@@ -56,7 +56,7 @@ function Men() {
             {/* Product Info */}
             <Link
               to={`/productdetails/${product._id}`}
-              onClick={()=>handleClick()}
+              onClick={() => handleClick()}
               className="no-underline"
             >
               <div className="p-4">

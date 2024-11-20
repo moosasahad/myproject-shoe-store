@@ -69,7 +69,7 @@ const items=Cookies.get('adminuser')
 // console.log("adminuser",items);
 items&& setAdminstate(items)
 },[])
-console.log("adminstate",adminstate);
+// console.log("adminstate",adminstate);
 
   return (
 <Valuecontext.Provider value={obj}>
@@ -91,7 +91,7 @@ console.log("adminstate",adminstate);
                 <Route path="/Wishlist" element={<Wishlist/>}/>
                 <Route path="/paymentpage" element={<Paymen />} />
                 {/* <Route path="/success/:sctionId" element={<Success />} /> */}
-                <Route path="/orders" element={<Orders />} />
+                <Route path="/orderse" element={<Orders />} />
                 <Route path="/orders/:sctionId" element={<Orders />} />
                 
 

@@ -23,10 +23,10 @@ function Home() {
 
   const handleClick = () => {
     window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+      top: 0,
+      behavior: "smooth",
     });
-}
+  };
   return (
     <>
       <div className="bg-gray-50">
@@ -97,7 +97,6 @@ function Home() {
                   SHOP NOW >
                 </span>
               </div>
-             
             </div>
           </div>
           <div className="bg-orange-100 p-2 w-72 border rounded-xl shadow-lg flex-wrap justify-center align-middle">
@@ -116,7 +115,6 @@ function Home() {
                   SHOP NOW >
                 </span>
               </div>
-             
             </div>
           </div>
           <div className="bg-orange-100 p-2 w-72 border rounded-xl shadow-lg flex-wrap justify-center align-middle">
@@ -135,7 +133,6 @@ function Home() {
                   SHOP NOW >
                 </span>
               </div>
-              
             </div>
           </div>
         </div>
@@ -187,10 +184,9 @@ function Home() {
                 />
               </div>
               <Link
-                
                 to={`/productdetails/${product._id}`}
                 className="no-underline"
-                onClick={()=>handleClick()}
+                onClick={() => handleClick()}
               >
                 <div className="p-4">
                   <h5 className="text-lg font-semibold text-gray-800">
