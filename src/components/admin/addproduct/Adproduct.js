@@ -23,7 +23,7 @@ function Adproduct() {
   };
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]); // Store the selected file
+    setImage(e.target.files[0]); 
   };
 
   const handleSubmit = (e) => {
@@ -33,7 +33,7 @@ function Adproduct() {
       try {
         // Create a FormData object
         const formData = new FormData();
-        formData.append("image", image); // Append the file
+        formData.append("image", image);
         Object.keys(product).forEach((key) => {
           formData.append(key, product[key]); // Append other fields
         });
@@ -50,6 +50,7 @@ function Adproduct() {
         setImage(null); // Reset the image state
       } catch (error) {
         console.error("Error adding product:", error);
+        toast.warning(error.response.data.message)
       }
     };
 

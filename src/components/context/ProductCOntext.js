@@ -7,6 +7,7 @@ function ProductCOntext({ children }) {
   const [menproduct, setMenproduct] = useState([]);
   const [womenproduct, setWomenproduct] = useState([]);
   const [relate, setRelate] = useState([]);
+  const [loading,setloadin]= useState(true)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,6 +24,8 @@ function ProductCOntext({ children }) {
         // console.log("response.data",response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
+      } finally {
+        setloadin(false)
       }
     };
 
@@ -41,7 +44,7 @@ function ProductCOntext({ children }) {
 
   return (
     <Productscontext.Provider
-      value={{ product, menproduct, womenproduct, relateproduct, relate }}
+      value={{ product, menproduct, womenproduct, relateproduct, relate,loading }}
     >
       {children}
     </Productscontext.Provider>

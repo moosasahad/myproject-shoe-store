@@ -7,7 +7,7 @@ import { Cartcontext } from "../../context/Addcart";
 import { Productscontext } from "../../context/ProductCOntext";
 
 function Women() {
-  const { womenproduct } = useContext(Productscontext);
+  const { womenproduct,loading } = useContext(Productscontext);
   const { handleCart, whishlist } = useContext(Cartcontext);
   const handleClick = () => {
     window.scrollTo({
@@ -16,7 +16,13 @@ function Women() {
     });
   };
   return (
-    <div className="py-12 bg-gray-50 mt-24">
+    <>
+    {loading?(
+       <div className="flex justify-center items-center h-screen">
+       <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full border-blue-500 border-t-transparent"></div>
+     </div>
+    ):(
+      <div className="py-12 bg-gray-50 mt-24">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-12">
         Women's Collection
       </h1>
@@ -135,6 +141,8 @@ function Women() {
         ))}
       </div>
     </div>
+    )}
+    </>
   );
 }
 

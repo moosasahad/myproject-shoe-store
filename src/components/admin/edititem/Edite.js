@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../../axiosinstance";
+import { toast } from "react-toastify";
 
 function Edite() {
   const navigate = useNavigate();

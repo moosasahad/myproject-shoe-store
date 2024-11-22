@@ -3,6 +3,7 @@ import axiosinstance from "../../axiosinstance";
 
 function useProducts() {
   const [product, setProduct] = useState([]);
+  const [isloading,setisloading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -11,13 +12,15 @@ function useProducts() {
         setProduct(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally{
+        setisloading(false)
       }
     };
 
     fetchData();
   }, []);
 
-  return [product];
+  return [product,isloading];
 }
 
 export default useProducts;

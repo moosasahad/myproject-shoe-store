@@ -8,6 +8,7 @@ import { FiLogOut } from "react-icons/fi";
 import { IoMdHome } from "react-icons/io";
 import { axiosPrivate } from "../../axiosinstance";
 import { Valuecontext } from "../../App";
+import { TbHomeStats } from "react-icons/tb";
 
 function Login() {
   const [status, setStatus] = useState();
@@ -53,7 +54,7 @@ function Login() {
         password: inputValue.password,
       });
       // console.log("Response:", response.data.token);
-      // console.log("response",response.data.admin)
+      console.log("response",response.data.admin)
       if (response.data.admin) {
         setAdminstate(response.data);
       }
@@ -77,6 +78,7 @@ function Login() {
     } catch (error) {
       console.error("There was an error logging in:", error);
       // toast.error('Login Error');
+        // {toast.warning(error.response.data.message)||toast.success("success")}      
     }
   };
   const navigate = useNavigate();

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { BiShowAlt } from "react-icons/bi"
 import { FaRegEyeSlash } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 function Registration() {
     const navigate = useNavigate()
@@ -41,7 +42,8 @@ function Registration() {
                    
             } catch (error) {
                 console.error("Error submitting form", error);
-                console.log(error.response.data);
+                // console.log(error.response.data);
+                toast.warning(error.response.data.message)
                 
             }
             // setInput({
@@ -85,7 +87,7 @@ function Registration() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-pattern bg-white">
+        <div className="flex justify-center items-center min-h-screen bg-pattern bg-white mt-20">
   <div className="w-full max-w-md p-6 bg-white shadow-md rounded-md">
     <h1 className="text-2xl font-semibold text-gray-800 mb-6">Sign up.</h1>
 

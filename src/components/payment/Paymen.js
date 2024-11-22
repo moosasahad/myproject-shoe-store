@@ -7,6 +7,8 @@ const stripePromise = loadStripe("pk_test_51QKaD7J7Mcf8zmejWW7oKrpHj1ncGG364Rb89
 
 export default function Paymen() {
   const { clientSecret } = useContext(Cartcontext);
+  console.log("sdfghjkertyu",clientSecret);
+  
 
   const option = { clientSecret };  
 

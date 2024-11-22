@@ -29,6 +29,8 @@ import Wishlist from './components/whislist/Wishlist';
 // import Success from './components/payment/success';
 import Orders from './components/payment/Orders';
 import Cookies from 'js-cookie';
+import useProducts from './components/coustom hook/Products';
+import Adress from './components/payment/Adress';
 export const Valuecontext = createContext();
 
 function App() {
@@ -70,10 +72,16 @@ const items=Cookies.get('adminuser')
 items&& setAdminstate(items)
 },[])
 // console.log("adminstate",adminstate);
-
+const [isloading] = useProducts()
   return (
 <Valuecontext.Provider value={obj}>
     <div>
+      {!isloading?(
+         <div className="flex justify-center items-center h-screen">
+         <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full border-blue-500 border-t-transparent"></div>
+       </div>
+      ):(
+        <div>
       {!adminstate ? (
         
             <div className="App">
@@ -93,6 +101,9 @@ items&& setAdminstate(items)
                 {/* <Route path="/success/:sctionId" element={<Success />} /> */}
                 <Route path="/orderse" element={<Orders />} />
                 <Route path="/orders/:sctionId" element={<Orders />} />
+                <Route path="/addres" element={<Adress />} />
+
+
                 
 
               </Routes>
@@ -136,6 +147,8 @@ items&& setAdminstate(items)
   pauseOnHover
 />
   </div>
+      )}
+    </div>
   </Valuecontext.Provider>
    
   );

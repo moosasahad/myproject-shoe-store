@@ -14,7 +14,14 @@ function Addcart({ children }) {
   const [cartCount, setCartcount] = useState(null);
   const [product, setProduct] = useState([]);
   const [wishCount, setwishcount] = useState(null);
+  const [loading,setloadin] = useState(true)
 
+  const handleClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   const fetchCartData = async () => {
     try {
       const response = await axiosPrivate.get("/getcart");
@@ -23,6 +30,8 @@ function Addcart({ children }) {
       setCartcount(response.data.product.length);
     } catch (error) {
       console.error("Error fetching cart data:", error);
+    }finally {
+      setloadin(false)
     }
   };
 
@@ -32,8 +41,10 @@ function Addcart({ children }) {
 
   const handleCart = async (productId) => {
     if (!user) {
-      toast.error("Place login");
+      toast.warning("Place login");
+      handleClick()
       navigate("/login");
+
     } else {
       try {
         const response = await axiosPrivate.post("/addcart", { productId });
@@ -54,10 +65,12 @@ function Addcart({ children }) {
   //wishlish ....
 
   const whishlist = async (productId) => {
-    console.log("jkahsdjkas", user);
+    // console.log("jkahsdjkas", user);
     if (!user) {
-      toast.error("Place login");
+      toast.warning("Place login");
+      
       navigate("/login");
+      handleClick()
     } else {
       try {
         const response = await axiosPrivate.post("/wishlist", { productId });
@@ -80,7 +93,9 @@ function Addcart({ children }) {
   const order = async () => {
     try {
       const res = await axiosPrivate.post("/order");
-      // console.log("order res",res.data.data.order.sessionID);
+      console.log("order")
+      
+      console.log("order res",res.data.data);
       setClientSecret(res.data.data.clientsecret);
       setsessionID(res.data.data.order.sessionID);
     } catch (error) {
@@ -96,6 +111,8 @@ function Addcart({ children }) {
       setwishcount(res.data.product.length);
     } catch (error) {
       console.log("Error fetching wishlist", error);
+    } finally {
+      setloadin(false)
     }
   };
   useEffect(() => {
@@ -117,6 +134,7 @@ function Addcart({ children }) {
         product,
         wishlist,
         wishCount,
+        loading,
       }}
     >
       {children}
