@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
-  const { sctionId } = useParams();
+  const { sctionId,loading } = useParams();
   // console.log("Session ID", sctionId);
 
   const verify = async () => {
@@ -57,7 +57,13 @@ function Orders() {
   };
 const navigate = useNavigate()
   return (
-    <div className="max-w-6xl mx-auto p-4">
+    <>
+    {loading?(
+      <div className="flex justify-center items-center h-screen">
+      <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full border-blue-500 border-t-transparent"></div>
+    </div>
+    ):(
+      <div className="max-w-6xl mx-auto p-4">
     <h1 className="text-2xl font-bold mb-6 text-center">Order List</h1>
     {orders.length === 0 ? (
       <div className="mt-36">
@@ -149,6 +155,8 @@ const navigate = useNavigate()
       ))
     )}
   </div>
+    )}
+    </>
   
   );
 }

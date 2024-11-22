@@ -15,7 +15,13 @@ function Addcart({ children }) {
   const [product, setProduct] = useState([]);
   const [wishCount, setwishcount] = useState(null);
   const [loading,setloadin] = useState(true)
-
+useEffect(()=>{
+  if(!user){
+    setCartcount(null)
+    setwishcount(null)
+    setProduct([])
+  }
+})
   const handleClick = () => {
     window.scrollTo({
       top: 0,
@@ -37,7 +43,7 @@ function Addcart({ children }) {
 
   useEffect(() => {
     fetchCartData();
-  }, []);
+  }, [user]);
 
   const handleCart = async (productId) => {
     if (!user) {
@@ -117,8 +123,7 @@ function Addcart({ children }) {
   };
   useEffect(() => {
     wishlist();
-  }, []);
-
+  }, [user,cartproduct]);
   return (
     <Cartcontext.Provider
       value={{

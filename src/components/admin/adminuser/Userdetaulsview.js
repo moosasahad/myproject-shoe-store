@@ -76,9 +76,10 @@ function Userdetaulsview() {
 
                 {/* Delivery Info */}
                 <div className="p-4 border rounded-md bg-gray-50">
-                  <h3 className="font-semibold mb-2">Delivery Address</h3>
-                  <p className="text-sm">Street: Beruniy 369</p>
-                  <p className="text-sm">City: Tashkent</p>
+                <p className="text-sm">Street: {order.addres.street}</p>
+              <p className="text-sm">state: {order.addres.state}</p>
+              <p className="text-sm">City: {order.addres.city}</p>
+              <p className="text-sm">zip: {order.addres.zip}</p>
                 </div>
               </div>
 

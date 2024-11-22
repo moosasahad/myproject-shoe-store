@@ -38,7 +38,7 @@ function Footer() {
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 px-6">
             {/* About Section */}
             <div>
-                <h1 className="text-3xl font-bold text-yellow-500">My-Store</h1>
+                <h1 className="text-3xl font-bold text-yellow-500">SHOE CLUB</h1>
                 <p className="text-gray-400 mt-4">
                     Praesent eget tortor sit risus egestas <br />
                     Nulla pharetra ornare quis <br />
